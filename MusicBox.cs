@@ -32,5 +32,12 @@ namespace MusicBox
             
             PlayButton.ToggleShape();
         }
+
+        private void MusicBox_SizeChanged(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Size Changed!");
+            PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
+                                        ClientSize.Height - 100 - PlayButton.Height / 2);
+        }
     }
 }

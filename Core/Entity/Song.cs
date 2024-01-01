@@ -12,7 +12,7 @@ namespace MusicBox.Core.Entity
         public string Title { get; set; } = title;
         public int ArtistID { get; set; } = artistID;
         public int AlbumID { get; set; } = albumID;
-        public string? FilePath { get; set; } = filePath;
+        public string FilePath { get; set; } = filePath;
     }
 
 }

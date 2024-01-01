@@ -30,15 +30,24 @@
         {
             PlayButton = new PlayButton();
             label1 = new Label();
+            label2 = new Label();
             SuspendLayout();
+            // 
+            // MusicBox
+            // 
+            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlText;
+            ClientSize = new Size(1600, 1120);
             // 
             // PlayButton
             // 
             PlayButton.BackColor = Color.Black;
             PlayButton.FlatStyle = FlatStyle.Flat;
-            PlayButton.Location = new Point(332, 312);
             PlayButton.Name = "PlayButton";
             PlayButton.Size = new Size(85, 85);
+            PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
+                                        ClientSize.Height - 100 - PlayButton.Height / 2);
             PlayButton.TabIndex = 1;
             PlayButton.Text = "Start";
             PlayButton.UseVisualStyleBackColor = true;
@@ -55,17 +64,27 @@
             label1.TabIndex = 2;
             label1.Text = "4:27";
             // 
-            // MusicBox
+            // label2
             // 
-            AutoScaleDimensions = new SizeF(11F, 24F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlText;
-            ClientSize = new Size(821, 523);
+            label2.AutoSize = true;
+            label2.BackColor = SystemColors.ControlText;
+            label2.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(393, 190);
+            label2.Name = "label2";
+            label2.Size = new Size(210, 25);
+            label2.TabIndex = 3;
+            label2.Text = "ギターと孤独と蒼い惑星";
+            //
+            // All setting
+            //
+            Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(PlayButton);
             Name = "MusicBox";
             Text = "Form1";
             Load += MusicBox_Load;
+            SizeChanged += MusicBox_SizeChanged;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -73,5 +92,6 @@
         #endregion
         private PlayButton PlayButton;
         private Label label1;
+        private Label label2;
     }
 }

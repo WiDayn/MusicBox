@@ -31,19 +31,21 @@ namespace MusicBox.Core.PlayBack.Player
         public void PlayInOrder()
         {
             IEnumerator<Song> songList = MusicPlayList.PlayInOrder().GetEnumerator();
-            songList.MoveNext();
-            Debug.WriteLine($"Playing: {songList.Current.Title} by ArtistID: {songList.Current.ArtistID} From AlbumID: {songList.Current.AlbumID}");
-            bassPlayer.LoadAudio(songList.Current.FilePath);
-            bassPlayer.Play();
-            bassPlayer.TrackEnded += (sender, e) =>
+            if (songList.MoveNext())
             {
-                MusicPlayedList.AddSong(songList.Current);
-                if (songList.MoveNext())
+                Debug.WriteLine($"Playing: {songList.Current.Title} by ArtistID: {songList.Current.ArtistID} From AlbumID: {songList.Current.AlbumID}");
+                bassPlayer.LoadAudio(songList.Current.FilePath);
+                bassPlayer.Play();
+                bassPlayer.TrackEnded += (sender, e) =>
                 {
-                    bassPlayer.LoadAudio(songList.Current.FilePath);
-                    bassPlayer.Play();
-                }
-            };
+                    MusicPlayedList.AddSong(songList.Current);
+                    if (songList.MoveNext())
+                    {
+                        bassPlayer.LoadAudio(songList.Current.FilePath);
+                        bassPlayer.Play();
+                    }
+                };
+            }
         }
 
         public void PlayInRandom()
