@@ -1,4 +1,5 @@
-﻿using MusicBox.Core.PlayBack;
+﻿using MusicBox.Core.Entity;
+using MusicBox.Core.PlayBack;
 using MusicBox.Core.PlayBack.Player;
 using System.Diagnostics;
 using Un4seen.Bass; //添加引用
