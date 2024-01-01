@@ -8,4 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Bass.Net">
+      <HintPath>bin\Debug\net8.0-windows\dll\Bass.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

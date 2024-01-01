@@ -1,17 +1,22 @@
+using MusicBox.Core.PlayBack.Player;
+using System.Diagnostics;
+using Un4seen.Bass; //ÃÌº”“˝”√
+
 namespace MusicBox
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+        public static BassPlayer audioPlayer = new();
+
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            Debug.WriteLine("111111");
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            audioPlayer.LoadAudio("C:\\Users\\skv\\source\\repos\\MusicBox\\bin\\Debug\\net8.0-windows\\mygo.m4a");
+            audioPlayer.Play();
+            Application.Run(new MusicBox());
+            audioPlayer.Dispose();
         }
     }
 }
