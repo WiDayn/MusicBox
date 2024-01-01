@@ -22,6 +22,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
+            MusicBox_SizeChanged(sender, e);
         }
 
         private void StopButton_click(object sender, EventArgs e)
@@ -45,9 +46,12 @@ namespace MusicBox
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
-            Debug.WriteLine("Size Changed!");
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
-                                        ClientSize.Height - 100 - PlayButton.Height / 2);
+                                        ClientSize.Height - 63);
+            MainSplitContainer.Size = new Size(ClientSize.Width - 10, ClientSize.Height - 75);
+            playProgressBar.Size = new Size(ClientSize.Width / 3, 5);
+            playProgressBar.Location = new Point(ClientSize.Width / 2 - playProgressBar.Size.Width / 2, ClientSize.Height - 20);
+            playProgressBar.Value = 50;
         }
     }
 }
