@@ -9,6 +9,8 @@ namespace MusicBox.Core.PlayBack.Player
         private int nowStatus; // 0 - 未加载 1 - 加载完毕，暂停状态 2 - 播放状态
         private bool autoRepeat; // 是否自动重播
 
+        public event EventHandler TrackEnded; // 定义一个事件，当歌曲播放完毕时触发
+
         public BassPlayer(bool autoRepeat = false)
         {
             // 初始化Bass
@@ -33,6 +35,8 @@ namespace MusicBox.Core.PlayBack.Player
             {
                 throw new Exception("载入音频文件失败!");
             }
+
+            Bass.BASS_ChannelSetSync(_stream, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(EndTrack), IntPtr.Zero);
         }
 
         // 开始播放
@@ -54,7 +58,7 @@ namespace MusicBox.Core.PlayBack.Player
         }
 
         // 获取音乐总时长（以秒为单位）
-        public double GetTotalDuration()
+        public double GetTotalDurationInSeconds()
         {
             long length = Bass.BASS_ChannelGetLength(_stream);
             return Bass.BASS_ChannelBytes2Seconds(_stream, length);
@@ -90,6 +94,11 @@ namespace MusicBox.Core.PlayBack.Player
             if (_stream != 0)
                 Bass.BASS_StreamFree(_stream);
             Bass.BASS_Free();
+        }
+
+        private void EndTrack(int handle, int channel, int data, IntPtr user)
+        {
+            TrackEnded?.Invoke(this, EventArgs.Empty); // 触发事件
         }
     }
 }

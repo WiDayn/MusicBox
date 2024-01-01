@@ -16,13 +16,13 @@ namespace MusicBox
 
         private void StopButton_click(object sender, EventArgs e)
         {
-            Debug.WriteLine(Program.audioPlayer.GetCurrentPositionInSeconds() + " / " + Program.audioPlayer.GetTotalDuration());
-            Program.audioPlayer.Stop();
+            Debug.WriteLine(Program.musicPlayer.GetCurrentPositionInSeconds() + " / " + Program.musicPlayer.GetTotalDurationInSeconds());
+            Program.musicPlayer.Stop();
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            Program.audioPlayer.Play();
+            Program.musicPlayer.Start();
         }
     }
 }
