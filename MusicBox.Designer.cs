@@ -1,7 +1,12 @@
-﻿namespace MusicBox
+﻿using System.Runtime.InteropServices;
+
+namespace MusicBox
 {
+
     partial class MusicBox
     {
+        private int oriClientWidth = 1600;
+        private int oriClientHeight = 1120;
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -20,6 +25,7 @@
             base.Dispose(disposing);
         }
 
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -33,21 +39,14 @@
             label2 = new Label();
             SuspendLayout();
             // 
-            // MusicBox
-            // 
-            AutoScaleDimensions = new SizeF(11F, 24F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlText;
-            ClientSize = new Size(1600, 1120);
-            // 
             // PlayButton
             // 
             PlayButton.BackColor = Color.Black;
             PlayButton.FlatStyle = FlatStyle.Flat;
+            PlayButton.Location = new Point(oriClientWidth / 2 - PlayButton.Width / 2,
+                                        oriClientHeight - 100 - PlayButton.Height / 2);
             PlayButton.Name = "PlayButton";
             PlayButton.Size = new Size(85, 85);
-            PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
-                                        ClientSize.Height - 100 - PlayButton.Height / 2);
             PlayButton.TabIndex = 1;
             PlayButton.Text = "Start";
             PlayButton.UseVisualStyleBackColor = true;
@@ -75,13 +74,19 @@
             label2.Size = new Size(210, 25);
             label2.TabIndex = 3;
             label2.Text = "ギターと孤独と蒼い惑星";
-            //
-            // All setting
-            //
+            // 
+            // MusicBox
+            // 
+            AutoScaleDimensions = new SizeF(11F, 24F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlText;
+            ClientSize = new Size(oriClientWidth, oriClientHeight);
+            MinimumSize = new Size(1584, 1128);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(PlayButton);
             Name = "MusicBox";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += MusicBox_Load;
             SizeChanged += MusicBox_SizeChanged;

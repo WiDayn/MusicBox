@@ -1,14 +1,24 @@
 
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace MusicBox
 {
     public partial class MusicBox : Form
     {
+        //
+        // 调整非客户区颜色为黑色
+        //
+        [DllImport("dwmapi.dll", PreserveSig = true)]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
         public MusicBox()
         {
             InitializeComponent();
+            int TitlebarDarkColour = 0x000000;
+            DwmSetWindowAttribute(this.Handle, 35, ref TitlebarDarkColour, System.Runtime.InteropServices.Marshal.SizeOf(TitlebarDarkColour));
         }
+
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
