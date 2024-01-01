@@ -32,7 +32,7 @@ namespace MusicBox.Core.PlayBack.Player
         {
             IEnumerator<Song> songList = MusicPlayList.PlayInOrder().GetEnumerator();
             songList.MoveNext();
-            Debug.WriteLine($"Playing: {songList.Current.Title} by {songList.Current.Artist}");
+            Debug.WriteLine($"Playing: {songList.Current.Title} by ArtistID: {songList.Current.ArtistID} From AlbumID: {songList.Current.AlbumID}");
             bassPlayer.LoadAudio(songList.Current.FilePath);
             bassPlayer.Play();
             bassPlayer.TrackEnded += (sender, e) =>

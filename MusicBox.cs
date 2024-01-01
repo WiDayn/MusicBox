@@ -22,7 +22,15 @@ namespace MusicBox
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            Program.musicPlayer.Start();
+            if (PlayButton.isPlaying)
+            {
+                Program.musicPlayer.Start();
+            } else
+            {
+                Program.musicPlayer.Stop();
+            }
+            
+            PlayButton.ToggleShape();
         }
     }
 }

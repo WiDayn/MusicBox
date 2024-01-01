@@ -28,46 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            StopButton = new Button();
-            StartButton = new Button();
+            PlayButton = new PlayButton();
+            label1 = new Label();
             SuspendLayout();
             // 
-            // StopButton
+            // PlayButton
             // 
-            StopButton.Location = new Point(251, 217);
-            StopButton.Name = "StopButton";
-            StopButton.Size = new Size(94, 63);
-            StopButton.TabIndex = 0;
-            StopButton.Text = "Stop";
-            StopButton.UseVisualStyleBackColor = true;
-            StopButton.Click += StopButton_click;
+            PlayButton.BackColor = Color.Black;
+            PlayButton.FlatStyle = FlatStyle.Flat;
+            PlayButton.Location = new Point(332, 312);
+            PlayButton.Name = "PlayButton";
+            PlayButton.Size = new Size(85, 85);
+            PlayButton.TabIndex = 1;
+            PlayButton.Text = "Start";
+            PlayButton.UseVisualStyleBackColor = true;
+            PlayButton.Click += StartButton_Click;
             // 
-            // StartButton
+            // label1
             // 
-            StartButton.Location = new Point(385, 217);
-            StartButton.Name = "StartButton";
-            StartButton.Size = new Size(110, 63);
-            StartButton.TabIndex = 1;
-            StartButton.Text = "Start";
-            StartButton.UseVisualStyleBackColor = true;
-            StartButton.Click += StartButton_Click;
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label1.ForeColor = Color.FromArgb(178, 178, 178);
+            label1.Location = new Point(610, 441);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 25);
+            label1.TabIndex = 2;
+            label1.Text = "4:27";
             // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(11F, 24F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(StartButton);
-            Controls.Add(StopButton);
+            BackColor = SystemColors.ControlText;
+            ClientSize = new Size(821, 523);
+            Controls.Add(label1);
+            Controls.Add(PlayButton);
             Name = "MusicBox";
             Text = "Form1";
             Load += MusicBox_Load;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private Button StopButton;
-        private Button StartButton;
+        private PlayButton PlayButton;
+        private Label label1;
     }
 }

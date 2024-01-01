@@ -14,5 +14,10 @@ namespace MusicBox.Core.Entity
         public string? NickName { get; set; } = nickName;
         public DateTime? CredAt { get; set; }
         public DateTime? LastLogin { get; set; }
+        public List<int> FavoriteSongs { get; set; }
+        public List<int> FavoriteArtists { get; set; }
+        public List<int> FavoriteAblums {  get; set; }
+        public List<int> FavoritePlayLists { get; set; }
+        public List<int> OwnPlayLists {  get; set; }
     }
 }

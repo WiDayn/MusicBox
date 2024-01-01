@@ -7,16 +7,31 @@ using MusicBox.Core.Entity;
 
 namespace MusicBox.Core.PlayBack
 {
-    internal class QueuePlayList : PlayList
+    internal class QueuePlayList
     {
+        private List<Song> songs;
         private Random random;
 
         public QueuePlayList()
         {
+            songs = new List<Song>();
             random = new Random();
         }
 
+        // 添加歌曲到播放列表
+        public void AddSong(Song song)
+        {
+            songs.Add(song);
+        }
 
+        // 按顺序播放
+        public IEnumerable<Song> PlayInOrder()
+        {
+            foreach (var song in songs)
+            {
+                yield return song;
+            }
+        }
         // 打乱播放列表
         public void RandomList()
         {
