@@ -36,12 +36,21 @@ namespace MusicBox
             if (PlayButton.isPlaying)
             {
                 Program.musicPlayer.Start();
-            } else
+            }
+            else
             {
                 Program.musicPlayer.Stop();
             }
-            
+
             PlayButton.ToggleShape();
+        }
+
+        private void PlayTrackBar_Scroll(object sender, EventArgs e)
+        {
+            Debug.WriteLine(playTrackBar.Value);
+            Program.musicPlayer.SetCurrentPositionInSeconds(playTrackBar.Value * 1.0 / 100 * Program.musicPlayer.GetTotalDurationInSeconds());
+
+            playTrackBar.ToggleShape();
         }
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
@@ -49,9 +58,19 @@ namespace MusicBox
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         ClientSize.Height - 63);
             MainSplitContainer.Size = new Size(ClientSize.Width - 10, ClientSize.Height - 75);
-            playProgressBar.Size = new Size(ClientSize.Width / 3, 5);
-            playProgressBar.Location = new Point(ClientSize.Width / 2 - playProgressBar.Size.Width / 2, ClientSize.Height - 20);
-            playProgressBar.Value = 50;
+            playTrackBar.Size = new Size(ClientSize.Width / 3, 5);
+            playTrackBar.Location = new Point(ClientSize.Width / 2 - playTrackBar.Size.Width / 2, ClientSize.Height - 20);
+            playTrackBar.Value = 50;
+            NowTimeLabel.Location = new Point(playTrackBar.Location.X - NowTimeLabel.Width - 10, playTrackBar.Location.Y - 6);
+            EndTimeLabel.Location = new Point(playTrackBar.Location.X + playTrackBar.Width + 10, playTrackBar.Location.Y - 6);
+        }
+
+        private void SecondTimer_Tick(object sender, EventArgs e)
+        {
+            NowTimeLabel.Text = (int)Program.musicPlayer.GetCurrentPositionInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetCurrentPositionInSeconds() % 60);
+            EndTimeLabel.Text = (int)Program.musicPlayer.GetTotalDurationInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetTotalDurationInSeconds() % 60);
+            playTrackBar.Value = (int)(Program.musicPlayer.GetCurrentPositionInSeconds() / Program.musicPlayer.GetTotalDurationInSeconds() * 100);
+            playTrackBar.ToggleShape();
         }
     }
 }

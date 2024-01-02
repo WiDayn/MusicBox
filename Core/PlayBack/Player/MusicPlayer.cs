@@ -64,6 +64,11 @@ namespace MusicBox.Core.PlayBack.Player
             return bassPlayer.GetTotalDurationInSeconds();
         }
 
+        public void SetCurrentPositionInSeconds(double seconds)
+        {
+            bassPlayer.SetCurrentPosition(seconds);
+        }
+
         public void Start()
         {
             bassPlayer.Play();

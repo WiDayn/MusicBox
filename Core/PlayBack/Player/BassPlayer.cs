@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Un4seen.Bass;
 
 namespace MusicBox.Core.PlayBack.Player
@@ -16,7 +17,7 @@ namespace MusicBox.Core.PlayBack.Player
             // 初始化Bass
             if (!Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, nint.Zero))
             {
-                throw new Exception("Bass 初始化失败!");
+                Debug.WriteLine("Bass 初始化失败!");
             }
             nowStatus = 0;
             this.autoRepeat = autoRepeat;
@@ -33,7 +34,7 @@ namespace MusicBox.Core.PlayBack.Player
             _stream = Bass.BASS_StreamCreateFile(filePath, 0, 0, BASSFlag.BASS_DEFAULT);
             if (_stream == 0)
             {
-                throw new Exception("载入音频文件失败!");
+                Debug.WriteLine("载入音频文件失败!");
             }
 
             Bass.BASS_ChannelSetSync(_stream, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(EndTrack), IntPtr.Zero);
@@ -44,7 +45,7 @@ namespace MusicBox.Core.PlayBack.Player
         {
             if (!Bass.BASS_ChannelPlay(_stream, false))
             {
-                throw new Exception("播放失败!");
+                Debug.WriteLine("播放失败!");
             }
         }
 
@@ -53,7 +54,7 @@ namespace MusicBox.Core.PlayBack.Player
         {
             if (!Bass.BASS_ChannelStop(_stream))
             {
-                throw new Exception("停止播放失败!");
+                Debug.WriteLine("停止播放失败!");
             }
         }
 
@@ -79,12 +80,25 @@ namespace MusicBox.Core.PlayBack.Player
             return volume;
         }
 
+        // 设置当前播放到的时长（以秒为单位）
+        public void SetCurrentPosition(double seconds)
+        {
+            // 将秒转换为字节位置
+            long position = Bass.BASS_ChannelSeconds2Bytes(_stream, seconds);
+
+            // 设置播放位置
+            if (!Bass.BASS_ChannelSetPosition(_stream, position))
+            {
+                Debug.WriteLine("设置播放位置失败!");
+            }
+        }
+
         // 调整音量（volume取值范围0到1）
         public void SetVolume(float volume)
         {
             if (!Bass.BASS_ChannelSetAttribute(_stream, BASSAttribute.BASS_ATTRIB_VOL, volume))
             {
-                throw new Exception("设置音量失败!");
+                Debug.WriteLine("设置音量失败!");
             }
         }
 

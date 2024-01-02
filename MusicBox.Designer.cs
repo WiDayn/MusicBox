@@ -34,11 +34,14 @@ namespace MusicBox
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             PlayButton = new PlayButton();
-            label1 = new Label();
+            EndTimeLabel = new Label();
             label2 = new Label();
             MainSplitContainer = new SplitContainer();
-            playProgressBar = new ProgressBar();
+            playTrackBar = new PlayTrackBar();
+            NowTimeLabel = new Label();
+            SecondTimer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.SuspendLayout();
             SuspendLayout();
@@ -56,17 +59,17 @@ namespace MusicBox
             PlayButton.UseVisualStyleBackColor = true;
             PlayButton.Click += StartButton_Click;
             // 
-            // label1
+            // EndTimeLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            label1.ForeColor = Color.FromArgb(178, 178, 178);
-            label1.Location = new Point(388, 312);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(32, 17);
-            label1.TabIndex = 2;
-            label1.Text = "4:27";
+            EndTimeLabel.AutoSize = true;
+            EndTimeLabel.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            EndTimeLabel.ForeColor = Color.FromArgb(178, 178, 178);
+            EndTimeLabel.Location = new Point(665, 751);
+            EndTimeLabel.Margin = new Padding(2, 0, 2, 0);
+            EndTimeLabel.Name = "EndTimeLabel";
+            EndTimeLabel.Size = new Size(32, 17);
+            EndTimeLabel.TabIndex = 2;
+            EndTimeLabel.Text = "4:27";
             // 
             // label2
             // 
@@ -101,11 +104,32 @@ namespace MusicBox
             // 
             // playProgressBar
             // 
-            playProgressBar.BackColor = Color.FromArgb(77, 77, 77);
-            playProgressBar.Location = new Point(357, 758);
-            playProgressBar.Name = "playProgressBar";
-            playProgressBar.Size = new Size(294, 10);
-            playProgressBar.TabIndex = 5;
+            playTrackBar.BackColor = Color.Black;
+            playTrackBar.Location = new Point(357, 758);
+            playTrackBar.Name = "playProgressBar";
+            playTrackBar.AutoSize = false;
+            playTrackBar.Size = new Size(294, 10);
+            playTrackBar.Minimum = 0;
+            playTrackBar.Maximum = 100;
+            playTrackBar.TabIndex = 5;
+            playTrackBar.ScrollChanged += new EventHandler(PlayTrackBar_Scroll); ;
+            // 
+            // NowTimeLabel
+            // 
+            NowTimeLabel.AutoSize = true;
+            NowTimeLabel.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            NowTimeLabel.ForeColor = Color.FromArgb(178, 178, 178);
+            NowTimeLabel.Location = new Point(310, 751);
+            NowTimeLabel.Margin = new Padding(2, 0, 2, 0);
+            NowTimeLabel.Name = "NowTimeLabel";
+            NowTimeLabel.Size = new Size(32, 17);
+            NowTimeLabel.TabIndex = 6;
+            NowTimeLabel.Text = "4:27";
+            // 
+            // SecondTimer
+            // 
+            SecondTimer.Enabled = true;
+            SecondTimer.Tick += SecondTimer_Tick;
             // 
             // MusicBox
             // 
@@ -113,9 +137,10 @@ namespace MusicBox
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(998, 771);
-            Controls.Add(playProgressBar);
+            Controls.Add(NowTimeLabel);
+            Controls.Add(playTrackBar);
             Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(EndTimeLabel);
             Controls.Add(PlayButton);
             Controls.Add(MainSplitContainer);
             Margin = new Padding(2);
@@ -133,9 +158,11 @@ namespace MusicBox
 
         #endregion
         private PlayButton PlayButton;
-        private Label label1;
+        private Label EndTimeLabel;
         private Label label2;
         private SplitContainer MainSplitContainer;
-        private ProgressBar playProgressBar;
+        private PlayTrackBar playTrackBar;
+        private Label NowTimeLabel;
+        private System.Windows.Forms.Timer SecondTimer;
     }
 }
