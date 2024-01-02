@@ -47,7 +47,6 @@ namespace MusicBox
 
         private void PlayTrackBar_Scroll(object sender, EventArgs e)
         {
-            Debug.WriteLine(playTrackBar.Value);
             Program.musicPlayer.SetCurrentPositionInSeconds(playTrackBar.Value * 1.0 / 100 * Program.musicPlayer.GetTotalDurationInSeconds());
 
             playTrackBar.ToggleShape();
