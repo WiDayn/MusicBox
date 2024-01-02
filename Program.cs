@@ -14,8 +14,8 @@ namespace MusicBox
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            musicPlayer.AddSongToList(new Song(1, "春日影", 1, 2, "C:\\Users\\skv\\source\\repos\\MusicBox\\bin\\Debug\\net8.0-windows\\mygo.m4a"));
-            musicPlayer.AddSongToList(new Song(2, "タイニーリトル・アジアンタム", 2, 3, "C:\\Users\\skv\\Downloads\\tainiiritoru.m4a"));
+            musicPlayer.AddSongToList(new Song(1, "春日影", 1, 2, "C:\\Users\\15037\\Desktop\\MusicBox\\1.m4a"));
+            musicPlayer.AddSongToList(new Song(2, "タイニーリトル・アジアンタム", 2, 3, "C:\\Users\\15037\\Desktop\\MusicBox\\2.m4a"));
             musicPlayer.PlayInRandom();
             Application.Run(new MusicBox());
             musicPlayer.Dispose();
