@@ -64,6 +64,7 @@ namespace MusicBox
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
+            ArtistPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -117,6 +118,7 @@ namespace MusicBox
             // MainSplitContainer.Panel2
             // 
             MainSplitContainer.Panel2.BackColor = Color.Black;
+            MainSplitContainer.Panel2.Controls.Add(ArtistPanel);
             MainSplitContainer.Panel2.Controls.Add(AlbumPanel);
             MainSplitContainer.Panel2.Controls.Add(RightTabControl);
             MainSplitContainer.Panel2.SizeChanged += MainSplitContainer_Panel2_SizeChanged;
@@ -268,7 +270,7 @@ namespace MusicBox
             playTrackBar.Location = new Point(357, 758);
             playTrackBar.Maximum = 100;
             playTrackBar.Name = "playTrackBar";
-            playTrackBar.Size = new Size(294, (int)(10 * GetScreenScalingFactor()));
+            playTrackBar.Size = new Size(104, 45);
             playTrackBar.TabIndex = 5;
             // 
             // NowTimeLabel
@@ -353,6 +355,14 @@ namespace MusicBox
             VolumeTrackBar.Size = new Size(115, 10);
             VolumeTrackBar.TabIndex = 10;
             // 
+            // ArtistPanel
+            // 
+            ArtistPanel.Location = new Point(329, 208);
+            ArtistPanel.Name = "ArtistPanel";
+            ArtistPanel.Size = new Size(200, 100);
+            ArtistPanel.TabIndex = 11;
+            ArtistPanel.Paint += panel1_Paint;
+            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -418,5 +428,6 @@ namespace MusicBox
         private DataGridView AlbumView;
         private BorderlessTabControl RightTabControl;
         private Panel AlbumPanel;
+        private Panel ArtistPanel;
     }
 }

@@ -32,7 +32,8 @@ namespace MusicBox
         private void MusicBox_Load(object sender, EventArgs e)
         {
             RightTabControl.AddPanel(AlbumPanel);
-            RightTabControl.SwitchToPanel(0);
+            RightTabControl.AddPanel(ArtistPanel);
+            RightTabControl.SwitchToPanel(1);
             MusicBox_SizeChanged(sender, e);
         }
 
@@ -126,11 +127,17 @@ namespace MusicBox
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
-
+            RightTabControl.SwitchToPanel(0);
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            RightTabControl.SwitchToPanel(1);
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
