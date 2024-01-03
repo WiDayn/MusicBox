@@ -14,8 +14,8 @@ namespace MusicBox
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            musicPlayer.AddSongToList(new Song(1, "春日影", 1, 2, "http://localhost:5000/external/Album/%E6%9E%97%E5%AE%B6%E8%B0%A6-SEVEN/%E5%9C%A8%E7%A9%BA%E4%B8%AD%E7%9A%84%E9%80%99%E4%B8%80%E7%A7%92.flac"));
-            musicPlayer.AddSongToList(new Song(2, "タイニーリトル・アジアンタム", 2, 3, "http://localhost:5000/external/Album/%E6%9E%97%E5%AE%B6%E8%B0%A6-SEVEN/%E5%9C%A8%E7%A9%BA%E4%B8%AD%E7%9A%84%E9%80%99%E4%B8%80%E7%A7%92.flac"));
+            musicPlayer.AddSongToList(new Song(1, "春日影", 1, 2, "https://m701.music.126.net/20240103143901/e35f09e9777ae4204a16a7df44601b22/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/32387577059/58db/077f/3939/5502c82f2146ae407621fb965301e869.m4a"));
+            musicPlayer.AddSongToList(new Song(2, "タイニーリトル・アジアンタム", 2, 3, "https://m701.music.126.net/20240103143901/e35f09e9777ae4204a16a7df44601b22/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/32387577059/58db/077f/3939/5502c82f2146ae407621fb965301e869.m4a"));
             musicPlayer.PlayInRandom();
             Application.Run(new MusicBox());
             musicPlayer.Dispose();

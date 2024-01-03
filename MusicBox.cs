@@ -56,9 +56,9 @@ namespace MusicBox
         {
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         ClientSize.Height - 63);
-            NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + 80,
+            NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + 45,
                             ClientSize.Height - 63);
-            LastButton.Location = new Point(ClientSize.Width / 2 - LastButton.Width / 2 - 80,
+            LastButton.Location = new Point(ClientSize.Width / 2 - LastButton.Width / 2 - 45,
                             ClientSize.Height - 63);
             MainSplitContainer.Size = new Size(ClientSize.Width - 10, ClientSize.Height - 75);
             playTrackBar.Size = new Size(ClientSize.Width / 3, 5);
@@ -92,5 +92,28 @@ namespace MusicBox
 
             LastButton.ToggleShape();
         }
+
+        private void HomeButton_Click(object sender, EventArgs e)
+        {
+            HomeButton.ToggleShape();
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            SearchButton.ToggleShape();
+        }
+
+        private void MainSplitContainer_Panel1_SizeChanged(object sender, EventArgs e)
+        {
+            // 更新SearchButton的大小，使其与MainSplitContainer.Panel1的宽度相同，高度为35
+            SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, 35);
+            HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, 35);
+        }
+
+        private void MainSplitContainer_Panel2_SizeChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
