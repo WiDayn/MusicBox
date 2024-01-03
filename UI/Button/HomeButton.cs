@@ -23,7 +23,15 @@ public class HomeButton : Button
         this.MouseDown += HomeButton_MouseDown;
         this.MouseUp += HomeButton_MouseUp;
     }
-
+    public static float GetScreenScalingFactor()
+    {
+        using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+        {
+            float dpiX = graphics.DpiX;
+            // 标准 DPI 通常是 96，所以缩放比例是当前 DPI 与 96 的比值
+            return dpiX / 96.0f;
+        }
+    }
     private void HomeButton_MouseEnter(object sender, EventArgs e)
     {
         isMouseOn = true;
@@ -84,8 +92,8 @@ public class HomeButton : Button
         using (Pen outlinePen = new Pen(penColor, 3))
         {
             // 定义图标的外观颜色和尺寸
-            int padding = 8;
-            int size = Math.Min(Width, Height) - 2 * padding;
+            int padding =  (int)(8 / GetScreenScalingFactor());
+            int size = Math.Min(Width, Height) - padding * 2;
             float doorWidth = size / 4f;
             float doorHeight = size / 2f;
 

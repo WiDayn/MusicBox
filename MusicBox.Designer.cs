@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using MusicBox.UI;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MusicBox
@@ -46,15 +47,14 @@ namespace MusicBox
             LeftTopPanel = new Panel();
             SearchButton = new SearchButton();
             HomeButton = new HomeButton();
-            tabControl = new TabControl();
-            tabPage1 = new TabPage();
+            AlbumPanel = new Panel();
             AlbumView = new DataGridView();
             num = new DataGridViewTextBoxColumn();
             title = new DataGridViewTextBoxColumn();
             Album = new DataGridViewTextBoxColumn();
             date = new DataGridViewTextBoxColumn();
             time = new DataGridViewTextBoxColumn();
-            tabPage2 = new TabPage();
+            RightTabControl = new BorderlessTabControl();
             playTrackBar = new PlayTrackBar();
             NowTimeLabel = new Label();
             SecondTimer = new System.Windows.Forms.Timer(components);
@@ -69,8 +69,7 @@ namespace MusicBox
             MainSplitContainer.Panel2.SuspendLayout();
             MainSplitContainer.SuspendLayout();
             LeftTopPanel.SuspendLayout();
-            tabControl.SuspendLayout();
-            tabPage1.SuspendLayout();
+            AlbumPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)AlbumView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
@@ -117,12 +116,13 @@ namespace MusicBox
             // 
             // MainSplitContainer.Panel2
             // 
-            MainSplitContainer.Panel2.BackColor = Color.FromArgb(18, 18, 18);
-            MainSplitContainer.Panel2.Controls.Add(tabControl);
+            MainSplitContainer.Panel2.BackColor = Color.Black;
+            MainSplitContainer.Panel2.Controls.Add(AlbumPanel);
+            MainSplitContainer.Panel2.Controls.Add(RightTabControl);
             MainSplitContainer.Panel2.SizeChanged += MainSplitContainer_Panel2_SizeChanged;
             MainSplitContainer.Size = new Size(990, 686);
             MainSplitContainer.SplitterDistance = 330;
-            MainSplitContainer.SplitterWidth = 2;
+            MainSplitContainer.SplitterWidth = 1;
             MainSplitContainer.TabIndex = 4;
             MainSplitContainer.SplitterMoved += SplitterMoved_SizeChanged;
             // 
@@ -170,36 +170,15 @@ namespace MusicBox
             HomeButton.UseVisualStyleBackColor = true;
             HomeButton.Click += HomeButton_Click;
             // 
-            // tabControl
+            // AlbumPanel
             // 
-            tabControl.Appearance = TabAppearance.FlatButtons;
-            tabControl.Controls.Add(tabPage1);
-            tabControl.Controls.Add(tabPage2);
-            tabControl.ItemSize = new Size(0, 1);
-            tabControl.Location = new Point(0, 0);
-            tabControl.Margin = new Padding(0);
-            tabControl.Multiline = true;
-            tabControl.Name = "tabControl";
-            tabControl.Padding = new Point(0, 0);
-            tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(96, 100);
-            tabControl.SizeMode = TabSizeMode.Fixed;
-            tabControl.TabIndex = 1;
-             Rectangle tabArea = tabControl.GetTabRect(0);
-    RectangleF tabHeaderArea = new RectangleF(tabArea.Left, tabArea.Top, tabControl.Width, tabArea.Height);
-    Rectangle clientArea = new Rectangle(0, (int)tabHeaderArea.Height, tabControl.Width, tabControl.Height - (int)tabHeaderArea.Height);
-    tabControl.Region = new Region(clientArea);
-            // 
-            // tabPage1
-            // 
-            tabPage1.BackColor = Color.FromArgb(18, 18, 18);
-            tabPage1.Controls.Add(AlbumView);
-            tabPage1.Location = new Point(4, 5);
-            tabPage1.Margin = new Padding(0);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Size = new Size(88, 91);
-            tabPage1.TabIndex = 0;
-            tabPage1.UseVisualStyleBackColor = true;
+            AlbumPanel.BackColor = Color.Transparent;
+            AlbumPanel.Controls.Add(AlbumView);
+            AlbumPanel.Location = new Point(3, 183);
+            AlbumPanel.Margin = new Padding(0);
+            AlbumPanel.Name = "AlbumPanel";
+            AlbumPanel.Size = new Size(200, 186);
+            AlbumPanel.TabIndex = 2;
             // 
             // AlbumView
             // 
@@ -220,11 +199,11 @@ namespace MusicBox
             AlbumView.Cursor = Cursors.Hand;
             AlbumView.EnableHeadersVisualStyles = false;
             AlbumView.GridColor = Color.FromArgb(18, 18, 18);
-            AlbumView.Location = new Point(52, 0);
+            AlbumView.Location = new Point(0, 3);
             AlbumView.Name = "AlbumView";
             AlbumView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             AlbumView.RowHeadersVisible = false;
-            AlbumView.Size = new Size(96, 100);
+            AlbumView.Size = new Size(165, 100);
             AlbumView.TabIndex = 0;
             // 
             // num
@@ -275,14 +254,12 @@ namespace MusicBox
             time.ReadOnly = true;
             time.Resizable = DataGridViewTriState.False;
             // 
-            // tabPage2
+            // RightTabControl
             // 
-            tabPage2.BackColor = Color.FromArgb(18, 18, 18);
-            tabPage2.Location = new Point(4, 5);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Size = new Size(88, 91);
-            tabPage2.TabIndex = 1;
-            tabPage2.UseVisualStyleBackColor = true;
+            RightTabControl.Location = new Point(3, 3);
+            RightTabControl.Name = "RightTabControl";
+            RightTabControl.Size = new Size(646, 680);
+            RightTabControl.TabIndex = 1;
             // 
             // playTrackBar
             // 
@@ -291,7 +268,7 @@ namespace MusicBox
             playTrackBar.Location = new Point(357, 758);
             playTrackBar.Maximum = 100;
             playTrackBar.Name = "playTrackBar";
-            playTrackBar.Size = new Size(294, 10);
+            playTrackBar.Size = new Size(294, (int)(10 * GetScreenScalingFactor()));
             playTrackBar.TabIndex = 5;
             // 
             // NowTimeLabel
@@ -373,7 +350,7 @@ namespace MusicBox
             VolumeTrackBar.Location = new Point(872, 727);
             VolumeTrackBar.Maximum = 100;
             VolumeTrackBar.Name = "VolumeTrackBar";
-            VolumeTrackBar.Size = new Size(115, 5);
+            VolumeTrackBar.Size = new Size(115, 10);
             VolumeTrackBar.TabIndex = 10;
             // 
             // MusicBox
@@ -405,8 +382,7 @@ namespace MusicBox
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).EndInit();
             MainSplitContainer.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
-            tabControl.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
+            AlbumPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)AlbumView).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
@@ -438,10 +414,9 @@ namespace MusicBox
         private PlayTrackBar VolumeTrackBar;
         private Panel LeftTopPanel;
         private Panel LeftDownPanel;
-        private TabControl tabControl;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
         private DataGridView alumdataGridView;
         private DataGridView AlbumView;
+        private BorderlessTabControl RightTabControl;
+        private Panel AlbumPanel;
     }
 }

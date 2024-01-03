@@ -24,6 +24,15 @@ public class SearchButton : Button
         this.MouseUp += SearchButton_MouseUp;
     }
 
+    public static float GetScreenScalingFactor()
+    {
+        using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+        {
+            float dpiX = graphics.DpiX;
+            // 标准 DPI 通常是 96，所以缩放比例是当前 DPI 与 96 的比值
+            return dpiX / 96.0f;
+        }
+    }
     private void SearchButton_MouseEnter(object sender, EventArgs e)
     {
         isMouseOver = true;
@@ -82,7 +91,7 @@ public class SearchButton : Button
         using (Pen pen = new Pen(penColor, 3))
         {
             // 计算放大镜的圆圈部分
-            int padding = 10;
+            int padding = (int)(10 / GetScreenScalingFactor());
             int size = Math.Min(Width, Height) - padding * 2;
             int radius = size / 2;
             Point center = new Point(padding + radius, padding + radius);
