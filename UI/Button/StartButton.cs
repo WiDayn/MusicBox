@@ -13,6 +13,8 @@ public class PlayButton : Button
         this.FlatAppearance.BorderSize = 0;
         // 确保按钮背景是黑色的
         this.BackColor = Color.Black;
+
+        this.FlatAppearance.MouseDownBackColor = Color.FromArgb(18, 18, 18);
     }
 
     protected override void OnPaint(PaintEventArgs pe)

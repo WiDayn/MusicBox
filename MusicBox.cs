@@ -106,13 +106,25 @@ namespace MusicBox
 
         private void MainSplitContainer_Panel2_SizeChanged(object sender, EventArgs e)
         {
-            dataGridView1.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 6 / 10);
-            dataGridView1.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
+            tabControl.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height);
+            tabControl.Location = new Point(0, 0);
+            tabPage1.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height);
+            tabPage1.Location = new Point(0,0);
+            tabPage2.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height);
+            tabPage2.Location = new Point(0, 0);
+            AlbumView.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 6 / 10);
+            AlbumView.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
+
         }
 
-        private void LastButton_MouseHover(object sender, EventArgs e)
+        private void HomeButton_Click(object sender, EventArgs e)
         {
-          
+            tabControl.SelectedIndex = 0;
+        }
+
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
         }
     }
 }

@@ -38,25 +38,23 @@ namespace MusicBox
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
-            label2 = new Label();
             MainSplitContainer = new SplitContainer();
             LeftDownPanel = new Panel();
             LeftTopPanel = new Panel();
             SearchButton = new SearchButton();
             HomeButton = new HomeButton();
-            dataGridView1 = new DataGridView();
+            tabControl = new TabControl();
+            tabPage1 = new TabPage();
+            AlbumView = new DataGridView();
             num = new DataGridViewTextBoxColumn();
             title = new DataGridViewTextBoxColumn();
             Album = new DataGridViewTextBoxColumn();
             date = new DataGridViewTextBoxColumn();
             time = new DataGridViewTextBoxColumn();
+            tabPage2 = new TabPage();
             playTrackBar = new PlayTrackBar();
             NowTimeLabel = new Label();
             SecondTimer = new System.Windows.Forms.Timer(components);
@@ -71,7 +69,9 @@ namespace MusicBox
             MainSplitContainer.Panel2.SuspendLayout();
             MainSplitContainer.SuspendLayout();
             LeftTopPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            tabControl.SuspendLayout();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AlbumView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
@@ -102,19 +102,6 @@ namespace MusicBox
             EndTimeLabel.TabIndex = 2;
             EndTimeLabel.Text = "4:27";
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = SystemColors.ControlText;
-            label2.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(250, 135);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(140, 17);
-            label2.TabIndex = 3;
-            label2.Text = "ギターと孤独と蒼い惑星";
-            // 
             // MainSplitContainer
             // 
             MainSplitContainer.Location = new Point(5, 0);
@@ -131,7 +118,7 @@ namespace MusicBox
             // MainSplitContainer.Panel2
             // 
             MainSplitContainer.Panel2.BackColor = Color.FromArgb(18, 18, 18);
-            MainSplitContainer.Panel2.Controls.Add(dataGridView1);
+            MainSplitContainer.Panel2.Controls.Add(tabControl);
             MainSplitContainer.Panel2.SizeChanged += MainSplitContainer_Panel2_SizeChanged;
             MainSplitContainer.Size = new Size(990, 686);
             MainSplitContainer.SplitterDistance = 330;
@@ -141,7 +128,7 @@ namespace MusicBox
             // 
             // LeftDownPanel
             // 
-            LeftDownPanel.BackColor = Color.FromArgb(21, 21, 21);
+            LeftDownPanel.BackColor = Color.FromArgb(18, 18, 18);
             LeftDownPanel.Location = new Point(7, 155);
             LeftDownPanel.Name = "LeftDownPanel";
             LeftDownPanel.Size = new Size(320, 531);
@@ -149,7 +136,7 @@ namespace MusicBox
             // 
             // LeftTopPanel
             // 
-            LeftTopPanel.BackColor = Color.FromArgb(21, 21, 21);
+            LeftTopPanel.BackColor = Color.FromArgb(18, 18, 18);
             LeftTopPanel.Controls.Add(SearchButton);
             LeftTopPanel.Controls.Add(HomeButton);
             LeftTopPanel.Location = new Point(5, 0);
@@ -168,6 +155,7 @@ namespace MusicBox
             SearchButton.Size = new Size(50, 35);
             SearchButton.TabIndex = 1;
             SearchButton.UseVisualStyleBackColor = false;
+            SearchButton.Click += SearchButton_Click;
             // 
             // HomeButton
             // 
@@ -180,13 +168,45 @@ namespace MusicBox
             HomeButton.Size = new Size(50, 35);
             HomeButton.TabIndex = 0;
             HomeButton.UseVisualStyleBackColor = true;
+            HomeButton.Click += HomeButton_Click;
             // 
-            // dataGridView1
+            // tabControl
             // 
-            dataGridView1.AllowUserToResizeRows = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.BackgroundColor = Color.FromArgb(18, 18, 18);
-            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            tabControl.Appearance = TabAppearance.FlatButtons;
+            tabControl.Controls.Add(tabPage1);
+            tabControl.Controls.Add(tabPage2);
+            tabControl.ItemSize = new Size(0, 1);
+            tabControl.Location = new Point(0, 0);
+            tabControl.Margin = new Padding(0);
+            tabControl.Multiline = true;
+            tabControl.Name = "tabControl";
+            tabControl.Padding = new Point(0, 0);
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(96, 100);
+            tabControl.SizeMode = TabSizeMode.Fixed;
+            tabControl.TabIndex = 1;
+             Rectangle tabArea = tabControl.GetTabRect(0);
+    RectangleF tabHeaderArea = new RectangleF(tabArea.Left, tabArea.Top, tabControl.Width, tabArea.Height);
+    Rectangle clientArea = new Rectangle(0, (int)tabHeaderArea.Height, tabControl.Width, tabControl.Height - (int)tabHeaderArea.Height);
+    tabControl.Region = new Region(clientArea);
+            // 
+            // tabPage1
+            // 
+            tabPage1.BackColor = Color.FromArgb(18, 18, 18);
+            tabPage1.Controls.Add(AlbumView);
+            tabPage1.Location = new Point(4, 5);
+            tabPage1.Margin = new Padding(0);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Size = new Size(88, 91);
+            tabPage1.TabIndex = 0;
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // AlbumView
+            // 
+            AlbumView.AllowUserToResizeRows = false;
+            AlbumView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            AlbumView.BackgroundColor = Color.FromArgb(18, 18, 18);
+            AlbumView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(18, 18, 18);
             dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
@@ -194,18 +214,18 @@ namespace MusicBox
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(18, 18, 18);
             dataGridViewCellStyle1.SelectionForeColor = Color.Gray;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { num, title, Album, date, time });
-            dataGridView1.Cursor = Cursors.Hand;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.GridColor = Color.FromArgb(18, 18, 18);
-            dataGridView1.Location = new Point(0, 100);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridView1.RowHeadersVisible = false;
-            dataGridView1.Size = new Size(96, 100);
-            dataGridView1.TabIndex = 0;
+            AlbumView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            AlbumView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            AlbumView.Columns.AddRange(new DataGridViewColumn[] { num, title, Album, date, time });
+            AlbumView.Cursor = Cursors.Hand;
+            AlbumView.EnableHeadersVisualStyles = false;
+            AlbumView.GridColor = Color.FromArgb(18, 18, 18);
+            AlbumView.Location = new Point(52, 0);
+            AlbumView.Name = "AlbumView";
+            AlbumView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            AlbumView.RowHeadersVisible = false;
+            AlbumView.Size = new Size(96, 100);
+            AlbumView.TabIndex = 0;
             // 
             // num
             // 
@@ -222,10 +242,7 @@ namespace MusicBox
             // 
             // title
             // 
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle3.ForeColor = Color.Gray;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            title.DefaultCellStyle = dataGridViewCellStyle3;
+            title.DefaultCellStyle = dataGridViewCellStyle2;
             title.HeaderText = "标题";
             title.Name = "title";
             title.ReadOnly = true;
@@ -233,10 +250,7 @@ namespace MusicBox
             // 
             // Album
             // 
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle4.ForeColor = Color.Gray;
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            Album.DefaultCellStyle = dataGridViewCellStyle4;
+            Album.DefaultCellStyle = dataGridViewCellStyle2;
             Album.FillWeight = 80F;
             Album.HeaderText = "专辑";
             Album.Name = "Album";
@@ -245,10 +259,7 @@ namespace MusicBox
             // 
             // date
             // 
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle5.ForeColor = Color.Gray;
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            date.DefaultCellStyle = dataGridViewCellStyle5;
+            date.DefaultCellStyle = dataGridViewCellStyle2;
             date.FillWeight = 45F;
             date.HeaderText = "添加日期";
             date.Name = "date";
@@ -257,15 +268,21 @@ namespace MusicBox
             // 
             // time
             // 
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle6.ForeColor = Color.Gray;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            time.DefaultCellStyle = dataGridViewCellStyle6;
+            time.DefaultCellStyle = dataGridViewCellStyle2;
             time.FillWeight = 35F;
             time.HeaderText = "时长";
             time.Name = "time";
             time.ReadOnly = true;
             time.Resizable = DataGridViewTriState.False;
+            // 
+            // tabPage2
+            // 
+            tabPage2.BackColor = Color.FromArgb(18, 18, 18);
+            tabPage2.Location = new Point(4, 5);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Size = new Size(88, 91);
+            tabPage2.TabIndex = 1;
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // playTrackBar
             // 
@@ -348,7 +365,6 @@ namespace MusicBox
             LastButton.TabIndex = 8;
             LastButton.UseVisualStyleBackColor = true;
             LastButton.Click += LastButton_Click;
-            LastButton.MouseHover += LastButton_MouseHover;
             // 
             // VolumeTrackBar
             // 
@@ -374,7 +390,6 @@ namespace MusicBox
             Controls.Add(NextButton);
             Controls.Add(NowTimeLabel);
             Controls.Add(playTrackBar);
-            Controls.Add(label2);
             Controls.Add(EndTimeLabel);
             Controls.Add(PlayButton);
             Controls.Add(MainSplitContainer);
@@ -390,7 +405,9 @@ namespace MusicBox
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).EndInit();
             MainSplitContainer.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            tabControl.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)AlbumView).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).EndInit();
@@ -401,7 +418,6 @@ namespace MusicBox
         #endregion
         private PlayButton PlayButton;
         private Label EndTimeLabel;
-        private Label label2;
         private SplitContainer MainSplitContainer;
         private PlayTrackBar playTrackBar;
         private Label NowTimeLabel;
@@ -422,5 +438,10 @@ namespace MusicBox
         private PlayTrackBar VolumeTrackBar;
         private Panel LeftTopPanel;
         private Panel LeftDownPanel;
+        private TabControl tabControl;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private DataGridView alumdataGridView;
+        private DataGridView AlbumView;
     }
 }
