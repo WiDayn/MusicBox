@@ -146,7 +146,6 @@ namespace MusicBox
             SearchButton.Size = new Size(50, 35);
             SearchButton.TabIndex = 1;
             SearchButton.UseVisualStyleBackColor = false;
-            SearchButton.Click += SearchButton_Click;
             // 
             // HomeButton
             // 
@@ -159,7 +158,6 @@ namespace MusicBox
             HomeButton.Size = new Size(50, 35);
             HomeButton.TabIndex = 0;
             HomeButton.UseVisualStyleBackColor = true;
-            HomeButton.Click += HomeButton_Click;
             // 
             // dataGridView1
             // 
