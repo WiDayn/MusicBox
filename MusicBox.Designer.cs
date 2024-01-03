@@ -46,6 +46,8 @@ namespace MusicBox
             EndTimeLabel = new Label();
             label2 = new Label();
             MainSplitContainer = new SplitContainer();
+            LeftDownPanel = new Panel();
+            LeftTopPanel = new Panel();
             SearchButton = new SearchButton();
             HomeButton = new HomeButton();
             dataGridView1 = new DataGridView();
@@ -66,6 +68,7 @@ namespace MusicBox
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
             MainSplitContainer.SuspendLayout();
+            LeftTopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
@@ -118,9 +121,9 @@ namespace MusicBox
             // 
             // MainSplitContainer.Panel1
             // 
-            MainSplitContainer.Panel1.BackColor = Color.FromArgb(18, 18, 18);
-            MainSplitContainer.Panel1.Controls.Add(SearchButton);
-            MainSplitContainer.Panel1.Controls.Add(HomeButton);
+            MainSplitContainer.Panel1.BackColor = Color.Black;
+            MainSplitContainer.Panel1.Controls.Add(LeftDownPanel);
+            MainSplitContainer.Panel1.Controls.Add(LeftTopPanel);
             MainSplitContainer.Panel1.SizeChanged += MainSplitContainer_Panel1_SizeChanged;
             // 
             // MainSplitContainer.Panel2
@@ -133,13 +136,31 @@ namespace MusicBox
             MainSplitContainer.SplitterWidth = 15;
             MainSplitContainer.TabIndex = 4;
             // 
+            // LeftDownPanel
+            // 
+            LeftDownPanel.BackColor = Color.FromArgb(21, 21, 21);
+            LeftDownPanel.Location = new Point(7, 154);
+            LeftDownPanel.Name = "LeftDownPanel";
+            LeftDownPanel.Size = new Size(320, 529);
+            LeftDownPanel.TabIndex = 2;
+            // 
+            // LeftTopPanel
+            // 
+            LeftTopPanel.BackColor = Color.FromArgb(21, 21, 21);
+            LeftTopPanel.Controls.Add(SearchButton);
+            LeftTopPanel.Controls.Add(HomeButton);
+            LeftTopPanel.Location = new Point(5, 0);
+            LeftTopPanel.Name = "LeftTopPanel";
+            LeftTopPanel.Size = new Size(330, 130);
+            LeftTopPanel.TabIndex = 1;
+            // 
             // SearchButton
             // 
             SearchButton.BackColor = Color.FromArgb(18, 18, 18);
             SearchButton.FlatStyle = FlatStyle.Flat;
             SearchButton.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
             SearchButton.ForeColor = Color.White;
-            SearchButton.Location = new Point(0, 75);
+            SearchButton.Location = new Point(14, 79);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(50, 35);
             SearchButton.TabIndex = 1;
@@ -152,7 +173,7 @@ namespace MusicBox
             HomeButton.FlatStyle = FlatStyle.Flat;
             HomeButton.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
             HomeButton.ForeColor = Color.White;
-            HomeButton.Location = new Point(0, 15);
+            HomeButton.Location = new Point(14, 13);
             HomeButton.Name = "HomeButton";
             HomeButton.Size = new Size(50, 35);
             HomeButton.TabIndex = 0;
@@ -231,7 +252,6 @@ namespace MusicBox
             playTrackBar.Name = "playTrackBar";
             playTrackBar.Size = new Size(294, 10);
             playTrackBar.TabIndex = 5;
-            playTrackBar.ScrollChanged += PlayTrackBar_Scroll;
             // 
             // NowTimeLabel
             // 
@@ -344,6 +364,7 @@ namespace MusicBox
             MainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).EndInit();
             MainSplitContainer.ResumeLayout(false);
+            LeftTopPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
@@ -373,5 +394,7 @@ namespace MusicBox
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn time;
         private PlayTrackBar VolumeTrackBar;
+        private Panel LeftTopPanel;
+        private Panel LeftDownPanel;
     }
 }
