@@ -15,6 +15,7 @@ namespace MusicBox.UI.Button
         private PictureBox pictureBox;
         private Label Title;
         private Label Description;
+        private bool MouseOn = false;
 
         public RecentButton()
         {
@@ -54,6 +55,25 @@ namespace MusicBox.UI.Button
             this.Controls.Add(Description);
 
             this.SizeChanged += SizeChangedHandler;
+            this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
+            this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
+        }
+
+        private void RecentButton_MouseEnter(object sender, EventArgs e)
+        {
+            // 鼠标停留在TrackBar上时的逻辑
+            MouseOn = true;
+            BackColor = Color.FromArgb(BackColor.R + 8, BackColor.R + 8, BackColor.R + 8);
+            ToggleShape();
+        }
+
+        // 当鼠标离开TrackBar时触发的方法
+        private void RecentButton_MouseLeave(object sender, EventArgs e)
+        {
+            // 鼠标离开TrackBar时的逻辑
+            MouseOn = false;
+            BackColor = Color.FromArgb(BackColor.R - 8, BackColor.R - 8, BackColor.R - 8);
+            ToggleShape();
         }
 
         private void SizeChangedHandler(object sender, EventArgs e)
@@ -78,6 +98,19 @@ namespace MusicBox.UI.Button
         {
             get => Description.Text;
             set => Description.Text = value;
+        }
+
+        // 当鼠标点击时触发
+        protected override void OnMouseClick(MouseEventArgs e)
+        {
+            base.OnMouseClick(e);
+            // 修改背景颜色
+            BackColor = Color.FromArgb(26, 26, 26);
+        }
+
+        public void ToggleShape()
+        {
+            Invalidate();
         }
     }
 
