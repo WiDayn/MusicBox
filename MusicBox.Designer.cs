@@ -63,6 +63,7 @@ namespace MusicBox
             LeftDownArtistsNameLabel = new Label();
             NextButton = new NextButton();
             LastButton = new LastButton();
+            VolumeTrackBar = new PlayTrackBar();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -70,6 +71,7 @@ namespace MusicBox
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
             SuspendLayout();
             // 
             // PlayButton
@@ -329,12 +331,23 @@ namespace MusicBox
             LastButton.Click += LastButton_Click;
             LastButton.MouseHover += LastButton_MouseHover;
             // 
+            // VolumeTrackBar
+            // 
+            VolumeTrackBar.AutoSize = false;
+            VolumeTrackBar.BackColor = Color.Black;
+            VolumeTrackBar.Location = new Point(872, 727);
+            VolumeTrackBar.Maximum = 100;
+            VolumeTrackBar.Name = "VolumeTrackBar";
+            VolumeTrackBar.Size = new Size(115, 5);
+            VolumeTrackBar.TabIndex = 10;
+            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(998, 771);
+            Controls.Add(VolumeTrackBar);
             Controls.Add(LeftDownArtistsNameLabel);
             Controls.Add(LeftDownSongNameLabel);
             Controls.Add(LeftDownAlbumBox);
@@ -360,6 +373,7 @@ namespace MusicBox
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -385,5 +399,6 @@ namespace MusicBox
         private DataGridViewTextBoxColumn Album;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn time;
+        private PlayTrackBar VolumeTrackBar;
     }
 }
