@@ -75,6 +75,13 @@ namespace MusicBox
             playTrackBar.ToggleShape();
         }
 
+        private void VolumeTrackBar_Scroll(object sender, EventArgs e)
+        {
+            Program.musicPlayer.SetVolume((float)(VolumeTrackBar.Value * 1.0 / 100));
+
+            VolumeTrackBar.ToggleShape();
+        }
+
         private void SplitterMoved_SizeChanged(object sender, EventArgs e)
         {
             LeftTopPanel.Size = new Size(MainSplitContainer.Panel1.Width - (int)(7 * GetScreenScalingFactor()), (int)(130 * GetScreenScalingFactor()));
@@ -85,6 +92,7 @@ namespace MusicBox
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
+            VolumeTrackBar.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0)), (int)(ClientSize.Height - 35 * GetScreenScalingFactor()));
             RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         (int)(ClientSize.Height - 63 * GetScreenScalingFactor()));
@@ -111,6 +119,8 @@ namespace MusicBox
             EndTimeLabel.Text = (int)Program.musicPlayer.GetTotalDurationInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetTotalDurationInSeconds() % 60);
             playTrackBar.Value = (int)(Program.musicPlayer.GetCurrentPositionInSeconds() / Program.musicPlayer.GetTotalDurationInSeconds() * 100);
             playTrackBar.ToggleShape();
+            VolumeTrackBar.Value = (int)(Program.musicPlayer.GetVolume() * 100);
+            VolumeTrackBar.ToggleShape();
         }
 
         private void NextButton_Click(object sender, EventArgs e)

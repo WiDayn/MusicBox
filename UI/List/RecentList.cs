@@ -50,7 +50,6 @@ namespace MusicBox.UI.List
         {
             foreach (RecentButton item in Panel.Controls)
             {
-                Debug.WriteLine(item.Width);
                 item.Width = (int)(Width * 0.90);
             }
             Panel.Size = new Size(Width, Height);

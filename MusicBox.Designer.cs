@@ -292,6 +292,7 @@ namespace MusicBox
             playTrackBar.Name = "playTrackBar";
             playTrackBar.Size = new Size(104, 45);
             playTrackBar.TabIndex = 5;
+            playTrackBar.ScrollChanged += PlayTrackBar_Scroll;
             // 
             // NowTimeLabel
             // 
@@ -374,6 +375,7 @@ namespace MusicBox
             VolumeTrackBar.Name = "VolumeTrackBar";
             VolumeTrackBar.Size = new Size(115, 10);
             VolumeTrackBar.TabIndex = 10;
+            VolumeTrackBar.ScrollChanged += VolumeTrackBar_Scroll;
             // 
             // MusicBox
             // 
