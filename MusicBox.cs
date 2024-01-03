@@ -56,6 +56,10 @@ namespace MusicBox
         {
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         ClientSize.Height - 63);
+            NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + 80,
+                            ClientSize.Height - 63);
+            LastButton.Location = new Point(ClientSize.Width / 2 - LastButton.Width / 2 - 80,
+                            ClientSize.Height - 63);
             MainSplitContainer.Size = new Size(ClientSize.Width - 10, ClientSize.Height - 75);
             playTrackBar.Size = new Size(ClientSize.Width / 3, 5);
             playTrackBar.Location = new Point(ClientSize.Width / 2 - playTrackBar.Size.Width / 2, ClientSize.Height - 20);
@@ -70,6 +74,20 @@ namespace MusicBox
             EndTimeLabel.Text = (int)Program.musicPlayer.GetTotalDurationInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetTotalDurationInSeconds() % 60);
             playTrackBar.Value = (int)(Program.musicPlayer.GetCurrentPositionInSeconds() / Program.musicPlayer.GetTotalDurationInSeconds() * 100);
             playTrackBar.ToggleShape();
+        }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+            //播放下一首
+
+            NextButton.ToggleShape();
+        }
+
+        private void LastButton_Click(object sender, EventArgs e)
+        {
+            //播放上一首
+
+            LastButton.ToggleShape();
         }
     }
 }
