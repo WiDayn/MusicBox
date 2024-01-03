@@ -4,6 +4,7 @@ using System.Windows.Forms;
 
 public class LastButton : Button
 {
+    private bool isMouseOver = false;
 
     public LastButton()
     {
@@ -12,49 +13,28 @@ public class LastButton : Button
         this.FlatAppearance.BorderSize = 0;
         // 确保按钮背景是黑色的
         this.BackColor = Color.Black;
+        // 设置按钮在鼠标点击时的背景色
+        this.FlatAppearance.MouseDownBackColor = Color.Black;
+        // 添加鼠标事件处理程序
+        this.MouseEnter += NextButton_MouseEnter;
+        this.MouseLeave += NextButton_MouseLeave;
+    }
+
+    private void NextButton_MouseEnter(object sender, EventArgs e)
+    {
+        isMouseOver = true;
+        this.Invalidate();
+    }
+
+    private void NextButton_MouseLeave(object sender, EventArgs e)
+    {
+        isMouseOver = false;
+        this.Invalidate();
     }
 
     protected override void OnPaint(PaintEventArgs pe)
     {
         PaintLast(pe);
-    }
-    public void ToggleShape()
-    {
-        this.Invalidate();
-    }
-
-    protected void PaintStop(PaintEventArgs pe)
-    {
-        base.OnPaint(pe); // 调用基类的 OnPaint 方法来处理基本的绘制
-
-        // 获取 Graphics 对象
-        Graphics graphics = pe.Graphics;
-        graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-        // 定义白色圆形背景
-        Brush backgroundBrush = new SolidBrush(Color.White);
-        int diameter = Math.Min(this.Width, this.Height) - 2; // 减去 2 以保留边缘
-        Rectangle backgroundRectangle = new Rectangle((this.Width - diameter) / 2, (this.Height - diameter) / 2, diameter, diameter);
-        graphics.FillEllipse(backgroundBrush, backgroundRectangle);
-
-        // 计算两个矩形的宽度和高度
-        int rectWidth = this.Width / 6;
-        int rectHeight = this.Height / 2;
-
-        // 计算两个矩形之间的空间以及它们相对于按钮中心的位置
-        int space = rectWidth / 2;
-        int totalRectWidth = 2 * rectWidth + space;
-        int leftRectX = (this.Width - totalRectWidth) / 2;
-        int rectY = (this.Height - rectHeight) / 2;
-
-        // 定义两个黑色矩形
-        Brush rectBrush = new SolidBrush(Color.Black);
-        Rectangle leftRect = new Rectangle(leftRectX, rectY, rectWidth, rectHeight);
-        Rectangle rightRect = new Rectangle(leftRectX + rectWidth + space, rectY, rectWidth, rectHeight);
-
-        // 绘制两个黑色矩形
-        graphics.FillRectangle(rectBrush, leftRect);
-        graphics.FillRectangle(rectBrush, rightRect);
     }
 
     protected void PaintLast(PaintEventArgs pe)
@@ -65,46 +45,53 @@ public class LastButton : Button
         Graphics graphics = pe.Graphics;
         graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-        // 定义白色圆形背景
-        int diameter = Math.Min(this.Width, this.Height) - 2; // 减去 2 以保留边缘
+        // 根据鼠标状态选择画笔颜色
+        Color penColor = isMouseOver ? Color.White : Color.Gray;
 
-        // 定义正三角形的大小，使其适当地适应圆形内部
-        float triangleSideLength = (float)(diameter * 2 / (2 * Math.Sqrt(3))); // 侧长
-        float triangleHeight = (float)(triangleSideLength * Math.Sqrt(3) / 2); // 高度
-
-        // 计算三角形的中心点（重心）
-        PointF centerPoint = new PointF(this.Width / 2 , this.Height / 2);
-
-        // 以中心点为基准计算三角形的三个顶点
-        PointF[] trianglePoints = new PointF[3];
-        trianglePoints[0] = new PointF(centerPoint.X - triangleSideLength / 2, centerPoint.Y + triangleHeight / 3);
-        trianglePoints[1] = new PointF(centerPoint.X + triangleSideLength / 2, centerPoint.Y + triangleHeight / 3);
-        trianglePoints[2] = new PointF(centerPoint.X, centerPoint.Y - (2 * triangleHeight / 3));
-
-        // 为了横置三角形，我们绕中心点旋转三角形的顶点
-        float angle = 270; // 旋转角度
-        for (int i = 0; i < trianglePoints.Length; i++)
+        // 设置画笔
+        using (Pen pen = new Pen(penColor, 3))
         {
-            trianglePoints[i] = RotatePoint(trianglePoints[i], centerPoint, angle);
+            // 定义白色圆形背景
+            int diameter = Math.Min(this.Width, this.Height) - 2; // 减去 2 以保留边缘
+
+            // 定义正三角形的大小，使其适当地适应圆形内部
+            float triangleSideLength = (float)(diameter * 2 / (2 * Math.Sqrt(3))); // 侧长
+            float triangleHeight = (float)(triangleSideLength * Math.Sqrt(3) / 2); // 高度
+
+            // 计算三角形的中心点（重心）
+            PointF centerPoint = new PointF(this.Width / 2, this.Height / 2);
+
+            // 以中心点为基准计算三角形的三个顶点
+            PointF[] trianglePoints = new PointF[3];
+            trianglePoints[0] = new PointF(centerPoint.X - triangleSideLength / 2, centerPoint.Y + triangleHeight / 3);
+            trianglePoints[1] = new PointF(centerPoint.X + triangleSideLength / 2, centerPoint.Y + triangleHeight / 3);
+            trianglePoints[2] = new PointF(centerPoint.X, centerPoint.Y - (2 * triangleHeight / 3));
+
+            // 为了横置三角形，我们绕中心点旋转三角形的顶点
+            float angle = 270; // 旋转角度
+            for (int i = 0; i < trianglePoints.Length; i++)
+            {
+                trianglePoints[i] = RotatePoint(trianglePoints[i], centerPoint, angle);
+            }
+
+            // 绘制三角形
+            Brush triangleBrush = new SolidBrush(penColor);
+            graphics.FillPolygon(triangleBrush, trianglePoints);
+
+            // 计算两个矩形的宽度和高度
+            int rectWidth = this.Width / 6;
+            int rectHeight = this.Height / 2;
+
+            float rectX = centerPoint.X - triangleSideLength / 2 - rectWidth;
+            float rectY = centerPoint.Y - rectHeight / 2;
+
+            // 定义矩形
+            Brush rectBrush = new SolidBrush(penColor);
+            Rectangle Rect = new Rectangle((int)rectX, (int)rectY, rectWidth, rectHeight);
+
+            // 绘制矩形
+            graphics.FillRectangle(rectBrush, Rect);
         }
-
-        // 绘制三角形
-        Brush triangleBrush = new SolidBrush(Color.Gray);
-        graphics.FillPolygon(triangleBrush, trianglePoints);
-
-        // 计算两个矩形的宽度和高度
-        int rectWidth = this.Width / 6;
-        int rectHeight = this.Height / 2;
-
-        float rectX = centerPoint.X - triangleSideLength / 2 - rectWidth;
-        float rectY = centerPoint.Y - rectHeight / 2;
-
-        // 定义矩形
-        Brush rectBrush = new SolidBrush(Color.Gray);
-        Rectangle Rect = new Rectangle((int)rectX, (int)rectY, rectWidth, rectHeight);
-
-        // 绘制矩形
-        graphics.FillRectangle(rectBrush, Rect);
     }
 
     private PointF RotatePoint(PointF pointToRotate, PointF centerPoint, float angleInDegrees)

@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 public class SearchButton : Button
 {
+    private bool isMouseOver = false;
+    private bool isMouseDown = false;
+
     public SearchButton()
     {
         // 设置按钮样式为 Flat，边框大小为 0
@@ -11,6 +14,46 @@ public class SearchButton : Button
         this.FlatAppearance.BorderSize = 0;
         // 确保按钮背景
         this.BackColor = Color.FromArgb(18, 18, 18);
+        this.FlatAppearance.MouseDownBackColor = Color.FromArgb(18, 18, 18);
+        // 设置按钮在鼠标悬浮时的背景色
+        this.FlatAppearance.MouseOverBackColor = Color.FromArgb(18, 18, 18);
+        // 添加鼠标事件处理程序
+        this.MouseEnter += SearchButton_MouseEnter;
+        this.MouseLeave += SearchButton_MouseLeave;
+        this.MouseDown += SearchButton_MouseDown;
+        this.MouseUp += SearchButton_MouseUp;
+    }
+
+    private void SearchButton_MouseEnter(object sender, EventArgs e)
+    {
+        isMouseOver = true;
+        isMouseDown = false;
+        this.Invalidate();
+    }
+
+    private void SearchButton_MouseLeave(object sender, EventArgs e)
+    {
+        isMouseOver = false;
+        isMouseDown = false;
+        this.Invalidate();
+    }
+
+    private void SearchButton_MouseDown(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Left)
+        {
+            isMouseDown = true;
+            this.Invalidate();
+        }
+    }
+
+    private void SearchButton_MouseUp(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Left)
+        {
+            isMouseDown = false;
+            this.Invalidate();
+        }
     }
 
     protected override void OnPaint(PaintEventArgs pe)
@@ -18,36 +61,45 @@ public class SearchButton : Button
         PaintSearch(pe);
     }
 
-    public void ToggleShape()
-    {
-        this.Invalidate();
-    }
     protected void PaintSearch(PaintEventArgs pe)
     {
         base.OnPaint(pe);
         Graphics g = pe.Graphics;
         g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
+        // 根据鼠标状态选择画笔颜色
+        Color penColor = Color.Gray;
+        if (isMouseOver)
+        {
+            penColor = Color.White;
+        }
+        if (isMouseDown)
+        {
+            penColor = Color.Blue;
+        }
+
         // 设置画笔
-        Pen pen = new Pen(Color.Gray, 2); // 白色画笔，线宽为2
+        using (Pen pen = new Pen(penColor, 3))
+        {
+            // 计算放大镜的圆圈部分
+            int padding = 10;
+            int size = Math.Min(Width, Height) - padding * 2;
+            int radius = size / 2;
+            Point center = new Point(padding + radius, padding + radius);
+            g.DrawEllipse(pen, center.X - radius, center.Y - radius, size, size);
 
-        // 计算放大镜的圆圈部分
-        int padding = 10;
-        int size = Math.Min(Width, Height) - padding * 2;
-        int radius = size / 2;
-        Point center = new Point(padding + radius, padding + radius);
-        g.DrawEllipse(pen, center.X - radius, center.Y - radius, size, size);
-
-        // 计算并绘制放大镜的柄
-        int handleLength = radius ;
-        Point handleStart = new Point(center.X + (int)(radius * 0.8), center.Y + (int)(radius * 0.8));
-        Point handleEnd = new Point(handleStart.X + handleLength, handleStart.Y + handleLength);
-        g.DrawLine(pen, handleStart, handleEnd);
+            // 计算并绘制放大镜的柄
+            int handleLength = radius;
+            Point handleStart = new Point(center.X + (int)(radius * 0.8), center.Y + (int)(radius * 0.8));
+            Point handleEnd = new Point(handleStart.X + handleLength, handleStart.Y + handleLength);
+            g.DrawLine(pen, handleStart, handleEnd);
+        }
 
         // 绘制按钮文字
         string buttonText = "搜索";
         SizeF textSize = g.MeasureString(buttonText, Font);
-        Point textLocation = new Point(50,8);
-        TextRenderer.DrawText(g, buttonText, Font, textLocation, Color.Gray);
+        Point textLocation = new Point(50, 8);
+        Color textColor = isMouseDown ? Color.Blue : (isMouseOver ? Color.White : Color.Gray);
+        TextRenderer.DrawText(g, buttonText, Font, textLocation, textColor);
     }
 }

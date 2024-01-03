@@ -90,25 +90,11 @@ namespace MusicBox
         private void NextButton_Click(object sender, EventArgs e)
         {
             //播放下一首
-
-            NextButton.ToggleShape();
         }
 
         private void LastButton_Click(object sender, EventArgs e)
         {
             //播放上一首
-
-            LastButton.ToggleShape();
-        }
-
-        private void HomeButton_Click(object sender, EventArgs e)
-        {
-            HomeButton.ToggleShape();
-        }
-
-        private void SearchButton_Click(object sender, EventArgs e)
-        {
-            SearchButton.ToggleShape();
         }
 
         private void MainSplitContainer_Panel1_SizeChanged(object sender, EventArgs e)
@@ -120,8 +106,13 @@ namespace MusicBox
 
         private void MainSplitContainer_Panel2_SizeChanged(object sender, EventArgs e)
         {
-
+            dataGridView1.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 6 / 10);
+            dataGridView1.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
         }
 
+        private void LastButton_MouseHover(object sender, EventArgs e)
+        {
+          
+        }
     }
 }

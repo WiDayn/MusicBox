@@ -36,11 +36,12 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
@@ -51,6 +52,7 @@ namespace MusicBox
             SearchButton = new SearchButton();
             HomeButton = new HomeButton();
             dataGridView1 = new DataGridView();
+            num = new DataGridViewTextBoxColumn();
             title = new DataGridViewTextBoxColumn();
             Album = new DataGridViewTextBoxColumn();
             date = new DataGridViewTextBoxColumn();
@@ -166,7 +168,6 @@ namespace MusicBox
             SearchButton.Size = new Size(50, 35);
             SearchButton.TabIndex = 1;
             SearchButton.UseVisualStyleBackColor = false;
-            SearchButton.Click += SearchButton_Click;
             // 
             // HomeButton
             // 
@@ -179,69 +180,91 @@ namespace MusicBox
             HomeButton.Size = new Size(50, 35);
             HomeButton.TabIndex = 0;
             HomeButton.UseVisualStyleBackColor = true;
-            HomeButton.Click += HomeButton_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.FromArgb(18, 18, 18);
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle6.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            dataGridViewCellStyle6.ForeColor = Color.Gray;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle6.SelectionForeColor = Color.Gray;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            dataGridViewCellStyle1.ForeColor = Color.Gray;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle1.SelectionForeColor = Color.Gray;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { title, Album, date, time });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { num, title, Album, date, time });
+            dataGridView1.Cursor = Cursors.Hand;
             dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.FromArgb(18, 18, 18);
-            dataGridView1.Location = new Point(7, 252);
+            dataGridView1.Location = new Point(0, 100);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridView1.Size = new Size(638, 434);
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.Size = new Size(96, 100);
             dataGridView1.TabIndex = 0;
+            // 
+            // num
+            // 
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle2.ForeColor = Color.Gray;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            num.DefaultCellStyle = dataGridViewCellStyle2;
+            num.FillWeight = 15F;
+            num.HeaderText = "#";
+            num.Name = "num";
+            num.ReadOnly = true;
+            num.Resizable = DataGridViewTriState.False;
+            num.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // title
             // 
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle7.ForeColor = Color.Gray;
-            dataGridViewCellStyle7.SelectionBackColor = Color.White;
-            title.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle3.ForeColor = Color.Gray;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            title.DefaultCellStyle = dataGridViewCellStyle3;
             title.HeaderText = "标题";
             title.Name = "title";
+            title.ReadOnly = true;
             title.Resizable = DataGridViewTriState.False;
             // 
             // Album
             // 
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle8.ForeColor = Color.Gray;
-            dataGridViewCellStyle8.SelectionBackColor = Color.White;
-            Album.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle4.ForeColor = Color.Gray;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            Album.DefaultCellStyle = dataGridViewCellStyle4;
+            Album.FillWeight = 80F;
             Album.HeaderText = "专辑";
             Album.Name = "Album";
+            Album.ReadOnly = true;
             Album.Resizable = DataGridViewTriState.False;
             // 
             // date
             // 
-            dataGridViewCellStyle9.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle9.ForeColor = Color.Gray;
-            dataGridViewCellStyle9.SelectionBackColor = Color.White;
-            date.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle5.ForeColor = Color.Gray;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            date.DefaultCellStyle = dataGridViewCellStyle5;
+            date.FillWeight = 45F;
             date.HeaderText = "添加日期";
             date.Name = "date";
+            date.ReadOnly = true;
             date.Resizable = DataGridViewTriState.False;
             // 
             // time
             // 
-            dataGridViewCellStyle10.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle10.ForeColor = Color.Gray;
-            dataGridViewCellStyle10.SelectionBackColor = Color.White;
-            time.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle6.ForeColor = Color.Gray;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            time.DefaultCellStyle = dataGridViewCellStyle6;
+            time.FillWeight = 35F;
             time.HeaderText = "时长";
             time.Name = "time";
+            time.ReadOnly = true;
             time.Resizable = DataGridViewTriState.False;
             // 
             // playTrackBar
@@ -325,6 +348,7 @@ namespace MusicBox
             LastButton.TabIndex = 8;
             LastButton.UseVisualStyleBackColor = true;
             LastButton.Click += LastButton_Click;
+            LastButton.MouseHover += LastButton_MouseHover;
             // 
             // VolumeTrackBar
             // 
@@ -390,6 +414,7 @@ namespace MusicBox
         private SearchButton SearchButton;
         private HomeButton HomeButton;
         private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn num;
         private DataGridViewTextBoxColumn title;
         private DataGridViewTextBoxColumn Album;
         private DataGridViewTextBoxColumn date;
