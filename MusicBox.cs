@@ -66,6 +66,9 @@ namespace MusicBox
             playTrackBar.Value = 50;
             NowTimeLabel.Location = new Point(playTrackBar.Location.X - NowTimeLabel.Width - 10, playTrackBar.Location.Y - 6);
             EndTimeLabel.Location = new Point(playTrackBar.Location.X + playTrackBar.Width + 10, playTrackBar.Location.Y - 6);
+            LeftDownAlbumBox.Location = new Point(10, ClientSize.Height - 70);
+            LeftDownSongNameLabel.Location = new Point(LeftDownAlbumBox.Location.X + LeftDownAlbumBox.Width + 5, LeftDownAlbumBox.Location.Y + 5);
+            LeftDownArtistsNameLabel.Location = new Point(LeftDownSongNameLabel.Location.X, LeftDownSongNameLabel.Location.Y + LeftDownSongNameLabel.Height + 5);
         }
 
         private void SecondTimer_Tick(object sender, EventArgs e)
