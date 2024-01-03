@@ -29,7 +29,7 @@ public class SearchButton : Button
         g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
         // 设置画笔
-        Pen pen = new Pen(Color.Gray, 2); // 白色画笔，线宽为2
+        Pen pen = new Pen(Color.Gray, 3); // 白色画笔，线宽为3
 
         // 计算放大镜的圆圈部分
         int padding = 10;

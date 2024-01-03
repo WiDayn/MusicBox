@@ -112,8 +112,13 @@ namespace MusicBox
 
         private void MainSplitContainer_Panel2_SizeChanged(object sender, EventArgs e)
         {
-
+            dataGridView1.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 6 / 10);
+            dataGridView1.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
         }
 
+        private void LastButton_MouseHover(object sender, EventArgs e)
+        {
+          
+        }
     }
 }

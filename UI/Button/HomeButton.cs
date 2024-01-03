@@ -53,7 +53,7 @@ public class HomeButton : Button
         };
 
         // 绘制房屋外部轮廓
-        using (Pen outlinePen = new Pen(Color.Gray, 2))
+        using (Pen outlinePen = new Pen(Color.Gray, 3))
         {
             graphics.DrawPolygon(outlinePen, outlinePoints);
         }
@@ -65,7 +65,7 @@ public class HomeButton : Button
             doorWidth,
             doorHeight);
 
-        using (Pen doorPen = new Pen(Color.Gray, 2))
+        using (Pen doorPen = new Pen(Color.Gray, 3))
         {
             graphics.DrawRectangle(doorPen, door.X, door.Y, door.Width, door.Height);
         }
