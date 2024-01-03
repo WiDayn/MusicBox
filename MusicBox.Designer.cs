@@ -133,15 +133,16 @@ namespace MusicBox
             MainSplitContainer.Panel2.SizeChanged += MainSplitContainer_Panel2_SizeChanged;
             MainSplitContainer.Size = new Size(990, 686);
             MainSplitContainer.SplitterDistance = 330;
-            MainSplitContainer.SplitterWidth = 15;
+            MainSplitContainer.SplitterWidth = 2;
             MainSplitContainer.TabIndex = 4;
+            MainSplitContainer.SplitterMoved += SplitterMoved_SizeChanged;
             // 
             // LeftDownPanel
             // 
             LeftDownPanel.BackColor = Color.FromArgb(21, 21, 21);
-            LeftDownPanel.Location = new Point(7, 154);
+            LeftDownPanel.Location = new Point(7, 155);
             LeftDownPanel.Name = "LeftDownPanel";
-            LeftDownPanel.Size = new Size(320, 529);
+            LeftDownPanel.Size = new Size(320, 531);
             LeftDownPanel.TabIndex = 2;
             // 
             // LeftTopPanel

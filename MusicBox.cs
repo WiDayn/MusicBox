@@ -52,6 +52,12 @@ namespace MusicBox
             playTrackBar.ToggleShape();
         }
 
+        private void SplitterMoved_SizeChanged(object sender, EventArgs e)
+        {
+            LeftTopPanel.Size = new Size(MainSplitContainer.Panel1.Width - 15, 130);
+            LeftDownPanel.Size = new Size(MainSplitContainer.Panel1.Width - 15, ClientSize.Height - 75 - LeftDownPanel.Location.Y);
+        }
+
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
@@ -70,6 +76,7 @@ namespace MusicBox
             LeftDownAlbumBox.Location = new Point(10, ClientSize.Height - 70);
             LeftDownSongNameLabel.Location = new Point(LeftDownAlbumBox.Location.X + LeftDownAlbumBox.Width + 5, LeftDownAlbumBox.Location.Y + 5);
             LeftDownArtistsNameLabel.Location = new Point(LeftDownSongNameLabel.Location.X, LeftDownSongNameLabel.Location.Y + LeftDownSongNameLabel.Height + 5);
+            SplitterMoved_SizeChanged(sender, e);
         }
 
         private void SecondTimer_Tick(object sender, EventArgs e)
