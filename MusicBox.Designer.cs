@@ -35,6 +35,7 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
             label2 = new Label();
@@ -42,8 +43,13 @@ namespace MusicBox
             playTrackBar = new PlayTrackBar();
             NowTimeLabel = new Label();
             SecondTimer = new System.Windows.Forms.Timer(components);
+            LeftDownAlbumBox = new PictureBox();
+            LeftDownSongNameLabel = new Label();
+            LeftDownArtistsNameLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             SuspendLayout();
             // 
             // PlayButton
@@ -102,17 +108,16 @@ namespace MusicBox
             MainSplitContainer.SplitterWidth = 15;
             MainSplitContainer.TabIndex = 4;
             // 
-            // playProgressBar
+            // playTrackBar
             // 
+            playTrackBar.AutoSize = false;
             playTrackBar.BackColor = Color.Black;
             playTrackBar.Location = new Point(357, 758);
-            playTrackBar.Name = "playProgressBar";
-            playTrackBar.AutoSize = false;
-            playTrackBar.Size = new Size(294, 10);
-            playTrackBar.Minimum = 0;
             playTrackBar.Maximum = 100;
+            playTrackBar.Name = "playTrackBar";
+            playTrackBar.Size = new Size(294, 10);
             playTrackBar.TabIndex = 5;
-            playTrackBar.ScrollChanged += new EventHandler(PlayTrackBar_Scroll); ;
+            playTrackBar.ScrollChanged += PlayTrackBar_Scroll;
             // 
             // NowTimeLabel
             // 
@@ -131,12 +136,48 @@ namespace MusicBox
             SecondTimer.Enabled = true;
             SecondTimer.Tick += SecondTimer_Tick;
             // 
+            // LeftDownAlbumBox
+            // 
+            LeftDownAlbumBox.Image = (Image)resources.GetObject("LeftDownAlbumBox.Image");
+            LeftDownAlbumBox.Location = new Point(12, 695);
+            LeftDownAlbumBox.Name = "LeftDownAlbumBox";
+            LeftDownAlbumBox.Size = new Size(60, 60);
+            LeftDownAlbumBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            LeftDownAlbumBox.TabIndex = 7;
+            LeftDownAlbumBox.TabStop = false;
+            // 
+            // LeftDownSongNameLabel
+            // 
+            LeftDownSongNameLabel.AutoSize = true;
+            LeftDownSongNameLabel.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            LeftDownSongNameLabel.ForeColor = Color.White;
+            LeftDownSongNameLabel.Location = new Point(88, 704);
+            LeftDownSongNameLabel.Name = "LeftDownSongNameLabel";
+            LeftDownSongNameLabel.Size = new Size(45, 17);
+            LeftDownSongNameLabel.TabIndex = 8;
+            LeftDownSongNameLabel.Text = "label1";
+            // 
+            // LeftDownArtistsNameLabel
+            // 
+            LeftDownArtistsNameLabel.AutoSize = true;
+            LeftDownArtistsNameLabel.Font = new Font("Microsoft YaHei UI", 7F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            LeftDownArtistsNameLabel.BackColor = SystemColors.ControlText;
+            LeftDownArtistsNameLabel.ForeColor = Color.FromArgb(114, 114, 114);
+            LeftDownArtistsNameLabel.Location = new Point(90, 727);
+            LeftDownArtistsNameLabel.Name = "LeftDownArtistsNameLabel";
+            LeftDownArtistsNameLabel.Size = new Size(43, 17);
+            LeftDownArtistsNameLabel.TabIndex = 9;
+            LeftDownArtistsNameLabel.Text = "label1";
+            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(998, 771);
+            Controls.Add(LeftDownArtistsNameLabel);
+            Controls.Add(LeftDownSongNameLabel);
+            Controls.Add(LeftDownAlbumBox);
             Controls.Add(NowTimeLabel);
             Controls.Add(playTrackBar);
             Controls.Add(label2);
@@ -152,6 +193,8 @@ namespace MusicBox
             SizeChanged += MusicBox_SizeChanged;
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).EndInit();
             MainSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,5 +207,8 @@ namespace MusicBox
         private PlayTrackBar playTrackBar;
         private Label NowTimeLabel;
         private System.Windows.Forms.Timer SecondTimer;
+        private PictureBox LeftDownAlbumBox;
+        private Label LeftDownSongNameLabel;
+        private Label LeftDownArtistsNameLabel;
     }
 }
