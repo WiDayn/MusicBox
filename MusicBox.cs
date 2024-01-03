@@ -1,6 +1,9 @@
 
+using MusicBox.UI.Button;
+using MusicBox.UI.List;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace MusicBox
 {
@@ -31,9 +34,17 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
+            MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(1);
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "测试", "艺人");
             MusicBox_SizeChanged(sender, e);
         }
 
@@ -74,6 +85,7 @@ namespace MusicBox
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
+            RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         (int)(ClientSize.Height - 63 * GetScreenScalingFactor()));
             NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + (int)(45 * GetScreenScalingFactor()),
