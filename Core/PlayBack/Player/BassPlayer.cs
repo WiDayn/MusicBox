@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Un4seen.Bass;
 
 namespace MusicBox.Core.PlayBack.Player
@@ -24,19 +25,31 @@ namespace MusicBox.Core.PlayBack.Player
         }
 
         // 载入音频文件
-        public void LoadAudio(string filePath)
+        public void LoadAudio(string source)
         {
             // 先释放之前的音频流
             if (_stream != 0)
                 Bass.BASS_StreamFree(_stream);
 
-            // 创建音频流
-            _stream = Bass.BASS_StreamCreateFile(filePath, 0, 0, BASSFlag.BASS_DEFAULT);
-            if (_stream == 0)
+            // 检查 source 是文件路径还是 URL
+            if (Uri.IsWellFormedUriString(source, UriKind.Absolute))
             {
-                Debug.WriteLine("载入音频文件失败!");
+                // 从 URL 创建音频流，但不使用 BASS_STREAM_BLOCK
+                _stream = Bass.BASS_StreamCreateURL(source, 0, BASSFlag.BASS_STREAM_STATUS | BASSFlag.BASS_SAMPLE_FLOAT, null, IntPtr.Zero);
+            }
+            else
+            {
+                // 从文件创建音频流
+                _stream = Bass.BASS_StreamCreateFile(source, 0, 0, BASSFlag.BASS_DEFAULT);
             }
 
+            if (_stream == 0)
+            {
+                Debug.WriteLine("载入音频源失败!");
+                return;
+            }
+
+            // 设置歌曲播放完毕的事件处理器
             Bass.BASS_ChannelSetSync(_stream, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(EndTrack), IntPtr.Zero);
         }
 
@@ -80,6 +93,20 @@ namespace MusicBox.Core.PlayBack.Player
             return volume;
         }
 
+        public void CheckHTTPHeaders(int stream)
+        {
+            IntPtr httpHeadersPtr = Bass.BASS_ChannelGetTags(stream, BASSTag.BASS_TAG_HTTP);
+            if (httpHeadersPtr != IntPtr.Zero)
+            {
+                string httpHeaders = Marshal.PtrToStringAnsi(httpHeadersPtr);
+                Debug.WriteLine("HTTP Headers:\n" + httpHeaders);
+            }
+            else
+            {
+                Debug.WriteLine("无法获取 HTTP 头部信息");
+            }
+        }
+
         // 设置当前播放到的时长（以秒为单位）
         public void SetCurrentPosition(double seconds)
         {
@@ -89,7 +116,8 @@ namespace MusicBox.Core.PlayBack.Player
             // 设置播放位置
             if (!Bass.BASS_ChannelSetPosition(_stream, position))
             {
-                Debug.WriteLine("设置播放位置失败!");
+                BASSError error = Bass.BASS_ErrorGetCode();
+                Debug.WriteLine($"设置播放位置失败，错误代码: {error}");
             }
         }
 
