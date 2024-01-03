@@ -61,9 +61,10 @@ namespace MusicBox
             LastButton.Location = new Point(ClientSize.Width / 2 - LastButton.Width / 2 - 45,
                             ClientSize.Height - 63);
             MainSplitContainer.Size = new Size(ClientSize.Width - 10, ClientSize.Height - 75);
-            playTrackBar.Size = new Size(ClientSize.Width / 3, 5);
+            playTrackBar.Size = new Size(ClientSize.Width / 3, 10);
             playTrackBar.Location = new Point(ClientSize.Width / 2 - playTrackBar.Size.Width / 2, ClientSize.Height - 20);
             playTrackBar.Value = 50;
+            VolumeTrackBar.Size = new Size(115, 10);
             NowTimeLabel.Location = new Point(playTrackBar.Location.X - NowTimeLabel.Width - 10, playTrackBar.Location.Y - 6);
             EndTimeLabel.Location = new Point(playTrackBar.Location.X + playTrackBar.Width + 10, playTrackBar.Location.Y - 6);
             LeftDownAlbumBox.Location = new Point(10, ClientSize.Height - 70);

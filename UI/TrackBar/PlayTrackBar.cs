@@ -6,6 +6,7 @@ using System.Windows.Forms;
 public class PlayTrackBar : TrackBar
 {
     private bool isDragging = false;
+    private bool MouseOn = false;
     // 声明新事件
     public event EventHandler ScrollChanged;
     public PlayTrackBar()
@@ -14,6 +15,23 @@ public class PlayTrackBar : TrackBar
         this.MouseDown += CustomTrackBar_MouseDown;
         this.MouseMove += CustomTrackBar_MouseMove;
         this.MouseUp += CustomTrackBar_MouseUp;
+        this.MouseEnter += new EventHandler(PlayTrackBar_MouseEnter);
+        this.MouseLeave += new EventHandler(PlayTrackBar_MouseLeave);
+    }
+
+    private void PlayTrackBar_MouseEnter(object sender, EventArgs e)
+    {
+        // 鼠标停留在TrackBar上时的逻辑
+        MouseOn = true;
+        ToggleShape();
+    }
+
+    // 当鼠标离开TrackBar时触发的方法
+    private void PlayTrackBar_MouseLeave(object sender, EventArgs e)
+    {
+        // 鼠标离开TrackBar时的逻辑
+        MouseOn = false;
+        ToggleShape();
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -24,10 +42,10 @@ public class PlayTrackBar : TrackBar
         Rectangle trackRectangle = ClientRectangle;
 
         Rectangle fullRectangle = new Rectangle(
-            trackRectangle.X,
-            trackRectangle.Y,
-            (int)Size.Width,
-            Size.Height);
+            trackRectangle.X + 3,
+            trackRectangle.Y + 3,
+            Size.Width,
+           4);
 
         // 使用 GDI+ 绘制自定义外观
         using (SolidBrush brush = new SolidBrush(Color.FromArgb(77, 77, 77))) // 进度条颜色
@@ -36,25 +54,28 @@ public class PlayTrackBar : TrackBar
         }
 
         Rectangle progressRectangle = new Rectangle(
-            trackRectangle.X,
-            trackRectangle.Y,
+            trackRectangle.X + 3,
+            trackRectangle.Y + 3,
             (int)(Size.Width * ((double)Value / Maximum)),
-            Size.Height);
+            4);
 
         // 使用 GDI+ 绘制自定义外观
-        using (SolidBrush brush = new SolidBrush(Color.White)) // 进度条颜色
+        using (SolidBrush brush = new SolidBrush(MouseOn ? Color.FromArgb(29, 185, 84) : Color.White)) // 进度条颜色
         {
             e.Graphics.FillRectangle(brush, progressRectangle);
         }
-        
 
-        //// 绘制滑块
-        //Rectangle thumbRect = new Rectangle(
-        //    (int)(trackRectangle.Width * ((double)this.Value / this.Maximum)) - 8,
-        //    trackRectangle.Y + trackRectangle.Height / 2 - 8,
-        //    16, 16); // 可以调整滑块的大小
 
-        //e.Graphics.FillRectangle(Brushes.Gray, thumbRect); // 滑块颜色
+        if (MouseOn)
+        {
+            // 绘制滑块
+            Brush thumbBrush = new SolidBrush(Color.White);
+            Rectangle thumbRect = new Rectangle(
+                (int)((Size.Width - 10) * ((double)Value / Maximum)), 0,
+                10, 10); // 可以调整滑块的大小
+
+            e.Graphics.FillEllipse(thumbBrush, thumbRect); // 滑块颜色
+        }
     }
 
 

@@ -36,11 +36,11 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
@@ -61,6 +61,7 @@ namespace MusicBox
             LeftDownArtistsNameLabel = new Label();
             NextButton = new NextButton();
             LastButton = new LastButton();
+            VolumeTrackBar = new PlayTrackBar();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -68,6 +69,7 @@ namespace MusicBox
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
             SuspendLayout();
             // 
             // PlayButton
@@ -162,17 +164,17 @@ namespace MusicBox
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.BackgroundColor = Color.FromArgb(18, 18, 18);
             dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            dataGridViewCellStyle1.ForeColor = Color.Gray;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle1.SelectionForeColor = Color.Gray;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle6.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            dataGridViewCellStyle6.ForeColor = Color.Gray;
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle6.SelectionForeColor = Color.Gray;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { title, Album, date, time });
+            dataGridView1.EnableHeadersVisualStyles = false;
             dataGridView1.GridColor = Color.FromArgb(18, 18, 18);
             dataGridView1.Location = new Point(7, 252);
             dataGridView1.Name = "dataGridView1";
@@ -182,40 +184,40 @@ namespace MusicBox
             // 
             // title
             // 
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle2.ForeColor = Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            title.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle7.ForeColor = Color.Gray;
+            dataGridViewCellStyle7.SelectionBackColor = Color.White;
+            title.DefaultCellStyle = dataGridViewCellStyle7;
             title.HeaderText = "标题";
             title.Name = "title";
             title.Resizable = DataGridViewTriState.False;
             // 
             // Album
             // 
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle3.ForeColor = Color.Gray;
-            dataGridViewCellStyle3.SelectionBackColor = Color.White;
-            Album.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle8.ForeColor = Color.Gray;
+            dataGridViewCellStyle8.SelectionBackColor = Color.White;
+            Album.DefaultCellStyle = dataGridViewCellStyle8;
             Album.HeaderText = "专辑";
             Album.Name = "Album";
             Album.Resizable = DataGridViewTriState.False;
             // 
             // date
             // 
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle4.ForeColor = Color.Gray;
-            dataGridViewCellStyle4.SelectionBackColor = Color.White;
-            date.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle9.ForeColor = Color.Gray;
+            dataGridViewCellStyle9.SelectionBackColor = Color.White;
+            date.DefaultCellStyle = dataGridViewCellStyle9;
             date.HeaderText = "添加日期";
             date.Name = "date";
             date.Resizable = DataGridViewTriState.False;
             // 
             // time
             // 
-            dataGridViewCellStyle5.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle5.ForeColor = Color.Gray;
-            dataGridViewCellStyle5.SelectionBackColor = Color.White;
-            time.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle10.ForeColor = Color.Gray;
+            dataGridViewCellStyle10.SelectionBackColor = Color.White;
+            time.DefaultCellStyle = dataGridViewCellStyle10;
             time.HeaderText = "时长";
             time.Name = "time";
             time.Resizable = DataGridViewTriState.False;
@@ -303,12 +305,23 @@ namespace MusicBox
             LastButton.UseVisualStyleBackColor = true;
             LastButton.Click += LastButton_Click;
             // 
+            // VolumeTrackBar
+            // 
+            VolumeTrackBar.AutoSize = false;
+            VolumeTrackBar.BackColor = Color.Black;
+            VolumeTrackBar.Location = new Point(872, 727);
+            VolumeTrackBar.Maximum = 100;
+            VolumeTrackBar.Name = "VolumeTrackBar";
+            VolumeTrackBar.Size = new Size(115, 5);
+            VolumeTrackBar.TabIndex = 10;
+            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(998, 771);
+            Controls.Add(VolumeTrackBar);
             Controls.Add(LeftDownArtistsNameLabel);
             Controls.Add(LeftDownSongNameLabel);
             Controls.Add(LeftDownAlbumBox);
@@ -334,6 +347,7 @@ namespace MusicBox
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -358,5 +372,6 @@ namespace MusicBox
         private DataGridViewTextBoxColumn Album;
         private DataGridViewTextBoxColumn date;
         private DataGridViewTextBoxColumn time;
+        private PlayTrackBar VolumeTrackBar;
     }
 }
