@@ -7,8 +7,8 @@ public class PlayTrackBar : TrackBar
 {
     private bool isDragging = false;
     private bool MouseOn = false;
-    // 声明新事件
-    public event EventHandler ScrollChanged;
+    private const int WM_MOUSEWHEEL = 0x020A;
+
     public PlayTrackBar()
     {
         this.SetStyle(ControlStyles.UserPaint, true);
@@ -17,6 +17,18 @@ public class PlayTrackBar : TrackBar
         this.MouseUp += CustomTrackBar_MouseUp;
         this.MouseEnter += new EventHandler(PlayTrackBar_MouseEnter);
         this.MouseLeave += new EventHandler(PlayTrackBar_MouseLeave);
+    }
+
+    protected override void WndProc(ref Message m)
+    {
+        // 如果消息是鼠标滚轮消息，则忽略
+        if (m.Msg == WM_MOUSEWHEEL)
+        {
+            return;
+        }
+
+        // 否则，正常处理其他消息
+        base.WndProc(ref m);
     }
 
     private void PlayTrackBar_MouseEnter(object sender, EventArgs e)
@@ -32,6 +44,12 @@ public class PlayTrackBar : TrackBar
         // 鼠标离开TrackBar时的逻辑
         MouseOn = false;
         ToggleShape();
+    }
+
+    protected override void OnMouseWheel(MouseEventArgs e)
+    {
+        // 这里不调用基类的 OnMouseWheel 方法，以禁用滚轮功能
+        // base.OnMouseWheel(e);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -106,15 +124,8 @@ public class PlayTrackBar : TrackBar
         if (this.Value != newvalue)
         {
             this.Value = newvalue;
-            this.OnScrollChanged(EventArgs.Empty);
         }
         this.Refresh();
-    }
-
-    // 事件触发器方法
-    protected virtual void OnScrollChanged(EventArgs e)
-    {
-        ScrollChanged?.Invoke(this, e);
     }
 
     public void ToggleShape()
