@@ -87,6 +87,19 @@ namespace MusicBox.UI.List
             Panel.Controls.Add(recentButton);
         }
 
+        public void AddRecentButtonFromIMG(Image image, string titleText, string descriptionText)
+        {
+            var recentButton = new RecentButton
+            {
+                Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
+                Height = 120,
+            };
+            recentButton.Image = image;
+            recentButton.TitleText = titleText;
+            recentButton.DescriptionText = descriptionText;
+            Panel.Controls.Add(recentButton);
+        }
+
         // 公共方法用于设置音乐轨道项的数据
         public void SetTrackData(string index, string imgPath, string titleText, string descriptionText,string album,string duration)
         {
