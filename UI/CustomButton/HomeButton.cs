@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MusicBox.Core.Common;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 public class HomeButton : Button
 {
     private bool isMouseOn = false;
-    private bool isMouseDown = false;
 
     public HomeButton()
     {
@@ -21,7 +21,6 @@ public class HomeButton : Button
         this.MouseEnter += HomeButton_MouseEnter;
         this.MouseLeave += HomeButton_MouseLeave;
         this.MouseDown += HomeButton_MouseDown;
-        this.MouseUp += HomeButton_MouseUp;
     }
     public static float GetScreenScalingFactor()
     {
@@ -35,34 +34,21 @@ public class HomeButton : Button
     private void HomeButton_MouseEnter(object sender, EventArgs e)
     {
         isMouseOn = true;
-        isMouseDown = false;
         this.Invalidate();
     }
 
     private void HomeButton_MouseLeave(object sender, EventArgs e)
     {
         isMouseOn = false;
-        isMouseDown = false;
         this.Invalidate();
     }
 
     private void HomeButton_MouseDown(object sender, MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left)
-        {
-            isMouseDown = true;
-            this.Invalidate();
-        }
+        SharedData.Flag = true;
+        this.Invalidate();
     }
 
-    private void HomeButton_MouseUp(object sender, MouseEventArgs e)
-    {
-        if (e.Button == MouseButtons.Left)
-        {
-            isMouseDown = false;
-            this.Invalidate();
-        }
-    }
 
     protected override void OnPaint(PaintEventArgs pe)
     {
@@ -81,11 +67,11 @@ public class HomeButton : Button
         Color penColor = Color.Gray;
         if (isMouseOn)
         {
-            penColor = Color.White;
+            penColor = Color.FromArgb(240, 255, 255); 
         }
-        if (isMouseDown)
+        if (SharedData.Flag)
         {
-            penColor = Color.Blue;
+            penColor = Color.White;
         }
 
         // 设置画笔
@@ -131,7 +117,7 @@ public class HomeButton : Button
             string buttonText = "主页";
             SizeF textSize = graphics.MeasureString(buttonText, Font);
             Point textLocation = new Point(50, 8);
-            Color textColor = isMouseDown ? Color.Blue : (isMouseOn ? Color.White : Color.Gray);
+            Color textColor = SharedData.Flag ? Color.White : (isMouseOn ? Color.FromArgb(240, 255, 255) : Color.Gray);
             TextRenderer.DrawText(graphics, buttonText, Font, textLocation, textColor);
         }
     }

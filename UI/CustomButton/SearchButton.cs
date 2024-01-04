@@ -1,11 +1,11 @@
-﻿using System;
+﻿using MusicBox.Core.Common;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 public class SearchButton : Button
 {
     private bool isMouseOver = false;
-    private bool isMouseDown = false;
 
     public SearchButton()
     {
@@ -21,7 +21,6 @@ public class SearchButton : Button
         this.MouseEnter += SearchButton_MouseEnter;
         this.MouseLeave += SearchButton_MouseLeave;
         this.MouseDown += SearchButton_MouseDown;
-        this.MouseUp += SearchButton_MouseUp;
     }
 
     public static float GetScreenScalingFactor()
@@ -36,34 +35,21 @@ public class SearchButton : Button
     private void SearchButton_MouseEnter(object sender, EventArgs e)
     {
         isMouseOver = true;
-        isMouseDown = false;
         this.Invalidate();
     }
 
     private void SearchButton_MouseLeave(object sender, EventArgs e)
     {
         isMouseOver = false;
-        isMouseDown = false;
         this.Invalidate();
     }
 
     private void SearchButton_MouseDown(object sender, MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left)
-        {
-            isMouseDown = true;
-            this.Invalidate();
-        }
+        SharedData.Flag = false;
+        this.Invalidate();
     }
 
-    private void SearchButton_MouseUp(object sender, MouseEventArgs e)
-    {
-        if (e.Button == MouseButtons.Left)
-        {
-            isMouseDown = false;
-            this.Invalidate();
-        }
-    }
 
     protected override void OnPaint(PaintEventArgs pe)
     {
@@ -80,11 +66,11 @@ public class SearchButton : Button
         Color penColor = Color.Gray;
         if (isMouseOver)
         {
-            penColor = Color.White;
+            penColor = Color.FromArgb(240, 255, 255);
         }
-        if (isMouseDown)
+        if (!SharedData.Flag)
         {
-            penColor = Color.Blue;
+            penColor = Color.White;
         }
 
         // 设置画笔
@@ -108,7 +94,7 @@ public class SearchButton : Button
         string buttonText = "搜索";
         SizeF textSize = g.MeasureString(buttonText, Font);
         Point textLocation = new Point(50, 8);
-        Color textColor = isMouseDown ? Color.Blue : (isMouseOver ? Color.White : Color.Gray);
+        Color textColor = !SharedData.Flag ? Color.White : (isMouseOver ? Color.FromArgb(240, 255, 255) : Color.Gray);
         TextRenderer.DrawText(g, buttonText, Font, textLocation, textColor);
     }
 }
