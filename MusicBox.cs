@@ -38,13 +38,22 @@ namespace MusicBox
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "测试", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
             MusicBox_SizeChanged(sender, e);
         }
 
@@ -89,6 +98,12 @@ namespace MusicBox
             RightTabControl.Location = new Point((int)(7 * GetScreenScalingFactor()), 0);
             RightTabControl.Size = new Size(MainSplitContainer.Panel2.Width - (int)(7 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
+            // 更新SearchButton的大小，使其与MainSplitContainer.Panel1的宽度相同，高度为35
+            SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
+            HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
+
+            AlbumList.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
+            AlbumList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height * 6 / 10);
         }
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
@@ -133,25 +148,6 @@ namespace MusicBox
             //播放上一首
         }
 
-        private void MainSplitContainer_Panel1_SizeChanged(object sender, EventArgs e)
-        {
-            // 更新SearchButton的大小，使其与MainSplitContainer.Panel1的宽度相同，高度为35
-            SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, 35);
-            HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, 35);
-        }
-
-        private void MainSplitContainer_Panel2_SizeChanged(object sender, EventArgs e)
-        {
-            AlbumView.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 6 / 10);
-            AlbumView.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
-            AlbumLabel.Size = new Size(MainSplitContainer.Panel2.Height * 2 / 10, MainSplitContainer.Panel2.Height * 2 / 10);
-            AlbumLabel.Location = new Point(MainSplitContainer.Panel2.Height * 3 / 10, MainSplitContainer.Panel2.Height / 10);
-            AlbumpictureBox.Size = new Size(MainSplitContainer.Panel2.Height * 2 / 10, MainSplitContainer.Panel2.Height * 2 / 10);
-            AlbumpictureBox.Location = new Point(10, MainSplitContainer.Panel2.Height / 10);
-
-
-        }
-
         private void HomeButton_Click(object sender, EventArgs e)
         {
             RightTabControl.SwitchToPanel(0);
@@ -161,6 +157,5 @@ namespace MusicBox
         {
             RightTabControl.SwitchToPanel(1);
         }
-
     }
 }

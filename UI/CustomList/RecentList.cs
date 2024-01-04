@@ -1,4 +1,5 @@
-﻿using MusicBox.UI.Button;
+﻿using MusicBox.Core.Entity;
+using MusicBox.UI.Button;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,9 +58,16 @@ namespace MusicBox.UI.List
 
         private void SizeChangedHandler(object sender, EventArgs e)
         {
-            foreach (RecentButton item in Panel.Controls)
+            foreach (var item in Panel.Controls)
             {
-                item.Width = (int)(Width - (23 * GetScreenScalingFactor()));
+                if(item.GetType() == typeof(RecentButton))
+                {
+                    ((RecentButton)item).Width = (int)(Width - (23 * GetScreenScalingFactor()));
+                } else
+                {
+                    ((SongButton)item).Width = (int)(Width - (23 * GetScreenScalingFactor()));
+                }
+                
             }
             Panel.Size = new Size(Width, Height);
         }
@@ -77,6 +85,23 @@ namespace MusicBox.UI.List
             recentButton.TitleText = titleText;
             recentButton.DescriptionText = descriptionText;
             Panel.Controls.Add(recentButton);
+        }
+
+        // 公共方法用于设置音乐轨道项的数据
+        public void SetTrackData(string index, string imgPath, string titleText, string descriptionText,string album,string duration)
+        {
+            var musicTrackControl = new SongButton
+            {
+                Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
+                Height = 60,
+            };
+            musicTrackControl.Index = index;
+            musicTrackControl.TitleText = titleText;
+            musicTrackControl.DescriptionText = descriptionText;
+            musicTrackControl.Image = Image.FromFile(imgPath);
+            musicTrackControl.Album = album;
+            musicTrackControl.Duration = duration;
+            Panel.Controls.Add(musicTrackControl);
         }
     }
 }

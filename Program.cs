@@ -17,7 +17,7 @@ namespace MusicBox
             musicPlayer.AddSongToList(new Song(1, "春日影", 1, 2, "E:\\External\\Album\\林家谦-SEVEN\\在空中的這一秒.flac"));
             musicPlayer.AddSongToList(new Song(2, "タイニーリトル・アジアンタム", 2, 3, "E:\\External\\Album\\林家谦-SEVEN\\在空中的這一秒.flac"));
             musicPlayer.PlayInRandom();
-            Application.Run(new Login());
+            Application.Run(new MusicBox());
             musicPlayer.Dispose();
         }
     }

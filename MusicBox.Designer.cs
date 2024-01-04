@@ -39,8 +39,6 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
@@ -52,12 +50,7 @@ namespace MusicBox
             HomeButton = new HomeButton();
             ArtistPanel = new Panel();
             AlbumPanel = new Panel();
-            AlbumView = new DataGridView();
-            num = new DataGridViewTextBoxColumn();
-            title = new DataGridViewTextBoxColumn();
-            Album = new DataGridViewTextBoxColumn();
-            date = new DataGridViewTextBoxColumn();
-            time = new DataGridViewTextBoxColumn();
+            AlbumList = new RecentList();
             RightTabControl = new BorderlessTabControl();
             playTrackBar = new PlayTrackBar();
             NowTimeLabel = new Label();
@@ -75,7 +68,6 @@ namespace MusicBox
             LeftDownPanel.SuspendLayout();
             LeftTopPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)AlbumView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
@@ -117,7 +109,6 @@ namespace MusicBox
             MainSplitContainer.Panel1.BackColor = Color.Black;
             MainSplitContainer.Panel1.Controls.Add(LeftDownPanel);
             MainSplitContainer.Panel1.Controls.Add(LeftTopPanel);
-            MainSplitContainer.Panel1.SizeChanged += MainSplitContainer_Panel1_SizeChanged;
             // 
             // MainSplitContainer.Panel2
             // 
@@ -125,7 +116,6 @@ namespace MusicBox
             MainSplitContainer.Panel2.Controls.Add(ArtistPanel);
             MainSplitContainer.Panel2.Controls.Add(AlbumPanel);
             MainSplitContainer.Panel2.Controls.Add(RightTabControl);
-            MainSplitContainer.Panel2.SizeChanged += MainSplitContainer_Panel2_SizeChanged;
             MainSplitContainer.Size = new Size(990, 686);
             MainSplitContainer.SplitterDistance = 330;
             MainSplitContainer.SplitterWidth = 1;
@@ -186,101 +176,34 @@ namespace MusicBox
             // 
             // ArtistPanel
             // 
-            ArtistPanel.Location = new Point(237, 16);
+            ArtistPanel.BackColor = Color.FromArgb(18, 18, 18);
+            ArtistPanel.Location = new Point(0, 0);
             ArtistPanel.Name = "ArtistPanel";
             ArtistPanel.Size = new Size(200, 100);
             ArtistPanel.TabIndex = 11;
-            ArtistPanel.Paint += panel1_Paint;
             // 
             // AlbumPanel
             // 
-            AlbumPanel.BackColor = Color.Transparent;
-            AlbumPanel.Controls.Add(AlbumView);
-            AlbumPanel.Location = new Point(7, 13);
+            AlbumPanel.BackColor = Color.FromArgb(18, 18, 18);
+            AlbumPanel.Controls.Add(AlbumList);
+            AlbumPanel.Location = new Point(0, 0);
             AlbumPanel.Margin = new Padding(0);
             AlbumPanel.Name = "AlbumPanel";
-            AlbumPanel.Size = new Size(200, 186);
+            AlbumPanel.Size = new Size(96, 100);
             AlbumPanel.TabIndex = 2;
             // 
-            // AlbumView
+            // AlbumList
             // 
-            AlbumView.AllowUserToResizeRows = false;
-            AlbumView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            AlbumView.BackgroundColor = Color.FromArgb(18, 18, 18);
-            AlbumView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            dataGridViewCellStyle1.ForeColor = Color.Gray;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle1.SelectionForeColor = Color.Gray;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            AlbumView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            AlbumView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            AlbumView.Columns.AddRange(new DataGridViewColumn[] { num, title, Album, date, time });
-            AlbumView.Cursor = Cursors.Hand;
-            AlbumView.EnableHeadersVisualStyles = false;
-            AlbumView.GridColor = Color.FromArgb(18, 18, 18);
-            AlbumView.Location = new Point(0, 3);
-            AlbumView.Name = "AlbumView";
-            AlbumView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            AlbumView.RowHeadersVisible = false;
-            AlbumView.Size = new Size(165, 100);
-            AlbumView.TabIndex = 0;
-            // 
-            // num
-            // 
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle2.ForeColor = Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            num.DefaultCellStyle = dataGridViewCellStyle2;
-            num.FillWeight = 15F;
-            num.HeaderText = "#";
-            num.Name = "num";
-            num.ReadOnly = true;
-            num.Resizable = DataGridViewTriState.False;
-            num.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // title
-            // 
-            title.DefaultCellStyle = dataGridViewCellStyle2;
-            title.HeaderText = "标题";
-            title.Name = "title";
-            title.ReadOnly = true;
-            title.Resizable = DataGridViewTriState.False;
-            // 
-            // Album
-            // 
-            Album.DefaultCellStyle = dataGridViewCellStyle2;
-            Album.FillWeight = 80F;
-            Album.HeaderText = "专辑";
-            Album.Name = "Album";
-            Album.ReadOnly = true;
-            Album.Resizable = DataGridViewTriState.False;
-            // 
-            // date
-            // 
-            date.DefaultCellStyle = dataGridViewCellStyle2;
-            date.FillWeight = 45F;
-            date.HeaderText = "添加日期";
-            date.Name = "date";
-            date.ReadOnly = true;
-            date.Resizable = DataGridViewTriState.False;
-            // 
-            // time
-            // 
-            time.DefaultCellStyle = dataGridViewCellStyle2;
-            time.FillWeight = 35F;
-            time.HeaderText = "时长";
-            time.Name = "time";
-            time.ReadOnly = true;
-            time.Resizable = DataGridViewTriState.False;
+            AlbumList.Location = new Point(0, 100);
+            AlbumList.Name = "AlbumList";
+            AlbumList.Size = new Size(96, 100);
+            AlbumList.TabIndex = 0;
             // 
             // RightTabControl
             // 
             RightTabControl.Location = new Point(3, 3);
             RightTabControl.Name = "RightTabControl";
-            RightTabControl.Size = new Size(646, 680);
+            RightTabControl.Size = new Size(96, 100);
             RightTabControl.TabIndex = 1;
             // 
             // playTrackBar
@@ -377,13 +300,6 @@ namespace MusicBox
             VolumeTrackBar.TabIndex = 10;
             VolumeTrackBar.ScrollChanged += VolumeTrackBar_Scroll;
             // 
-            // 
-            ArtistPanel.Location = new Point(329, 208);
-            ArtistPanel.Name = "ArtistPanel";
-            ArtistPanel.Size = new Size(200, 100);
-            ArtistPanel.TabIndex = 11;
-            ArtistPanel.Paint += panel1_Paint;
-            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -408,14 +324,13 @@ namespace MusicBox
             Text = "MusicBox";
             Load += MusicBox_Load;
             SizeChanged += MusicBox_SizeChanged;
+            MainSplitContainer.Panel1.ResumeLayout(false);
+            MainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).EndInit();
             MainSplitContainer.ResumeLayout(false);
             LeftDownPanel.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
             AlbumPanel.ResumeLayout(false);
-            AlbumPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)AlbumpictureBox).EndInit();
-            ((System.ComponentModel.ISupportInitialize)AlbumView).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).EndInit();
@@ -438,17 +353,12 @@ namespace MusicBox
         private SearchButton SearchButton;
         private HomeButton HomeButton;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn num;
-        private DataGridViewTextBoxColumn title;
-        private DataGridViewTextBoxColumn Album;
-        private DataGridViewTextBoxColumn date;
-        private DataGridViewTextBoxColumn time;
         private PlayTrackBar VolumeTrackBar;
+        private RecentList AlbumList;
         private RecentList RecentList;
         private Panel LeftTopPanel;
         private Panel LeftDownPanel;
         private DataGridView alumdataGridView;
-        private DataGridView AlbumView;
         private BorderlessTabControl RightTabControl;
         private Panel AlbumPanel;
         private Panel ArtistPanel;
