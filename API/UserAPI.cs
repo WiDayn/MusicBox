@@ -12,7 +12,7 @@ namespace MusicBox.API
     internal class UserAPI
     {
         public static bool isLogin = false;
-        public static string authToken = "";
+        public static string authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiIxIiwibmJmIjoxNzA0MjM2NzM0LCJleHAiOjE3MDQ4NDE1MzQsImlhdCI6MTcwNDIzNjczNH0.bUpfOViTYGG5k_1F0AhVIHEnc6KeRV8K8lLsbSEvWlI";
         public static UserData userData = new UserData();
 
         public class LoginResponse

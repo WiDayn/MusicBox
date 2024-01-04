@@ -70,6 +70,15 @@ namespace MusicBox.Properties {
         }
         
         /// <summary>
+        ///   查找类似 http://localhost:5101/External 的本地化字符串。
+        /// </summary>
+        internal static string External_URL {
+            get {
+                return ResourceManager.GetString("External_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap MyLove {

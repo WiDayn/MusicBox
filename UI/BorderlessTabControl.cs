@@ -10,7 +10,7 @@ namespace MusicBox.UI
 {
     public class BorderlessTabControl : UserControl
     {
-        private List<Panel> panels = new List<Panel>();
+        public List<Panel> panels = new List<Panel>();
 
         public BorderlessTabControl()
         {
