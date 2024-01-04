@@ -17,8 +17,6 @@ namespace MusicBox.UI.Button
         private CircularPictureBox pictureBox;
         private Label Title;
         private Label Description;
-        private bool MouseOn = false;
-        private bool LightOn = false;
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
@@ -66,7 +64,6 @@ namespace MusicBox.UI.Button
         }
         private void ButtonLabel_MouseClick(object sender, MouseEventArgs e)
         {
-            Debug.WriteLine(1);
             ButtonClick?.Invoke(this, EventArgs.Empty);
         }
         private void RecentButton_MouseEnter(object sender, EventArgs e)
