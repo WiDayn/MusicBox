@@ -14,20 +14,18 @@ namespace MusicBox.API
         {
             string url = Properties.Resources.BackEnd_URL + "/favorite";
 
-            using (var client = new HttpClient())
+            var httpClient = Program.httpClient;
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(UserAPI.authToken);
+            var response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(UserAPI.authToken);
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<FavoriteResponse>(jsonString);
-                }
-                else
-                {
-                    // 处理错误情况
-                    throw new HttpRequestException($"Error fetching favorite songs: {response.StatusCode}");
-                }
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<FavoriteResponse>(jsonString);
+            }
+            else
+            {
+                // 处理错误情况
+                throw new HttpRequestException($"Error fetching favorite songs: {response.StatusCode}");
             }
         }
     }

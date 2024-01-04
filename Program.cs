@@ -18,6 +18,8 @@ namespace MusicBox
 
         public static BorderlessTabControl DefaultRightTabControl;
 
+        public static HttpClient httpClient = new();
+
         [STAThread]
         static void Main()
         {
