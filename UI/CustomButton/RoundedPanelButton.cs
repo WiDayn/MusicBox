@@ -12,6 +12,9 @@ namespace MusicBox.UI.CustomButton
     {
         public Label ButtonLabel { get; private set; }
 
+        // 声明一个点击事件
+        public event EventHandler ButtonClick;
+
         public RoundedPanelButton()
         {
             // 初始化Label
@@ -31,8 +34,21 @@ namespace MusicBox.UI.CustomButton
 
             // 设置圆角区域
             UpdateRegion();
+
             ButtonLabel.MouseEnter += new EventHandler(RoundedPanelBox_MouseEnter);
             ButtonLabel.MouseLeave += new EventHandler(RoundedPanelBox_MouseLeave);
+            ButtonLabel.MouseClick += new MouseEventHandler(ButtonLabel_MouseClick);
+        }
+        private void ButtonLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine(1);
+            OnButtonClick();
+        }
+
+        // 触发ButtonClick事件的方法
+        protected virtual void OnButtonClick()
+        {
+            ButtonClick?.Invoke(this, EventArgs.Empty);
         }
 
         private void RoundedPanelBox_MouseEnter(object sender, EventArgs e)

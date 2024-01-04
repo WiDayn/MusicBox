@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MusicBox.API;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -25,9 +27,20 @@ namespace MusicBox
             DwmSetWindowAttribute(this.Handle, 35, ref TitlebarDarkColour, System.Runtime.InteropServices.Marshal.SizeOf(TitlebarDarkColour));
         }
 
-        private void textBox1_Load(object sender, EventArgs e)
+        private async void LoginButton_Click(object sender, EventArgs e)
         {
-
+            var isSuccess = await UserAPI.PostLoginAsync(AccountTextBox.Text, PasswordTextBox.Text);
+            if (isSuccess)
+            {
+                Form musicbox = new MusicBox();
+                this.Hide();
+                musicbox.Show();
+                Debug.WriteLine("Login Success");
+            }
+            else
+            {
+                Debug.WriteLine("Login Failed");
+            }
         }
     }
 }
