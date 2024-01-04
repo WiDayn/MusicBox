@@ -48,6 +48,16 @@ namespace MusicBox.Core.PlayBack.Player
             }
         }
 
+        public float GetVolume()
+        {
+            return bassPlayer.GetVolume();
+        }
+
+        public void SetVolume(float volume)
+        {
+            bassPlayer.SetVolume(volume);
+        }
+
         public void PlayInRandom()
         {
             MusicPlayList.RandomList();

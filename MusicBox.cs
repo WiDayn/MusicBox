@@ -1,6 +1,9 @@
 
+using MusicBox.UI.Button;
+using MusicBox.UI.List;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace MusicBox
 {
@@ -31,9 +34,17 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
+            MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
-            RightTabControl.SwitchToPanel(1);
+            RightTabControl.SwitchToPanel(2);
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
+            RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "测试", "艺人");
             MusicBox_SizeChanged(sender, e);
         }
 
@@ -64,16 +75,25 @@ namespace MusicBox
             playTrackBar.ToggleShape();
         }
 
+        private void VolumeTrackBar_Scroll(object sender, EventArgs e)
+        {
+            Program.musicPlayer.SetVolume((float)(VolumeTrackBar.Value * 1.0 / 100));
+
+            VolumeTrackBar.ToggleShape();
+        }
+
         private void SplitterMoved_SizeChanged(object sender, EventArgs e)
         {
             LeftTopPanel.Size = new Size(MainSplitContainer.Panel1.Width - (int)(7 * GetScreenScalingFactor()), (int)(130 * GetScreenScalingFactor()));
             LeftDownPanel.Size = new Size(MainSplitContainer.Panel1.Width - (int)(7 * GetScreenScalingFactor()), ClientSize.Height - (int)(75 * GetScreenScalingFactor()) - LeftDownPanel.Location.Y);
             RightTabControl.Location = new Point((int)(7 * GetScreenScalingFactor()), 0);
             RightTabControl.Size = new Size(MainSplitContainer.Panel2.Width - (int)(7 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
+            RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
         }
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
+            VolumeTrackBar.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0)), (int)(ClientSize.Height - 35 * GetScreenScalingFactor()));
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         (int)(ClientSize.Height - 63 * GetScreenScalingFactor()));
             NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + (int)(45 * GetScreenScalingFactor()),
@@ -99,6 +119,8 @@ namespace MusicBox
             EndTimeLabel.Text = (int)Program.musicPlayer.GetTotalDurationInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetTotalDurationInSeconds() % 60);
             playTrackBar.Value = (int)(Program.musicPlayer.GetCurrentPositionInSeconds() / Program.musicPlayer.GetTotalDurationInSeconds() * 100);
             playTrackBar.ToggleShape();
+            VolumeTrackBar.Value = (int)(Program.musicPlayer.GetVolume() * 100);
+            VolumeTrackBar.ToggleShape();
         }
 
         private void NextButton_Click(object sender, EventArgs e)

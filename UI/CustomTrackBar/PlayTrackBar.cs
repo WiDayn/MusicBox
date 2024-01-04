@@ -8,6 +8,7 @@ public class PlayTrackBar : TrackBar
     private bool isDragging = false;
     private bool MouseOn = false;
     private const int WM_MOUSEWHEEL = 0x020A;
+    public event EventHandler ScrollChanged;
 
     public PlayTrackBar()
     {
@@ -60,7 +61,7 @@ public class PlayTrackBar : TrackBar
         Rectangle trackRectangle = ClientRectangle;
 
         Rectangle fullRectangle = new Rectangle(
-            trackRectangle.X + 3,
+            trackRectangle.X,
             trackRectangle.Y + 3,
             Size.Width,
            4);
@@ -72,7 +73,7 @@ public class PlayTrackBar : TrackBar
         }
 
         Rectangle progressRectangle = new Rectangle(
-            trackRectangle.X + 3,
+            trackRectangle.X,
             trackRectangle.Y + 3,
             (int)(Size.Width * ((double)Value / Maximum)),
             4);
@@ -124,8 +125,15 @@ public class PlayTrackBar : TrackBar
         if (this.Value != newvalue)
         {
             this.Value = newvalue;
+            this.OnScrollChanged(EventArgs.Empty);
         }
         this.Refresh();
+    }
+
+    // 事件触发器方法
+    protected virtual void OnScrollChanged(EventArgs e)
+    {
+        ScrollChanged?.Invoke(this, e);
     }
 
     public void ToggleShape()
