@@ -28,6 +28,15 @@ namespace MusicBox.UI.List
 
             this.SizeChanged += SizeChangedHandler;
         }
+        public static float GetScreenScalingFactor()
+        {
+            using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+            {
+                float dpiX = graphics.DpiX;
+                // 标准 DPI 通常是 96，所以缩放比例是当前 DPI 与 96 的比值
+                return dpiX / 96.0f;
+            }
+        }
 
         public void Sort()
         {
@@ -50,7 +59,7 @@ namespace MusicBox.UI.List
         {
             foreach (RecentButton item in Panel.Controls)
             {
-                item.Width = (int)(Width * 0.90);
+                item.Width = (int)(Width - (23 * GetScreenScalingFactor()));
             }
             Panel.Size = new Size(Width, Height);
         }
@@ -61,7 +70,7 @@ namespace MusicBox.UI.List
         {
             var recentButton = new RecentButton
             {
-                Width = (int)(Width * 0.90), // 减去滚动条的宽度
+                Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
                 Height = 120,
             };
             recentButton.Image = Image.FromFile(imgPath);
