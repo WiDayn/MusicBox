@@ -34,51 +34,52 @@ namespace MusicBox
         {
             UsernameLabel = new Label();
             PasswordLabel = new Label();
-            textBox1 = new RoundedTextBox();
-            button1 = new RoundedPanelButton();
+            AccountTextBox = new RoundedTextBox();
+            LoginButton = new RoundedPanelButton();
             label1 = new Label();
-            roundedTextBox1 = new RoundedTextBox();
+            PasswordTextBox = new RoundedTextBox();
             SuspendLayout();
             // 
             // UsernameLabel
             // 
             UsernameLabel.AutoSize = true;
-            UsernameLabel.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            UsernameLabel.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 134);
             UsernameLabel.ForeColor = Color.White;
             UsernameLabel.Location = new Point(64, 142);
             UsernameLabel.Name = "UsernameLabel";
-            UsernameLabel.Size = new Size(121, 19);
+            UsernameLabel.Size = new Size(129, 19);
             UsernameLabel.TabIndex = 0;
             UsernameLabel.Text = "电子邮件或用户名";
             // 
             // PasswordLabel
             // 
             PasswordLabel.AutoSize = true;
-            PasswordLabel.Font = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            PasswordLabel.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 134);
             PasswordLabel.ForeColor = Color.White;
             PasswordLabel.Location = new Point(64, 225);
             PasswordLabel.Name = "PasswordLabel";
-            PasswordLabel.Size = new Size(37, 19);
+            PasswordLabel.Size = new Size(39, 19);
             PasswordLabel.TabIndex = 1;
             PasswordLabel.Text = "密码";
             // 
-            // textBox1
+            // AccountTextBox
             // 
-            textBox1.BackColor = Color.Black;
-            textBox1.Location = new Point(64, 182);
-            textBox1.Name = "textBox1";
-            textBox1.Padding = new Padding(2);
-            textBox1.Size = new Size(247, 20);
-            textBox1.TabIndex = 2;
-            textBox1.Load += textBox1_Load;
+            AccountTextBox.BackColor = Color.Black;
+            AccountTextBox.Location = new Point(64, 182);
+            AccountTextBox.Name = "AccountTextBox";
+            AccountTextBox.Padding = new Padding(2);
+            AccountTextBox.Size = new Size(247, 20);
+            AccountTextBox.TabIndex = 2;
             // 
-            // button1
+            // LoginButton
             // 
-            button1.Location = new Point(143, 318);
-            button1.Name = "button1";
-            button1.Size = new Size(100, 35);
-            button1.TabIndex = 4;
-            button1.Text = "button1";
+            LoginButton.BackColor = Color.FromArgb(1, 183, 70);
+            LoginButton.Location = new Point(131, 318);
+            LoginButton.Name = "LoginButton";
+            LoginButton.Size = new Size(100, 35);
+            LoginButton.TabIndex = 4;
+            LoginButton.Text = "button1";
+            LoginButton.ButtonClick += LoginButton_Click;
             // 
             // label1
             // 
@@ -91,14 +92,14 @@ namespace MusicBox
             label1.TabIndex = 5;
             label1.Text = "登录到MusicBox";
             // 
-            // roundedTextBox1
+            // PasswordTextBox
             // 
-            roundedTextBox1.BackColor = Color.Black;
-            roundedTextBox1.Location = new Point(64, 264);
-            roundedTextBox1.Name = "roundedTextBox1";
-            roundedTextBox1.Padding = new Padding(2);
-            roundedTextBox1.Size = new Size(247, 20);
-            roundedTextBox1.TabIndex = 6;
+            PasswordTextBox.BackColor = Color.Black;
+            PasswordTextBox.Location = new Point(64, 264);
+            PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.Padding = new Padding(2);
+            PasswordTextBox.Size = new Size(247, 20);
+            PasswordTextBox.TabIndex = 6;
             // 
             // Login
             // 
@@ -106,10 +107,10 @@ namespace MusicBox
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(384, 411);
-            Controls.Add(roundedTextBox1);
+            Controls.Add(PasswordTextBox);
             Controls.Add(label1);
-            Controls.Add(button1);
-            Controls.Add(textBox1);
+            Controls.Add(LoginButton);
+            Controls.Add(AccountTextBox);
             Controls.Add(PasswordLabel);
             Controls.Add(UsernameLabel);
             Name = "Login";
@@ -123,9 +124,9 @@ namespace MusicBox
 
         private Label UsernameLabel;
         private Label PasswordLabel;
-        private RoundedTextBox textBox1;
-        private RoundedPanelButton button1;
+        private RoundedTextBox AccountTextBox;
+        private RoundedPanelButton LoginButton;
         private Label label1;
-        private RoundedTextBox roundedTextBox1;
+        private RoundedTextBox PasswordTextBox;
     }
 }
