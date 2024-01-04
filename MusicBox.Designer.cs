@@ -1,4 +1,5 @@
 ﻿using MusicBox.UI;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -37,9 +38,9 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
             MainSplitContainer = new SplitContainer();
@@ -47,7 +48,10 @@ namespace MusicBox
             LeftTopPanel = new Panel();
             SearchButton = new SearchButton();
             HomeButton = new HomeButton();
+            ArtistPanel = new Panel();
             AlbumPanel = new Panel();
+            AlbumLabel = new Label();
+            AlbumpictureBox = new PictureBox();
             AlbumView = new DataGridView();
             num = new DataGridViewTextBoxColumn();
             title = new DataGridViewTextBoxColumn();
@@ -64,13 +68,13 @@ namespace MusicBox
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
-            ArtistPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
             MainSplitContainer.SuspendLayout();
             LeftTopPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)AlbumpictureBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AlbumView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
@@ -172,15 +176,44 @@ namespace MusicBox
             HomeButton.UseVisualStyleBackColor = true;
             HomeButton.Click += HomeButton_Click;
             // 
+            // ArtistPanel
+            // 
+            ArtistPanel.Location = new Point(329, 208);
+            ArtistPanel.Name = "ArtistPanel";
+            ArtistPanel.Size = new Size(200, 100);
+            ArtistPanel.TabIndex = 11;
+            // 
             // AlbumPanel
             // 
             AlbumPanel.BackColor = Color.Transparent;
+            AlbumPanel.Controls.Add(AlbumLabel);
+            AlbumPanel.Controls.Add(AlbumpictureBox);
             AlbumPanel.Controls.Add(AlbumView);
-            AlbumPanel.Location = new Point(3, 183);
+            AlbumPanel.Location = new Point(3, 109);
             AlbumPanel.Margin = new Padding(0);
             AlbumPanel.Name = "AlbumPanel";
-            AlbumPanel.Size = new Size(200, 186);
+            AlbumPanel.Size = new Size(200, 260);
             AlbumPanel.TabIndex = 2;
+            // 
+            // AlbumLabel
+            // 
+            AlbumLabel.AutoSize = true;
+            AlbumLabel.Location = new Point(63, 78);
+            AlbumLabel.Name = "AlbumLabel";
+            AlbumLabel.Size = new Size(43, 17);
+            AlbumLabel.TabIndex = 2;
+            AlbumLabel.ForeColor = Color.White;
+            AlbumLabel.Text = "label1";
+            // 
+            // AlbumpictureBox
+            // 
+            AlbumpictureBox.Image = (Image)resources.GetObject("AlbumpictureBox.Image");
+            AlbumpictureBox.Location = new Point(10, 157);
+            AlbumpictureBox.Name = "AlbumpictureBox";
+            AlbumpictureBox.Size = new Size(96, 100);
+            AlbumpictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            AlbumpictureBox.TabIndex = 1;
+            AlbumpictureBox.TabStop = false;
             // 
             // AlbumView
             // 
@@ -188,20 +221,20 @@ namespace MusicBox
             AlbumView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             AlbumView.BackgroundColor = Color.FromArgb(18, 18, 18);
             AlbumView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle1.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            dataGridViewCellStyle1.ForeColor = Color.Gray;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle1.SelectionForeColor = Color.Gray;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            AlbumView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle3.Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            dataGridViewCellStyle3.ForeColor = Color.Gray;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle3.SelectionForeColor = Color.Gray;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            AlbumView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             AlbumView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             AlbumView.Columns.AddRange(new DataGridViewColumn[] { num, title, Album, date, time });
             AlbumView.Cursor = Cursors.Hand;
             AlbumView.EnableHeadersVisualStyles = false;
             AlbumView.GridColor = Color.FromArgb(18, 18, 18);
-            AlbumView.Location = new Point(0, 3);
+            AlbumView.Location = new Point(0, 123);
             AlbumView.Name = "AlbumView";
             AlbumView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             AlbumView.RowHeadersVisible = false;
@@ -210,10 +243,10 @@ namespace MusicBox
             // 
             // num
             // 
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(18, 18, 18);
-            dataGridViewCellStyle2.ForeColor = Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(18, 18, 18);
-            num.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(18, 18, 18);
+            dataGridViewCellStyle4.ForeColor = Color.Gray;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(18, 18, 18);
+            num.DefaultCellStyle = dataGridViewCellStyle4;
             num.FillWeight = 15F;
             num.HeaderText = "#";
             num.Name = "num";
@@ -223,7 +256,7 @@ namespace MusicBox
             // 
             // title
             // 
-            title.DefaultCellStyle = dataGridViewCellStyle2;
+            title.DefaultCellStyle = dataGridViewCellStyle4;
             title.HeaderText = "标题";
             title.Name = "title";
             title.ReadOnly = true;
@@ -231,7 +264,7 @@ namespace MusicBox
             // 
             // Album
             // 
-            Album.DefaultCellStyle = dataGridViewCellStyle2;
+            Album.DefaultCellStyle = dataGridViewCellStyle4;
             Album.FillWeight = 80F;
             Album.HeaderText = "专辑";
             Album.Name = "Album";
@@ -240,7 +273,7 @@ namespace MusicBox
             // 
             // date
             // 
-            date.DefaultCellStyle = dataGridViewCellStyle2;
+            date.DefaultCellStyle = dataGridViewCellStyle4;
             date.FillWeight = 45F;
             date.HeaderText = "添加日期";
             date.Name = "date";
@@ -249,7 +282,7 @@ namespace MusicBox
             // 
             // time
             // 
-            time.DefaultCellStyle = dataGridViewCellStyle2;
+            time.DefaultCellStyle = dataGridViewCellStyle4;
             time.FillWeight = 35F;
             time.HeaderText = "时长";
             time.Name = "time";
@@ -355,14 +388,6 @@ namespace MusicBox
             VolumeTrackBar.Size = new Size(115, 10);
             VolumeTrackBar.TabIndex = 10;
             // 
-            // ArtistPanel
-            // 
-            ArtistPanel.Location = new Point(329, 208);
-            ArtistPanel.Name = "ArtistPanel";
-            ArtistPanel.Size = new Size(200, 100);
-            ArtistPanel.TabIndex = 11;
-            ArtistPanel.Paint += panel1_Paint;
-            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -393,6 +418,8 @@ namespace MusicBox
             MainSplitContainer.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
             AlbumPanel.ResumeLayout(false);
+            AlbumPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)AlbumpictureBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)AlbumView).EndInit();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
@@ -429,5 +456,7 @@ namespace MusicBox
         private BorderlessTabControl RightTabControl;
         private Panel AlbumPanel;
         private Panel ArtistPanel;
+        private Label AlbumLabel;
+        private PictureBox AlbumpictureBox;
     }
 }

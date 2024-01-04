@@ -122,6 +122,11 @@ namespace MusicBox
         {
             AlbumView.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 6 / 10);
             AlbumView.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
+            AlbumLabel.Size = new Size(MainSplitContainer.Panel2.Height * 2 / 10, MainSplitContainer.Panel2.Height * 2 / 10);
+            AlbumLabel.Location = new Point(MainSplitContainer.Panel2.Height * 3 / 10, MainSplitContainer.Panel2.Height / 10);
+            AlbumpictureBox.Size = new Size(MainSplitContainer.Panel2.Height * 2 / 10, MainSplitContainer.Panel2.Height * 2 / 10);
+            AlbumpictureBox.Location = new Point(10, MainSplitContainer.Panel2.Height / 10);
+
 
         }
 
@@ -135,9 +140,5 @@ namespace MusicBox
             RightTabControl.SwitchToPanel(1);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
