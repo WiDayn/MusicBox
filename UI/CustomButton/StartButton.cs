@@ -12,7 +12,7 @@ public class PlayButton : Button
         this.FlatStyle = FlatStyle.Flat;
         this.FlatAppearance.BorderSize = 0;
         // 确保按钮背景是黑色的
-        this.BackColor = Color.Black;
+        this.BackColor = Color.FromArgb(18, 18, 18);
 
         this.FlatAppearance.MouseDownBackColor = Color.FromArgb(18, 18, 18);
     }

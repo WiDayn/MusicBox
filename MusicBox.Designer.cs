@@ -1,4 +1,5 @@
-﻿using MusicBox.UI;
+﻿using MusicBox.Core.Entity;
+using MusicBox.UI;
 using MusicBox.UI.Button;
 using MusicBox.UI.List;
 using System.Runtime.InteropServices;
@@ -40,6 +41,7 @@ namespace MusicBox
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
+            songPlayButton = new PlayButton();
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
             MainSplitContainer = new SplitContainer();
@@ -50,6 +52,7 @@ namespace MusicBox
             HomeButton = new HomeButton();
             ArtistPanel = new Panel();
             AlbumPanel = new Panel();
+            songTitle = new SongTitle();
             AlbumList = new RecentList();
             RightTabControl = new BorderlessTabControl();
             playTrackBar = new PlayTrackBar();
@@ -85,6 +88,20 @@ namespace MusicBox
             PlayButton.Text = "Start";
             PlayButton.UseVisualStyleBackColor = true;
             PlayButton.Click += StartButton_Click;
+            // 
+            // songPlayButton
+            // 
+            songPlayButton.BackColor = Color.FromArgb(18, 18, 18);
+            songPlayButton.FlatStyle = FlatStyle.Flat;
+            songPlayButton.Location = new Point(485, 718);
+            songPlayButton.Margin = new Padding(2);
+            songPlayButton.Name = "songPlayButton";
+            songPlayButton.Size = new Size(50,50);
+            songPlayButton.TabIndex = 1;
+            songPlayButton.Text = "Start";
+            songPlayButton.UseVisualStyleBackColor = true;
+            songPlayButton.Click += SongStartButton_Click;
+
             // 
             // EndTimeLabel
             // 
@@ -185,6 +202,8 @@ namespace MusicBox
             // AlbumPanel
             // 
             AlbumPanel.BackColor = Color.FromArgb(18, 18, 18);
+            AlbumPanel.Controls.Add(songPlayButton);
+            AlbumPanel.Controls.Add(songTitle);
             AlbumPanel.Controls.Add(AlbumList);
             AlbumPanel.Location = new Point(0, 0);
             AlbumPanel.Margin = new Padding(0);
@@ -340,6 +359,7 @@ namespace MusicBox
 
         #endregion
         private PlayButton PlayButton;
+        private PlayButton songPlayButton;
         private Label EndTimeLabel;
         private SplitContainer MainSplitContainer;
         private PlayTrackBar playTrackBar;
@@ -362,5 +382,6 @@ namespace MusicBox
         private BorderlessTabControl RightTabControl;
         private Panel AlbumPanel;
         private Panel ArtistPanel;
+        private SongTitle songTitle;
     }
 }

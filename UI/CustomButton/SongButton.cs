@@ -29,7 +29,7 @@ namespace MusicBox.UI.Button
             {
                 AutoSize = true,
                 Location = new Point((int)(Height * (1 / 10.0)), (int)(Height * (1 / 7.0))),
-                Font = new Font("Microsoft YaHei UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
             };
             this.Controls.Add(labelIndex);
@@ -58,10 +58,10 @@ namespace MusicBox.UI.Button
             // 创建并设置 Description Label
             Description = new Label
             {
-                Font = new Font("Microsoft YaHei UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
                 AutoSize = true,
-                Location = new Point((int)(Height * (37 / 40.0)), (int)(Height * ( 1 / 4.0))),
+                Location = new Point((int)(Height * (9 / 10.0)), (int)(Height * ( 1 / 5.0))),
                 TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
             };
@@ -72,7 +72,7 @@ namespace MusicBox.UI.Button
             {
                 AutoSize = true,
                 Location = new Point(Width * 2, (int)(Height * (1 / 7.0))),
-                Font = new Font("Microsoft YaHei UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
             };
             this.Controls.Add(labelAlbum);
@@ -81,7 +81,7 @@ namespace MusicBox.UI.Button
             labelDuration = new Label
             {
                 AutoSize = true,
-                Font = new Font("Microsoft YaHei UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
                 Location = new Point(Width * 3, (int)(Height * (1 / 7.0))),
             };

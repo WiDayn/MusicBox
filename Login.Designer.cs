@@ -57,7 +57,7 @@ namespace MusicBox
             PasswordLabel.AutoSize = true;
             PasswordLabel.Font = new Font("Microsoft YaHei UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 134);
             PasswordLabel.ForeColor = Color.White;
-            PasswordLabel.Location = new Point(64, 225);
+            PasswordLabel.Location = new Point(64, 229);
             PasswordLabel.Name = "PasswordLabel";
             PasswordLabel.Size = new Size(39, 19);
             PasswordLabel.TabIndex = 1;
@@ -66,7 +66,7 @@ namespace MusicBox
             // AccountTextBox
             // 
             AccountTextBox.BackColor = Color.Black;
-            AccountTextBox.Location = new Point(64, 182);
+            AccountTextBox.Location = new Point(64, 175);
             AccountTextBox.Name = "AccountTextBox";
             AccountTextBox.Padding = new Padding(2);
             AccountTextBox.Size = new Size(247, 20);
@@ -87,16 +87,16 @@ namespace MusicBox
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft YaHei UI", 30F, FontStyle.Bold);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(23, 34);
+            label1.Location = new Point(83, 50);
             label1.Name = "label1";
-            label1.Size = new Size(338, 52);
+            label1.Size = new Size(218, 52);
             label1.TabIndex = 5;
-            label1.Text = "登录到MusicBox";
+            label1.Text = "MusicBox";
             // 
             // PasswordTextBox
             // 
             PasswordTextBox.BackColor = Color.Black;
-            PasswordTextBox.Location = new Point(64, 264);
+            PasswordTextBox.Location = new Point(64, 260);
             PasswordTextBox.Name = "PasswordTextBox";
             PasswordTextBox.Padding = new Padding(2);
             PasswordTextBox.Size = new Size(247, 20);

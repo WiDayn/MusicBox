@@ -21,7 +21,7 @@ namespace MusicBox.API
 
         public static async Task<String> PostLoginAsync(string username, string password)
         {
-            var url = "http://127.0.0.1:5000/user/login";
+            var url = "http://192.168.50.173:5000/user/login";
             var loginData = new
             {
                 Username = username,

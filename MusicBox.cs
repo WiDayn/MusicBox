@@ -40,7 +40,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "E:\\External\\Album\\ÁÖ¼ÒÇ«-SEVEN\\cover.jpg";
+            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
@@ -84,6 +84,23 @@ namespace MusicBox
             PlayButton.ToggleShape();
         }
 
+        private void SongStartButton_Click(object sender, EventArgs e)
+        {
+            if (songPlayButton.isPlaying)
+            {
+                Program.musicPlayer.Start();
+                if(PlayButton.isPlaying)
+                    PlayButton.ToggleShape();
+            }
+            else
+            {
+                Program.musicPlayer.Stop();
+                if(!PlayButton.isPlaying)
+                    PlayButton.ToggleShape();
+            }
+            songPlayButton.ToggleShape();
+        }
+
         private void PlayTrackBar_Scroll(object sender, EventArgs e)
         {
             Program.musicPlayer.SetCurrentPositionInSeconds(playTrackBar.Value * 1.0 / 100 * Program.musicPlayer.GetTotalDurationInSeconds());
@@ -109,6 +126,9 @@ namespace MusicBox
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
 
+            songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width/80, MainSplitContainer.Panel2.Height * 9 /40);
+            songTitle.Location = new Point(0, MainSplitContainer.Panel2.Height * 3 / 10);
+            songTitle.Size = new Size(MainSplitContainer.Panel2.Width - (int)(8 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height * 1 / 10);
             AlbumList.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
             AlbumList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height * 6 / 10);
         }
