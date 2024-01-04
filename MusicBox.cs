@@ -20,6 +20,12 @@ namespace MusicBox
             InitializeComponent();
             int TitlebarDarkColour = 0x000000;
             DwmSetWindowAttribute(this.Handle, 35, ref TitlebarDarkColour, System.Runtime.InteropServices.Marshal.SizeOf(TitlebarDarkColour));
+            this.FormClosing += MusicBox_FormClosing; // 绑定事件处理器
+        }
+
+        private void MusicBox_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit(); // 当窗体关闭时退出应用程序
         }
 
         public static float GetScreenScalingFactor()
