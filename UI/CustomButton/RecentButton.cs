@@ -69,7 +69,6 @@ namespace MusicBox.UI.Button
         private void RecentButton_MouseEnter(object sender, EventArgs e)
         {
             // 鼠标停留在TrackBar上时的逻辑
-            MouseOn = true;
             BackColor = Color.FromArgb(BackColor.R + 8, BackColor.R + 8, BackColor.R + 8);
             ToggleShape();
         }
@@ -78,7 +77,6 @@ namespace MusicBox.UI.Button
         private void RecentButton_MouseLeave(object sender, EventArgs e)
         {
             // 鼠标离开TrackBar时的逻辑
-            MouseOn = false;
             BackColor = Color.FromArgb(BackColor.R - 8, BackColor.R - 8, BackColor.R - 8);
             ToggleShape();
         }
