@@ -8,6 +8,7 @@ namespace MusicBox.UI.Button
 {
     using global::MusicBox.UI.CustomPictureBox;
     using System;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -17,7 +18,10 @@ namespace MusicBox.UI.Button
         private Label Title;
         private Label Description;
         private bool MouseOn = false;
+        private bool LightOn = false;
 
+        // 声明一个点击事件
+        public event EventHandler ButtonClick;
         public RecentButton()
         {
             // 设置控件的初始大小
@@ -58,8 +62,13 @@ namespace MusicBox.UI.Button
             this.SizeChanged += SizeChangedHandler;
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
+            this.MouseClick += new MouseEventHandler(ButtonLabel_MouseClick);
         }
-
+        private void ButtonLabel_MouseClick(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine(1);
+            ButtonClick?.Invoke(this, EventArgs.Empty);
+        }
         private void RecentButton_MouseEnter(object sender, EventArgs e)
         {
             // 鼠标停留在TrackBar上时的逻辑
