@@ -40,26 +40,27 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
+            String testFilePath = "E:\\External\\Album\\林家谦-SEVEN\\cover.jpg";
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "林家谦", "艺人");
-            RecentList.AddRecentButton("D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg", "测试", "艺人", "跨时代", "3:40");
+            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
+            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
+            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
+            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
+            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
+            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
+            RecentList.AddRecentButton(testFilePath, "测试", "艺人");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
             MusicBox_SizeChanged(sender, e);
         }
 

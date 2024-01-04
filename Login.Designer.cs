@@ -38,6 +38,7 @@ namespace MusicBox
             LoginButton = new RoundedPanelButton();
             label1 = new Label();
             PasswordTextBox = new RoundedTextBox();
+            ErrorLabel = new Label();
             SuspendLayout();
             // 
             // UsernameLabel
@@ -74,7 +75,7 @@ namespace MusicBox
             // LoginButton
             // 
             LoginButton.BackColor = Color.FromArgb(1, 183, 70);
-            LoginButton.Location = new Point(131, 318);
+            LoginButton.Location = new Point(131, 324);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(100, 35);
             LoginButton.TabIndex = 4;
@@ -101,12 +102,24 @@ namespace MusicBox
             PasswordTextBox.Size = new Size(247, 20);
             PasswordTextBox.TabIndex = 6;
             // 
+            // ErrorLabel
+            // 
+            ErrorLabel.AutoSize = true;
+            ErrorLabel.ForeColor = Color.Red;
+            ErrorLabel.Location = new Point(64, 296);
+            ErrorLabel.Name = "ErrorLabel";
+            ErrorLabel.Size = new Size(56, 17);
+            ErrorLabel.TabIndex = 7;
+            ErrorLabel.Text = "错误信息";
+            ErrorLabel.Visible = false;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(384, 411);
+            Controls.Add(ErrorLabel);
             Controls.Add(PasswordTextBox);
             Controls.Add(label1);
             Controls.Add(LoginButton);
@@ -128,5 +141,6 @@ namespace MusicBox
         private RoundedPanelButton LoginButton;
         private Label label1;
         private RoundedTextBox PasswordTextBox;
+        private Label ErrorLabel;
     }
 }

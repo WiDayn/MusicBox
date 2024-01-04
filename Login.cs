@@ -30,7 +30,7 @@ namespace MusicBox
         private async void LoginButton_Click(object sender, EventArgs e)
         {
             var isSuccess = await UserAPI.PostLoginAsync(AccountTextBox.Text, PasswordTextBox.Text);
-            if (isSuccess)
+            if (isSuccess.Equals("success"))
             {
                 Form musicbox = new MusicBox();
                 this.Hide();
@@ -39,6 +39,8 @@ namespace MusicBox
             }
             else
             {
+                ErrorLabel.Text = "登录错误： " + isSuccess;
+                ErrorLabel.Visible = true;
                 Debug.WriteLine("Login Failed");
             }
         }

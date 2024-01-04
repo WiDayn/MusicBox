@@ -19,7 +19,7 @@ namespace MusicBox.API
             public string Message { get; set; }
         }
 
-        public static async Task<bool> PostLoginAsync(string username, string password)
+        public static async Task<String> PostLoginAsync(string username, string password)
         {
             var url = "http://127.0.0.1:5000/user/login";
             var loginData = new
@@ -42,12 +42,12 @@ namespace MusicBox.API
                     var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseString);
                     isLogin = true;
                     token = loginResponse.Data;
-                    return true;
+                    return "success";
                 }
                 else
                 {
                    Debug.WriteLine("Error: " + response.StatusCode);
-                    return false;
+                    return response.StatusCode.ToString();
                 }
             }
         }
