@@ -1,4 +1,5 @@
-
+ï»¿
+using MusicBox.API;
 using MusicBox.UI.Button;
 using MusicBox.UI.List;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ namespace MusicBox
     public partial class MusicBox : Form
     {
         //
-        // µ÷Õû·Ç¿Í»§ÇøÑÕÉ«ÎªºÚÉ«
+        // è°ƒæ•´éå®¢æˆ·åŒºé¢œè‰²ä¸ºé»‘è‰²
         //
         [DllImport("dwmapi.dll", PreserveSig = true)]
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -20,12 +21,12 @@ namespace MusicBox
             InitializeComponent();
             int TitlebarDarkColour = 0x000000;
             DwmSetWindowAttribute(this.Handle, 35, ref TitlebarDarkColour, System.Runtime.InteropServices.Marshal.SizeOf(TitlebarDarkColour));
-            this.FormClosing += MusicBox_FormClosing; // °ó¶¨ÊÂ¼ş´¦ÀíÆ÷
+            this.FormClosing += MusicBox_FormClosing; // ç»‘å®šäº‹ä»¶å¤„ç†å™¨
         }
 
         private void MusicBox_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit(); // µ±´°Ìå¹Ø±ÕÊ±ÍË³öÓ¦ÓÃ³ÌĞò
+            Application.Exit(); // å½“çª—ä½“å…³é—­æ—¶é€€å‡ºåº”ç”¨ç¨‹åº
         }
 
         public static float GetScreenScalingFactor()
@@ -33,34 +34,34 @@ namespace MusicBox
             using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
             {
                 float dpiX = graphics.DpiX;
-                // ±ê×¼ DPI Í¨³£ÊÇ 96£¬ËùÒÔËõ·Å±ÈÀıÊÇµ±Ç° DPI Óë 96 µÄ±ÈÖµ
+                // æ ‡å‡† DPI é€šå¸¸æ˜¯ 96ï¼Œæ‰€ä»¥ç¼©æ”¾æ¯”ä¾‹æ˜¯å½“å‰ DPI ä¸ 96 çš„æ¯”å€¼
                 return dpiX / 96.0f;
             }
         }
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "E:\\External\\Album\\ÁÖ¼ÒÇ«-SEVEN\\cover.jpg";
+            String testFilePath = "E:\\External\\Album\\æ—å®¶è°¦-SEVEN\\cover.jpg";
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
-            RecentList.AddRecentButton(testFilePath, "ÁÖ¼ÒÇ«", "ÒÕÈË");
-            RecentList.AddRecentButton(testFilePath, "ÁÖ¼ÒÇ«", "ÒÕÈË");
-            RecentList.AddRecentButton(testFilePath, "ÁÖ¼ÒÇ«", "ÒÕÈË");
-            RecentList.AddRecentButton(testFilePath, "ÁÖ¼ÒÇ«", "ÒÕÈË");
-            RecentList.AddRecentButton(testFilePath, "ÁÖ¼ÒÇ«", "ÒÕÈË");
-            RecentList.AddRecentButton(testFilePath, "ÁÖ¼ÒÇ«", "ÒÕÈË");
-            RecentList.AddRecentButton(testFilePath, "²âÊÔ", "ÒÕÈË");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "²âÊÔ", "ÒÕÈË", "¿çÊ±´ú", "3:40");
+            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "å·²ç»ç‚¹èµçš„æ­Œæ›²", "æ­Œå• â€¢ 1é¦–æ­Œæ›²");
+            RecentList.AddRecentButton(testFilePath, "æ—å®¶è°¦", "è‰ºäºº");
+            RecentList.AddRecentButton(testFilePath, "æ—å®¶è°¦", "è‰ºäºº");
+            RecentList.AddRecentButton(testFilePath, "æ—å®¶è°¦", "è‰ºäºº");
+            RecentList.AddRecentButton(testFilePath, "æ—å®¶è°¦", "è‰ºäºº");
+            RecentList.AddRecentButton(testFilePath, "æ—å®¶è°¦", "è‰ºäºº");
+            RecentList.AddRecentButton(testFilePath, "æµ‹è¯•", "è‰ºäºº");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
+            AlbumList.SetTrackData("1", testFilePath, "æµ‹è¯•", "è‰ºäºº", "è·¨æ—¶ä»£", "3:40");
             MusicBox_SizeChanged(sender, e);
         }
 
@@ -105,7 +106,7 @@ namespace MusicBox
             RightTabControl.Location = new Point((int)(7 * GetScreenScalingFactor()), 0);
             RightTabControl.Size = new Size(MainSplitContainer.Panel2.Width - (int)(7 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
-            // ¸üĞÂSearchButtonµÄ´óĞ¡£¬Ê¹ÆäÓëMainSplitContainer.Panel1µÄ¿í¶ÈÏàÍ¬£¬¸ß¶ÈÎª35
+            // æ›´æ–°SearchButtonçš„å¤§å°ï¼Œä½¿å…¶ä¸MainSplitContainer.Panel1çš„å®½åº¦ç›¸åŒï¼Œé«˜åº¦ä¸º35
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
 
@@ -137,6 +138,9 @@ namespace MusicBox
 
         private void SecondTimer_Tick(object sender, EventArgs e)
         {
+            // æ›´æ–°æˆ‘çš„å–œæ¬¢ä¸­æ­Œæ›²çš„æ•°é‡
+            ((RecentButton)RecentList.Controls[0].Controls[0]).DescriptionText = "æ­Œå• â€¢ " + UserAPI.userData.FavoriteSongNum + "é¦–æ­Œæ›²";
+
             NowTimeLabel.Text = (int)Program.musicPlayer.GetCurrentPositionInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetCurrentPositionInSeconds() % 60);
             EndTimeLabel.Text = (int)Program.musicPlayer.GetTotalDurationInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetTotalDurationInSeconds() % 60);
             playTrackBar.Value = (int)(Program.musicPlayer.GetCurrentPositionInSeconds() / Program.musicPlayer.GetTotalDurationInSeconds() * 100);
@@ -147,12 +151,12 @@ namespace MusicBox
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            //²¥·ÅÏÂÒ»Ê×
+            //æ’­æ”¾ä¸‹ä¸€é¦–
         }
 
         private void LastButton_Click(object sender, EventArgs e)
         {
-            //²¥·ÅÉÏÒ»Ê×
+            //æ’­æ”¾ä¸Šä¸€é¦–
         }
 
         private void HomeButton_Click(object sender, EventArgs e)
