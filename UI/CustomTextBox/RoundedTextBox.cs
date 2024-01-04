@@ -33,6 +33,7 @@ namespace MusicBox.UI.CustomTextBox
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
             textBox.BackColor = Color.Black;
+            textBox.ForeColor = Color.White;
 
             // 更新区域以使得 UserControl 的背景可见
             UpdateRegion();
