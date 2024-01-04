@@ -186,7 +186,7 @@ namespace MusicBox
             // 
             // ArtistPanel
             // 
-            ArtistPanel.Location = new Point(329, 208);
+            ArtistPanel.Location = new Point(237, 16);
             ArtistPanel.Name = "ArtistPanel";
             ArtistPanel.Size = new Size(200, 100);
             ArtistPanel.TabIndex = 11;
@@ -196,7 +196,7 @@ namespace MusicBox
             // 
             AlbumPanel.BackColor = Color.Transparent;
             AlbumPanel.Controls.Add(AlbumView);
-            AlbumPanel.Location = new Point(3, 183);
+            AlbumPanel.Location = new Point(7, 13);
             AlbumPanel.Margin = new Padding(0);
             AlbumPanel.Name = "AlbumPanel";
             AlbumPanel.Size = new Size(200, 186);

@@ -37,7 +37,7 @@ namespace MusicBox
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
-            RightTabControl.SwitchToPanel(1);
+            RightTabControl.SwitchToPanel(2);
             RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
             RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
             RecentList.AddRecentButton("E:\\External\\Album\\林家谦-SEVEN\\cover.jpg", "林家谦", "艺人");
