@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace MusicBox.UI.Button
 {
+    using global::MusicBox.UI.CustomPictureBox;
     using System;
     using System.Drawing;
     using System.Windows.Forms;
 
     public class RecentButton : UserControl
     {
-        private PictureBox pictureBox;
+        private CircularPictureBox pictureBox;
         private Label Title;
         private Label Description;
         private bool MouseOn = false;
@@ -22,7 +23,7 @@ namespace MusicBox.UI.Button
             // 设置控件的初始大小
             Size = new Size(300, 100);
             // 创建并设置 PictureBox
-            pictureBox = new PictureBox
+            pictureBox = new CircularPictureBox
             {
                 Size = new Size((int)(Height * (6 / 10.0)), (int)(Height * (6 / 10.0))),
                 Location = new Point((int)(Height * (1 / 10.0)), (int)(Height * (2 / 10.0))),

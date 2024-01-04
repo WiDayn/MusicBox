@@ -88,12 +88,12 @@ namespace MusicBox
             LeftDownPanel.Size = new Size(MainSplitContainer.Panel1.Width - (int)(7 * GetScreenScalingFactor()), ClientSize.Height - (int)(75 * GetScreenScalingFactor()) - LeftDownPanel.Location.Y);
             RightTabControl.Location = new Point((int)(7 * GetScreenScalingFactor()), 0);
             RightTabControl.Size = new Size(MainSplitContainer.Panel2.Width - (int)(7 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
+            RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
         }
 
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
             VolumeTrackBar.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0)), (int)(ClientSize.Height - 35 * GetScreenScalingFactor()));
-            RecentList.Size = new Size(LeftDownPanel.Size.Width - (int)(5 * GetScreenScalingFactor()), LeftDownPanel.Size.Height - (int)(5 * GetScreenScalingFactor()));
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         (int)(ClientSize.Height - 63 * GetScreenScalingFactor()));
             NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + (int)(45 * GetScreenScalingFactor()),
