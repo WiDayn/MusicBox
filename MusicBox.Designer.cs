@@ -52,7 +52,6 @@ namespace MusicBox
             HomeButton = new HomeButton();
             ArtistPanel = new Panel();
             AlbumPanel = new Panel();
-            songTopPanel = new SongTopPanel();
             songTitle = new SongTitle();
             AlbumList = new RecentList();
             RightTabControl = new BorderlessTabControl();
@@ -65,7 +64,8 @@ namespace MusicBox
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
-            label1 = new Label();
+            songTopPanel = new SongTopPanel();
+            homePlayList = new HomePlayList();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -74,6 +74,7 @@ namespace MusicBox
             LeftTopPanel.SuspendLayout();
             ArtistPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
+            ArtistPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
@@ -157,6 +158,13 @@ namespace MusicBox
             RecentList.Size = new Size(314, 66);
             RecentList.TabIndex = 0;
             // 
+            // homePlayList
+            // 
+            homePlayList.Location = new Point(0,0);
+            homePlayList.Name = "homePlayList";
+            homePlayList.Size = new Size(314, 66);
+            homePlayList.TabIndex = 0;
+            // 
             // LeftTopPanel
             // 
             LeftTopPanel.BackColor = Color.FromArgb(18, 18, 18);
@@ -196,11 +204,12 @@ namespace MusicBox
             // ArtistPanel
             // 
             ArtistPanel.BackColor = Color.FromArgb(18, 18, 18);
-            ArtistPanel.Controls.Add(label1);
-            ArtistPanel.Location = new Point(114, 158);
+            ArtistPanel.Controls.Add(homePlayList);
+            ArtistPanel.Location = new Point(0, 0);
+            ArtistPanel.Margin = new Padding(0);
             ArtistPanel.Name = "ArtistPanel";
             ArtistPanel.Size = new Size(200, 100);
-            ArtistPanel.TabIndex = 11;
+            ArtistPanel.TabIndex = 1;
             // 
             // AlbumPanel
             // 
@@ -336,16 +345,11 @@ namespace MusicBox
             VolumeTrackBar.TabIndex = 10;
             VolumeTrackBar.ScrollChanged += VolumeTrackBar_Scroll;
             // 
-            // label1
+            // songTopPanel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(21, 13);
-            label1.Name = "label1";
-            label1.Size = new Size(51, 19);
-            label1.TabIndex = 11;
-            label1.Text = "label1";
+            songTopPanel.Name = "songTopPanel";
+            songTopPanel.Location = new Point(0, 0);
+            songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
             // 
             // MusicBox
             // 
@@ -377,8 +381,6 @@ namespace MusicBox
             MainSplitContainer.ResumeLayout(false);
             LeftDownPanel.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
-            ArtistPanel.ResumeLayout(false);
-            ArtistPanel.PerformLayout();
             AlbumPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
@@ -414,6 +416,6 @@ namespace MusicBox
         private Panel ArtistPanel;
         private SongTitle songTitle;
         private SongTopPanel songTopPanel;
-        private Label label1;
+        private HomePlayList homePlayList;
     }
 }

@@ -131,6 +131,7 @@ namespace MusicBox
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
 
+            homePlayList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             songTopPanel.Location = new Point(0, 0);
             songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
             songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width/80, MainSplitContainer.Panel2.Height * 1 /4);
@@ -184,7 +185,7 @@ namespace MusicBox
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
-            RightTabControl.SwitchToPanel(0);
+            RightTabControl.SwitchToPanel(1);
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
