@@ -102,7 +102,7 @@ namespace MusicBox.UI.List
         }
 
         // 公共方法用于设置音乐轨道项的数据
-        public async void AddTrackData(string index, bool isHTTP, string imgPath, string titleText, string descriptionText,string album,string duration)
+        public async void AddTrackData(string index, bool isHTTP, string imgPath, string titleText, string artistNameText, string album,string duration)
         {
             var musicTrackControl = new SongButton
             {
@@ -111,7 +111,7 @@ namespace MusicBox.UI.List
             };
             musicTrackControl.Index = index;
             musicTrackControl.TitleText = titleText;
-            musicTrackControl.DescriptionText = descriptionText;
+            musicTrackControl.ArtistNameText = artistNameText;
             if (isHTTP)
             {
                 musicTrackControl.Image = await ImgAPI.LoadImageFromUrlAsync(imgPath);
@@ -120,7 +120,7 @@ namespace MusicBox.UI.List
             {
                 musicTrackControl.Image = Image.FromFile(imgPath);
             }
-            musicTrackControl.Album = album;
+            musicTrackControl.AlbumText = album;
             musicTrackControl.Duration = duration;
             Panel.Controls.Add(musicTrackControl);
         }

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MusicBox.API;
 using MusicBox.Core.Entity;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -28,6 +29,11 @@ namespace MusicBox.Core.PlayBack.Player
             MusicPlayList.AddSong(song);
         }
 
+        public void AddSongToListFront(Song song)
+        {
+            MusicPlayList.AddSongToFront(song);
+        }
+
         public void PlayInOrder()
         {
             IEnumerator<Song> songList = MusicPlayList.PlayInOrder().GetEnumerator();
@@ -35,6 +41,7 @@ namespace MusicBox.Core.PlayBack.Player
             {
                 Debug.WriteLine($"Playing: {songList.Current.Title} by ArtistID: {songList.Current.ArtistID} From AlbumID: {songList.Current.AlbumID}");
                 bassPlayer.LoadAudio(songList.Current.FilePath);
+                UpdatePlayingUI(songList.Current);
                 bassPlayer.Play();
                 bassPlayer.TrackEnded += (sender, e) =>
                 {
@@ -42,10 +49,18 @@ namespace MusicBox.Core.PlayBack.Player
                     if (songList.MoveNext())
                     {
                         bassPlayer.LoadAudio(songList.Current.FilePath);
+                        UpdatePlayingUI(songList.Current);
                         bassPlayer.Play();
                     }
                 };
             }
+        }
+
+        public async void UpdatePlayingUI(Song song)
+        {
+            Program.PlayingSongAlbumPicture.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumName + "/cover.jpg");
+            Program.PlayingSongTitleLabel.Text = song.Title;
+            Program.PlayingSongArtistLabel.Text = song.ArtistName;
         }
 
         public float GetVolume()

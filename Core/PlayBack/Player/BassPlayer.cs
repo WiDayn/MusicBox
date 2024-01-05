@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicBox.Core.Common;
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Un4seen.Bass;
@@ -35,7 +36,7 @@ namespace MusicBox.Core.PlayBack.Player
             if (Uri.IsWellFormedUriString(source, UriKind.Absolute))
             {
                 // 从 URL 创建音频流，但不使用 BASS_STREAM_BLOCK
-                _stream = Bass.BASS_StreamCreateURL(source, 0, BASSFlag.BASS_STREAM_STATUS | BASSFlag.BASS_SAMPLE_FLOAT, null, IntPtr.Zero);
+                _stream = Bass.BASS_StreamCreateURL(UrlConverter.EncodeUrl(source), 0, BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
             }
             else
             {
@@ -45,7 +46,8 @@ namespace MusicBox.Core.PlayBack.Player
 
             if (_stream == 0)
             {
-                Debug.WriteLine("载入音频源失败!");
+                BASSError error = Bass.BASS_ErrorGetCode();
+                Debug.WriteLine($"载入音频源失败! Error:{error}");
                 return;
             }
 

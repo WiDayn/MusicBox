@@ -61,7 +61,7 @@ namespace MusicBox.Properties {
         }
         
         /// <summary>
-        ///   查找类似 http://localhost:5000 的本地化字符串。
+        ///   查找类似 http://192.168.50.173:5101 的本地化字符串。
         /// </summary>
         internal static string BackEnd_URL {
             get {
@@ -70,7 +70,7 @@ namespace MusicBox.Properties {
         }
         
         /// <summary>
-        ///   查找类似 http://localhost:5000/External 的本地化字符串。
+        ///   查找类似 http://192.168.50.173:5101/External 的本地化字符串。
         /// </summary>
         internal static string External_URL {
             get {

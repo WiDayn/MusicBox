@@ -24,6 +24,11 @@ namespace MusicBox.Core.PlayBack
             songs.Add(song);
         }
 
+        public void AddSongToFront(Song song)
+        {
+            songs.Insert(0, song);
+        }
+
         // 按顺序播放
         public IEnumerable<Song> PlayInOrder()
         {
