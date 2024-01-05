@@ -33,7 +33,7 @@ namespace MusicBox.UI.List
             Panel.Size = new Size(Width, Height);
         }
 
-        public void AddSongTop(String imgPath, string titleText, string descriptionText)
+        public void AddSongTop(String imgPath ,string typeText, string nameText, string descriptionText)
         {
             var songTop = new SongTop
             {
@@ -41,7 +41,8 @@ namespace MusicBox.UI.List
                 Height = Height,
             };
             songTop.Image = Image.FromFile(imgPath);
-            songTop.TitleText = titleText;
+            songTop.TypeText = typeText;
+            songTop.NameText = nameText;
             songTop.DescriptionText = descriptionText;
             Panel.Controls.Add(songTop);
         }

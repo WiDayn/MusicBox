@@ -42,11 +42,12 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "E:\\External\\Album\\林家谦-SEVEN\\cover.jpg";
+            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
+            songTopPanel.AddSongTop(testFilePath, "艺人", "林家谦", "每月有2名听众");
             RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "已经点赞的歌曲", "歌单 • 1首歌曲");
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
