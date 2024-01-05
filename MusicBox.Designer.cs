@@ -51,7 +51,9 @@ namespace MusicBox
             SearchButton = new SearchButton();
             HomeButton = new HomeButton();
             ArtistPanel = new Panel();
+            homePlayList = new HomePlayList();
             AlbumPanel = new Panel();
+            songTopPanel = new SongTopPanel();
             songTitle = new SongTitle();
             AlbumList = new RecentList();
             RightTabControl = new BorderlessTabControl();
@@ -64,8 +66,6 @@ namespace MusicBox
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
-            songTopPanel = new SongTopPanel();
-            homePlayList = new HomePlayList();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -74,7 +74,6 @@ namespace MusicBox
             LeftTopPanel.SuspendLayout();
             ArtistPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
-            ArtistPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
@@ -144,6 +143,7 @@ namespace MusicBox
             // 
             // LeftDownPanel
             // 
+            LeftDownPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LeftDownPanel.BackColor = Color.FromArgb(18, 18, 18);
             LeftDownPanel.Controls.Add(RecentList);
             LeftDownPanel.Location = new Point(7, 155);
@@ -157,13 +157,6 @@ namespace MusicBox
             RecentList.Name = "RecentList";
             RecentList.Size = new Size(314, 66);
             RecentList.TabIndex = 0;
-            // 
-            // homePlayList
-            // 
-            homePlayList.Location = new Point(0,0);
-            homePlayList.Name = "homePlayList";
-            homePlayList.Size = new Size(314, 66);
-            homePlayList.TabIndex = 0;
             // 
             // LeftTopPanel
             // 
@@ -210,6 +203,13 @@ namespace MusicBox
             ArtistPanel.Name = "ArtistPanel";
             ArtistPanel.Size = new Size(200, 100);
             ArtistPanel.TabIndex = 1;
+            // 
+            // homePlayList
+            // 
+            homePlayList.Location = new Point(0, 0);
+            homePlayList.Name = "homePlayList";
+            homePlayList.Size = new Size(314, 66);
+            homePlayList.TabIndex = 0;
             // 
             // AlbumPanel
             // 
@@ -345,12 +345,6 @@ namespace MusicBox
             VolumeTrackBar.TabIndex = 10;
             VolumeTrackBar.ScrollChanged += VolumeTrackBar_Scroll;
             // 
-            // songTopPanel
-            // 
-            songTopPanel.Name = "songTopPanel";
-            songTopPanel.Location = new Point(0, 0);
-            songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
-            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -381,6 +375,7 @@ namespace MusicBox
             MainSplitContainer.ResumeLayout(false);
             LeftDownPanel.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
+            ArtistPanel.ResumeLayout(false);
             AlbumPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();

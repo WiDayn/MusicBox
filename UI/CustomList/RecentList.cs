@@ -23,12 +23,11 @@ namespace MusicBox.UI.List
             {
                 AutoScroll = true, // 启用自动滚动
                 FlowDirection = FlowDirection.TopDown,
-                WrapContents = false
+                WrapContents = false,
+                Dock = DockStyle.Fill,
             };
             Panel.AutoScroll = true;
             this.Controls.Add(Panel);
-
-            this.SizeChanged += SizeChangedHandler;
         }
         public static float GetScreenScalingFactor()
         {
@@ -40,25 +39,6 @@ namespace MusicBox.UI.List
             }
         }
 
-
-
-        private void SizeChangedHandler(object sender, EventArgs e)
-        {
-            foreach (var item in Panel.Controls)
-            {
-                if(item.GetType() == typeof(RecentButton))
-                {
-                    ((RecentButton)item).Width = (int)(Width - (23 * GetScreenScalingFactor()));
-                } else
-                {
-                    ((SongButton)item).Width = (int)(Width - (23 * GetScreenScalingFactor()));
-                }
-                
-            }
-            Panel.Size = new Size(Width, Height);
-        }
-
-
         // 方法：添加 RecentButton
         public void AddRecentButton(string imgPath, string type, string titleText, string descriptionText)
         {
@@ -66,6 +46,7 @@ namespace MusicBox.UI.List
             {
                 Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
                 Height = 120,
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
             };
             recentButton.Image = Image.FromFile(imgPath);
             recentButton.TitleText = titleText;
