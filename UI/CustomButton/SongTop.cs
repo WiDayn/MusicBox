@@ -11,52 +11,64 @@ namespace MusicBox.UI.Button
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
     using System.Windows.Forms;
 
     public class SongTop : UserControl
     {
-        private CircularPictureBox pictureBox;
-        private Label Title;
-        private Label Description;
+        private PictureBox pictureBox;
+        private Label type;
+        private Label name;
+        private Label description;
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
         public SongTop()
         {
-            // 设置控件的初始大小
-            Size = new Size(300, 100);
             // 创建并设置 PictureBox
-            pictureBox = new CircularPictureBox
+            pictureBox = new PictureBox
             {
-                Size = new Size((int)(Height * (6 / 10.0)), (int)(Height * (6 / 10.0))),
-                Location = new Point((int)(Height * (1 / 10.0)), (int)(Height * (2 / 10.0))),
+                Size = new Size((int)(Height * (1 / 2.0)), (int)(Height * (1 / 2.0))),
+                Location = new Point((int)(Height * (1 / 10.0)), (int)(Height * (1 / 7.0))),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
             this.Controls.Add(pictureBox);
 
             // 创建并设置 Label
-            Title = new Label
+            type = new Label
             {
-                Font = new Font("Microsoft YaHei UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.White,
                 AutoSize = true,
-                Location = new Point((int)(Height * (10.5 / 10.0)), (int)(Height * (3 / 10.0))),
+                Location = new Point((int)(Height * (9 / 10.0)), (int)(Height * (1 / 10.0))),
                 TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
             };
-            this.Controls.Add(Title);
+            this.Controls.Add(type);
 
             // 创建并设置 Label
-            Description = new Label
+            name = new Label
             {
-                Font = new Font("Microsoft YaHei UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 134),
-                ForeColor = Color.FromArgb(167, 167, 167),
+                Font = new Font("Microsoft YaHei UI", 50F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                ForeColor = Color.White,
                 AutoSize = true,
-                Location = new Point((int)(Height * (11 / 10.0)), (int)(Height * (6 / 10.0))),
+                Location = new Point((int)(Height * (9 / 10.0)), (int)(Height * (1 / 5.0))),
                 TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
             };
-            this.Controls.Add(Description);
+            this.Controls.Add(name);
+
+            // 创建并设置 Label
+            description = new Label
+            {
+                Font = new Font("Microsoft YaHei UI", 15F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                ForeColor = Color.White,
+                AutoSize = true,
+                Location = new Point(Height, (int)(Height * (9 / 10.0))),
+                TextAlign = ContentAlignment.MiddleLeft,
+                BackColor = Color.Transparent,
+            };
+            this.Controls.Add(description);
 
             // 为用户控件开启双缓冲，减少闪烁
             this.SetStyle(ControlStyles.UserPaint |
@@ -85,7 +97,10 @@ namespace MusicBox.UI.Button
 
         private void SizeChangedHandler(object sender, EventArgs e)
         {
-            pictureBox.Size = new Size((int)(Height * (6 / 10.0)), (int)(Height * (6 / 10.0)));
+            pictureBox.Size = new Size((int)(Height * (8 / 10.0)), (int)(Height * (8 / 10.0)));
+            type.Location = new Point((int)(Height ), (int)(Height * (1 / 8.0)));
+            name.Location = new Point((int)(Height * (9 / 10.0)), (int)(Height * (1 / 5.0)));
+            description.Location = new Point((int)(Height ), (int)(Height * (15 / 20.0)));
         }
 
         // 公共属性设置图片
@@ -94,17 +109,22 @@ namespace MusicBox.UI.Button
             get => pictureBox.Image;
             set => pictureBox.Image = value;
         }
-
-        public string TitleText
+        public string TypeText
         {
-            get => Title.Text;
-            set => Title.Text = value;
+            get => type.Text;
+            set => type.Text = value;
+        }
+
+        public string NameText
+        {
+            get => name.Text;
+            set => name.Text = value;
         }
 
         public string DescriptionText
         {
-            get => Description.Text;
-            set => Description.Text = value;
+            get => description.Text;
+            set => description.Text = value;
         }
     }
 
