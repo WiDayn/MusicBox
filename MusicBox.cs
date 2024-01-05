@@ -17,8 +17,6 @@ namespace MusicBox
         [DllImport("dwmapi.dll", PreserveSig = true)]
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
-
-
         public MusicBox()
         {
             InitializeComponent();

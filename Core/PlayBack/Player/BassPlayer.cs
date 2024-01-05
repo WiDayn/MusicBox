@@ -52,6 +52,11 @@ namespace MusicBox.Core.PlayBack.Player
                 Debug.WriteLine($"载入音频源失败! Error:{error}");
                 return;
             }
+            if(nowStatus == 0)
+            {
+                nowStatus = 1;
+                nowVolum = (float)0.35;
+            }
             SetVolume(nowVolum);
             // 设置歌曲播放完毕的事件处理器
             Bass.BASS_ChannelSetSync(_stream, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(EndTrack), IntPtr.Zero);
