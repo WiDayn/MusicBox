@@ -1,19 +1,24 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
+using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI.CustomPictureBox;
 
 namespace MusicBox.UI.Button
 {
     public class SongButton : UserControl
     {
+        private int SongID { get; set; }
+        private int ArtistID { get; set; }
+        private int AlbumID { get; set; }
         private Label labelIndex;
         private PictureBox pictureBox;
         private Label Title;
-        private Label Description;
-        private Label labelAlbum;
-        private Label labelDuration;
+        private Label ArtistName;
+        private Label LabelAlbum;
+        private Label LabelDuration;
         private bool MouseOn = false;
 
         public SongButton()
@@ -23,7 +28,6 @@ namespace MusicBox.UI.Button
 
         private void InitializeControls()
         {
-
             // 序号标签
             labelIndex = new Label
             {
@@ -56,7 +60,7 @@ namespace MusicBox.UI.Button
             this.Controls.Add(Title);
 
             // 创建并设置 Description Label
-            Description = new Label
+            ArtistName = new Label
             {
                 Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
@@ -65,36 +69,44 @@ namespace MusicBox.UI.Button
                 TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
             };
-            this.Controls.Add(Description);
+            this.Controls.Add(ArtistName);
 
             // 专辑标签
-            labelAlbum = new Label
+            LabelAlbum = new Label
             {
                 AutoSize = true,
                 Location = new Point(Width * 2, (int)(Height * (1 / 7.0))),
                 Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
             };
-            this.Controls.Add(labelAlbum);
+            this.Controls.Add(LabelAlbum);
 
             // 时长标签
-            labelDuration = new Label
+            LabelDuration = new Label
             {
                 AutoSize = true,
                 Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
                 Location = new Point(Width * 3, (int)(Height * (1 / 7.0))),
             };
-            this.Controls.Add(labelDuration);
+            this.Controls.Add(LabelDuration);
 
 
             this.SizeChanged += SizeChangedHandler;
 
-            this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
-            this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
+            this.MouseEnter += new EventHandler(SongButton_MouseEnter);
+            this.MouseLeave += new EventHandler(SongButton_MouseLeave);
+            this.MouseDoubleClick += new MouseEventHandler(SongButton_DoubleClick);
         }
 
-        private void RecentButton_MouseEnter(object sender, EventArgs e)
+        private void SongButton_DoubleClick(object sender, EventArgs e)
+        {
+            Debug.WriteLine($"Add song to playlist: SongID: {SongID} TitleText: {TitleText} - {ArtistID}");
+            Program.musicPlayer.AddSongToListFront(new Core.Entity.Song(SongID, TitleText, ArtistID, ArtistNameText, AlbumID, AlbumText, Properties.Resources.External_URL + "/Album/" + ArtistNameText + "-" + AlbumText + "/" + TitleText + ".flac"));
+            Program.musicPlayer.PlayInOrder();
+        }
+
+        private void SongButton_MouseEnter(object sender, EventArgs e)
         {
             // 鼠标停留在TrackBar上时的逻辑
             MouseOn = true;
@@ -103,7 +115,7 @@ namespace MusicBox.UI.Button
         }
 
         // 当鼠标离开TrackBar时触发的方法
-        private void RecentButton_MouseLeave(object sender, EventArgs e)
+        private void SongButton_MouseLeave(object sender, EventArgs e)
         {
             // 鼠标离开TrackBar时的逻辑
             MouseOn = false;
@@ -131,22 +143,22 @@ namespace MusicBox.UI.Button
             set => Title.Text = value;
         }
 
-        public string DescriptionText
+        public string ArtistNameText
         {
-            get => Description.Text;
-            set => Description.Text = value;
+            get => ArtistName.Text;
+            set => ArtistName.Text = value;
         }
 
-        public string Album
+        public string AlbumText
         {
-            get => labelAlbum.Text;
-            set => labelAlbum.Text = value;
+            get => LabelAlbum.Text;
+            set => LabelAlbum.Text = value;
         }
 
         public string Duration
         {
-            get => labelDuration.Text;
-            set => labelDuration.Text = value;
+            get => LabelDuration.Text;
+            set => LabelDuration.Text = value;
         }
 
         // 当鼠标点击时触发
@@ -159,8 +171,8 @@ namespace MusicBox.UI.Button
 
         private void SizeChangedHandler(object sender, EventArgs e)
         {
-            labelAlbum.Location = new Point(Width / 2, (int)(Height * (5 / 14.0)));
-            labelDuration.Location = new Point(Width * 8 / 9, (int)(Height * (5 / 14.0)));
+            LabelAlbum.Location = new Point(Width / 2, (int)(Height * (5 / 14.0)));
+            LabelDuration.Location = new Point(Width * 8 / 9, (int)(Height * (5 / 14.0)));
         }
 
         public void ToggleShape()

@@ -64,6 +64,9 @@ namespace MusicBox
             // 建立全局变量便于引用
             Program.DefaultAlbumList = AlbumList;
             Program.DefaultRightTabControl = RightTabControl;
+            Program.PlayingSongAlbumPicture = LeftDownAlbumBox;
+            Program.PlayingSongTitleLabel = LeftDownSongNameLabel;
+            Program.PlayingSongArtistLabel = LeftDownArtistsNameLabel;
         }
 
         private void StopButton_click(object sender, EventArgs e)

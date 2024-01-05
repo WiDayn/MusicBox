@@ -20,12 +20,16 @@ namespace MusicBox
 
         public static HttpClient httpClient = new();
 
+        public static Label PlayingSongTitleLabel;
+
+        public static Label PlayingSongArtistLabel;
+
+        public static PictureBox PlayingSongAlbumPicture;
+
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            //musicPlayer.AddSongToList(new Song(1, "春日影", 1, 2, "E:\\External\\Album\\林家谦-SEVEN\\在空中的這一秒.flac"));
-            //musicPlayer.AddSongToList(new Song(2, "タイニーリトル・アジアンタム", 2, 3, "E:\\External\\Album\\林家谦-SEVEN\\在空中的這一秒.flac"));
             musicPlayer.PlayInRandom();
             DefaultMusicBox = new();
             Application.Run(DefaultMusicBox);
