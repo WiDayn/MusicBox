@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using global::MusicBox.API;
+using global::MusicBox.UI.CustomPictureBox;
+using MusicBox.Core.Dtos;
 
 namespace MusicBox.UI.Button
 {
-    using global::MusicBox.UI.CustomPictureBox;
-    using System;
-    using System.Diagnostics;
-    using System.Drawing;
-    using System.Windows.Forms;
-
     public class RecentButton : UserControl
     {
         private CircularPictureBox pictureBox;
@@ -20,6 +12,8 @@ namespace MusicBox.UI.Button
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
+        public FavoriteResponse favoriteResponse;
+
         public RecentButton()
         {
             // 设置控件的初始大小
@@ -60,10 +54,27 @@ namespace MusicBox.UI.Button
             this.SizeChanged += SizeChangedHandler;
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
-            this.MouseClick += new MouseEventHandler(ButtonLabel_MouseClick);
+            this.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
+            this.Load += new EventHandler(RecentButton_Load);
         }
-        private void ButtonLabel_MouseClick(object sender, MouseEventArgs e)
+
+        private async void RecentButton_Load(object sender, EventArgs e)
         {
+            favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
+        }
+
+        private async void RecentButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            // TODO: 更新RightTabControl.(0)里的内容
+            Program.DefaultAlbumList.Panel.Controls.Clear();
+            int i = 1;
+            foreach (var song in favoriteResponse.Data)
+            {
+                // 专辑封面的位置是固定的
+                Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
+                    , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+            }
+            Program.DefaultRightTabControl.SwitchToPanel(0);
             ButtonClick?.Invoke(this, EventArgs.Empty);
         }
         private void RecentButton_MouseEnter(object sender, EventArgs e)

@@ -10,7 +10,7 @@ namespace MusicBox.UI
 {
     public class BorderlessTabControl : UserControl
     {
-        private List<Panel> panels = new List<Panel>();
+        public List<Panel> panels = new List<Panel>();
 
         public BorderlessTabControl()
         {
@@ -64,7 +64,5 @@ namespace MusicBox.UI
                 panels[panelIndex].Visible = true;
             }
         }
-
-        // 更多方法和属性可以根据需要添加
     }
 }

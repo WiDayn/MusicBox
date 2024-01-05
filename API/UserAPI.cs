@@ -12,7 +12,7 @@ namespace MusicBox.API
     internal class UserAPI
     {
         public static bool isLogin = false;
-        public static string authToken = "";
+        public static string authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiIxIiwibmJmIjoxNzA0MjM2NzM0LCJleHAiOjE3MDQ4NDE1MzQsImlhdCI6MTcwNDIzNjczNH0.bUpfOViTYGG5k_1F0AhVIHEnc6KeRV8K8lLsbSEvWlI";
         public static UserData userData = new UserData();
 
         public class LoginResponse
@@ -49,49 +49,45 @@ namespace MusicBox.API
                 Password = password
             };
 
-            using (var client = new HttpClient())
+            var client = Program.httpClient;
+            var json = JsonConvert.SerializeObject(loginData);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            client.Timeout = TimeSpan.FromSeconds(5); // Set timeout to 30 seconds
+            var response = await client.PostAsync(url, content);
+
+            if (response.IsSuccessStatusCode)
             {
-                var json = JsonConvert.SerializeObject(loginData);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                client.Timeout = TimeSpan.FromSeconds(5); // Set timeout to 30 seconds
-                var response = await client.PostAsync(url, content);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var responseString = await response.Content.ReadAsStringAsync();
-                    var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseString);
-                    isLogin = true;
-                    authToken = loginResponse.Data;
-                    GetUserInfoAsync();
-                    return "success";
-                }
-                else
-                {
-                   Debug.WriteLine("Error: " + response.StatusCode);
-                    return response.StatusCode.ToString();
-                }
+                var responseString = await response.Content.ReadAsStringAsync();
+                var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseString);
+                isLogin = true;
+                authToken = loginResponse.Data;
+                GetUserInfoAsync();
+                return "success";
+            }
+            else
+            {
+                Debug.WriteLine("Error: " + response.StatusCode);
+                return response.StatusCode.ToString();
             }
         }
         public static async void GetUserInfoAsync()
         {
             string url = Properties.Resources.BackEnd_URL + "/user/userinfo";
-            using (var client = new HttpClient())
+            var client = Program.httpClient;
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(authToken);
+            var response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(authToken);
-                var response = await client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    UserInfoResponse userInfoResponse = JsonConvert.DeserializeObject<UserInfoResponse>(jsonString);
-                    userData = userInfoResponse.Data;
-                    Debug.WriteLine("Get userData successfully");
-                }
-                else
-                {
-                    // 处理错误响应
-                    throw new HttpRequestException($"Error fetching user data: {response.StatusCode}");
-                }
+                var jsonString = await response.Content.ReadAsStringAsync();
+                UserInfoResponse userInfoResponse = JsonConvert.DeserializeObject<UserInfoResponse>(jsonString);
+                userData = userInfoResponse.Data;
+                Debug.WriteLine("Get userData successfully");
+            }
+            else
+            {
+                // 处理错误响应
+                throw new HttpRequestException($"Error fetching user data: {response.StatusCode}");
             }
         }
     }

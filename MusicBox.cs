@@ -19,6 +19,7 @@ namespace MusicBox
         public MusicBox()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
             int TitlebarDarkColour = 0x000000;
             DwmSetWindowAttribute(this.Handle, 35, ref TitlebarDarkColour, System.Runtime.InteropServices.Marshal.SizeOf(TitlebarDarkColour));
             this.FormClosing += MusicBox_FormClosing; // 绑定事件处理器
@@ -41,7 +42,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
+            String testFilePath = "E:\\External\\Album\\林家谦-SEVEN\\cover.jpg";
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
@@ -53,17 +54,15 @@ namespace MusicBox
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
             RecentList.AddRecentButton(testFilePath, "测试", "艺人");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            AlbumList.SetTrackData("1", testFilePath, "测试", "艺人", "跨时代", "3:40");
-            songTopPanel.AddSongTop(testFilePath, "林家谦", "艺人");
             MusicBox_SizeChanged(sender, e);
+            ref_setting();
+        }
+
+        private void ref_setting()
+        {
+            // 建立全局变量便于引用
+            Program.DefaultAlbumList = AlbumList;
+            Program.DefaultRightTabControl = RightTabControl;
         }
 
         private void StopButton_click(object sender, EventArgs e)

@@ -61,11 +61,20 @@ namespace MusicBox.Properties {
         }
         
         /// <summary>
-        ///   查找类似 http://localhost:5101 的本地化字符串。
+        ///   查找类似 http://localhost:5000 的本地化字符串。
         /// </summary>
         internal static string BackEnd_URL {
             get {
                 return ResourceManager.GetString("BackEnd_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 http://localhost:5000/External 的本地化字符串。
+        /// </summary>
+        internal static string External_URL {
+            get {
+                return ResourceManager.GetString("External_URL", resourceCulture);
             }
         }
         
