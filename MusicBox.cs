@@ -42,7 +42,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
+            String testFilePath = "E:\\cover.jpg";
 
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");

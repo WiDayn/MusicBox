@@ -27,7 +27,7 @@ namespace MusicBox.UI.List
             };
             this.Controls.Add(AlbumPanel);
 
-            this.SizeChanged += SizeChangedHandler;
+            AlbumPanel.Dock = DockStyle.Fill;
         }
 
         public static float GetScreenScalingFactor()
@@ -41,26 +41,13 @@ namespace MusicBox.UI.List
         }
 
 
-        private void SizeChangedHandler(object sender, EventArgs e)
-        {
-            // 适应每行四个按钮的布局
-            int buttonWidth = (int)(Width - (23 * GetScreenScalingFactor())) * 13 / 40;
-            foreach (HomePlayListButton item in AlbumPanel.Controls)
-            {
-                item.Width = buttonWidth;
-                item.Height = buttonWidth;
-            }
-            AlbumPanel.Size = new Size(Width, Height);
-        }
-
-
         // 方法：添加 HomePlayListButton
         public void AddHomePlayListButton(string imgPath, string titleText, string descriptionText)
         {
             var homePlayListButton = new HomePlayListButton
             {
-                Width = (int)(Width - (23 * GetScreenScalingFactor())) * 13 / 40, // 适应每行四个按钮的宽度
-                Height = (int)(Width - (23 * GetScreenScalingFactor())) * 13 / 40,
+                Width = (int)(200 / GetScreenScalingFactor()), // 适应每行四个按钮的宽度
+                Height = (int)(250 / GetScreenScalingFactor()),
             };
             homePlayListButton.Image = Image.FromFile(imgPath);
             homePlayListButton.TitleText = titleText;
