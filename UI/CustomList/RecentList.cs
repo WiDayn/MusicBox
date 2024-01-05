@@ -101,7 +101,7 @@ namespace MusicBox.UI.List
         }
 
         // 公共方法用于设置音乐轨道项的数据
-        public void AddTrackData(string index, string imgPath, string titleText, string descriptionText,string album,string duration)
+        public void SetTrackData(string index, string imgPath, string titleText, string descriptionText,string album,string duration)
         {
             var musicTrackControl = new SongButton
             {
