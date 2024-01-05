@@ -136,8 +136,8 @@ namespace MusicBox.UI.Button
                     int controlOffset = size / 4;
 
                     // 使用三次贝塞尔曲线绘制爱心形状
-                    path.AddBezier(x, y - size / 2, x - controlOffset, y - size, x - size, y - size / 2, x, y);
-                    path.AddBezier(x, y, x + size, y - size / 2, x + controlOffset, y - size, x, y - size / 2);
+                    path.AddBezier(x, y - size / 2, x - controlOffset, y - size, x - size, y - size / 2, x, y+ size / 4);
+                    path.AddBezier(x, y+ size / 4, x + size, y - size / 2, x + controlOffset, y - size, x, y - size / 2);
 
 
                     // 绘制爱心形状
