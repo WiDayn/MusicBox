@@ -75,15 +75,15 @@ namespace MusicBox.UI.Button
             if(Type == "Like")
             {
                 Program.AblumPlayingSongTopPanel.SetSongTopFromIMG(Properties.Resources.MyLove, "歌单", "已点赞的歌", UserAPI.userData.Username + " • " + favoriteResponse.Data.Count.ToString() + "首歌曲");
-            }
 
-            foreach (var song in favoriteResponse.Data)
-            {
-                // 专辑封面的位置是固定的
-                Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
-                    , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                foreach (var song in favoriteResponse.Data)
+                {
+                    // 专辑封面的位置是固定的
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
+                        , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                }
+                Program.DefaultRightTabControl.SwitchToPanel(0);
             }
-            Program.DefaultRightTabControl.SwitchToPanel(0);
             ButtonClick?.Invoke(this, EventArgs.Empty);
         }
         private void RecentButton_MouseEnter(object sender, EventArgs e)
