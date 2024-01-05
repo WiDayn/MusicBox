@@ -42,7 +42,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
+            String testFilePath = "E:\\cover.jpg";
 
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
@@ -50,14 +50,42 @@ namespace MusicBox
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
 
-            MusicBox_SizeChanged(sender, e);
+            MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
             RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
             RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
-            MusicBox_SizeChanged(sender, e);
+            MusicBoxLocationSet(sender, e);
+            Program.musicPlayer.SetVolume((float)0.5);
             ref_setting();
+            MusicBoxAnchorSet();
+        }
+
+        private void MusicBoxAnchorSet()
+        {
+            // 设置Top, Left 和 Right 锚点
+            AnchorStyles anchors = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+            // 设置 MainSplitContainer 内的控件锚点
+            //LeftTopPanel.Anchor = anchors;
+            //LeftDownPanel.Anchor = anchors;
+            //RightTabControl.Anchor = anchors;
+            //RecentList.Anchor = anchors;
+            //SearchButton.Anchor = anchors;
+            //HomeButton.Anchor = anchors;
+            //homePlayList.Anchor = anchors;
+            //songTopPanel.Anchor = anchors;
+            //songTitle.Anchor = anchors;
+            //AlbumList.Anchor = anchors;
+
+            // 设置主窗体上的控件锚点
+            VolumeTrackBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            MainSplitContainer.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            //LeftDownAlbumBox.Anchor = anchors;
+            //LeftDownSongNameLabel.Anchor = anchors;
+            //LeftDownArtistsNameLabel.Anchor = anchors;
+            RecentList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         }
 
         private void ref_setting()
@@ -151,7 +179,22 @@ namespace MusicBox
             AlbumList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height * 6 / 10);
         }
 
+        private void MusicBoxLocationSet(object sender, EventArgs e)
+        {
+            MusicBoxLocUpdate(sender, e);
+            MainSplitContainer.Size = new Size(ClientSize.Width - (int)(10 * GetScreenScalingFactor()), ClientSize.Height - (int)(75 * GetScreenScalingFactor()));
+            playTrackBar.Value = 50;
+            VolumeTrackBar.Size = new Size((int)(115 * GetScreenScalingFactor()), (int)(10 * GetScreenScalingFactor()));
+            playTrackBar.Size = new Size(ClientSize.Width / 3, (int)(45 * GetScreenScalingFactor()));
+        }
+
         private void MusicBox_SizeChanged(object sender, EventArgs e)
+        {
+            playTrackBar.Size = new Size(ClientSize.Width / 3, (int)(45 * GetScreenScalingFactor()));
+            MusicBoxLocUpdate(sender, e);
+        }
+
+        private void MusicBoxLocUpdate(object sender, EventArgs e)
         {
             VolumeTrackBar.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0)), (int)(ClientSize.Height - 35 * GetScreenScalingFactor()));
             volumeButton.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0) - 10 * GetScreenScalingFactor()), (int)(ClientSize.Height - 46 * GetScreenScalingFactor()));
@@ -161,17 +204,12 @@ namespace MusicBox
                             ClientSize.Height - (int)(63 * GetScreenScalingFactor()));
             LastButton.Location = new Point(ClientSize.Width / 2 - LastButton.Width / 2 - (int)(45 * GetScreenScalingFactor()),
                             ClientSize.Height - (int)(63 * GetScreenScalingFactor()));
-            MainSplitContainer.Size = new Size(ClientSize.Width - (int)(10 * GetScreenScalingFactor()), ClientSize.Height - (int)(75 * GetScreenScalingFactor()));
-            playTrackBar.Size = new Size(ClientSize.Width / 3, (int)(45 * GetScreenScalingFactor()));
             playTrackBar.Location = new Point(ClientSize.Width / 2 - playTrackBar.Size.Width / 2, ClientSize.Height - (int)(20 * GetScreenScalingFactor()));
-            playTrackBar.Value = 50;
-            VolumeTrackBar.Size = new Size((int)(115 * GetScreenScalingFactor()), (int)(10 * GetScreenScalingFactor()));
             NowTimeLabel.Location = new Point(playTrackBar.Location.X - NowTimeLabel.Width - (int)(10 * GetScreenScalingFactor()), playTrackBar.Location.Y - (int)(6 * GetScreenScalingFactor()));
             EndTimeLabel.Location = new Point(playTrackBar.Location.X + playTrackBar.Width + (int)(10 * GetScreenScalingFactor()), playTrackBar.Location.Y - (int)(6 * GetScreenScalingFactor()));
             LeftDownAlbumBox.Location = new Point(10, ClientSize.Height - (int)(70 * GetScreenScalingFactor()));
             LeftDownSongNameLabel.Location = new Point(LeftDownAlbumBox.Location.X + LeftDownAlbumBox.Width + (int)(5 * GetScreenScalingFactor()), LeftDownAlbumBox.Location.Y + (int)(5 * GetScreenScalingFactor()));
             LeftDownArtistsNameLabel.Location = new Point(LeftDownSongNameLabel.Location.X, LeftDownSongNameLabel.Location.Y + LeftDownSongNameLabel.Height + (int)(5 * GetScreenScalingFactor()));
-            SplitterMoved_SizeChanged(sender, e);
         }
 
         private void SecondTimer_Tick(object sender, EventArgs e)

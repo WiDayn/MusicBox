@@ -18,20 +18,8 @@ namespace MusicBox.UI.List
         public SongTopPanel()
         {
             Panel = new Panel();
+            Panel.Dock = DockStyle.Fill;
             this.Controls.Add(Panel);
-
-            this.SizeChanged += SizeChangedHandler;
-        }
-
-        private void SizeChangedHandler(object sender, EventArgs e)
-        {
-            foreach (SongTop item in Panel.Controls)
-            {
-                item.Width = Width;
-                item.Height = Height;
-            }
-
-            Panel.Size = new Size(Width, Height);
         }
 
         public async void SetSongTop(String imgPath ,string typeText, string nameText, string descriptionText)
@@ -40,6 +28,7 @@ namespace MusicBox.UI.List
             {
                 Width = Width, // 减去滚动条的宽度
                 Height = Height,
+                Dock = DockStyle.Fill,
             };
             if (imgPath.StartsWith("http"))
             {
@@ -60,6 +49,7 @@ namespace MusicBox.UI.List
             {
                 Width = Width, // 减去滚动条的宽度
                 Height = Height,
+                Dock = DockStyle.Fill,
             };
             songTop.Image = image;
 

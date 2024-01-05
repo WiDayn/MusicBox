@@ -28,6 +28,7 @@ namespace MusicBox.Core.PlayBack.Player
         // 载入音频文件
         public void LoadAudio(string source)
         {
+            float nowVolum = GetVolume();
             // 先释放之前的音频流
             if (_stream != 0)
                 Bass.BASS_StreamFree(_stream);
@@ -51,7 +52,7 @@ namespace MusicBox.Core.PlayBack.Player
                 Debug.WriteLine($"载入音频源失败! Error:{error}");
                 return;
             }
-
+            SetVolume(nowVolum);
             // 设置歌曲播放完毕的事件处理器
             Bass.BASS_ChannelSetSync(_stream, BASSSync.BASS_SYNC_END, 0, new SYNCPROC(EndTrack), IntPtr.Zero);
         }

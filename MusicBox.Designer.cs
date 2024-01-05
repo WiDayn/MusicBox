@@ -144,6 +144,7 @@ namespace MusicBox
             // 
             // LeftDownPanel
             // 
+            LeftDownPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LeftDownPanel.BackColor = Color.FromArgb(18, 18, 18);
             LeftDownPanel.Controls.Add(RecentList);
             LeftDownPanel.Location = new Point(7, 155);

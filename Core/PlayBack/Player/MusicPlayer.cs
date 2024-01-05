@@ -42,17 +42,19 @@ namespace MusicBox.Core.PlayBack.Player
             {
                 Debug.WriteLine($"Playing: {songList[0].Title} by ArtistID: {songList[0].ArtistID} From AlbumID: {songList[0].AlbumID}");
                 bassPlayer.LoadAudio(songList[0].FilePath);
+                MusicPlayedList.AddSong(songList[0]);
                 UpdatePlayingUI(songList[0]);
                 bassPlayer.Play();
+                songList.RemoveAt(0);
                 bassPlayer.TrackEnded += (sender, e) =>
                 {
-                    MusicPlayedList.AddSong(songList[0]);
-                    songList.RemoveAt(0);
                     if (songList.Count > 0)
                     {
+                        MusicPlayedList.AddSong(songList[0]);
                         bassPlayer.LoadAudio(songList[0].FilePath);
                         UpdatePlayingUI(songList[0]);
                         bassPlayer.Play();
+                        songList.RemoveAt(0);
                     }
                 };
             }
