@@ -11,7 +11,7 @@ namespace MusicBox.UI.Button
         private Label labelIndex;
         private PictureBox pictureBox;
         private Label Title;
-        private Label Description;
+        private Label ArtistName;
         private Label labelAlbum;
         private Label labelDuration;
         private bool MouseOn = false;
@@ -55,7 +55,7 @@ namespace MusicBox.UI.Button
             this.Controls.Add(Title);
 
             // 创建并设置 Description Label
-            Description = new Label
+            ArtistName = new Label
             {
                 Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134),
                 ForeColor = Color.FromArgb(167, 167, 167),
@@ -64,7 +64,7 @@ namespace MusicBox.UI.Button
                 TextAlign = ContentAlignment.MiddleLeft,
                 BackColor = Color.Transparent,
             };
-            this.Controls.Add(Description);
+            this.Controls.Add(ArtistName);
 
             // 专辑标签
             labelAlbum = new Label
@@ -132,8 +132,8 @@ namespace MusicBox.UI.Button
 
         public string DescriptionText
         {
-            get => Description.Text;
-            set => Description.Text = value;
+            get => ArtistName.Text;
+            set => ArtistName.Text = value;
         }
 
         public string Album
