@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using MusicBox.Core.Dtos;
 using Newtonsoft.Json;
 
 namespace MusicBox.API
@@ -14,31 +15,7 @@ namespace MusicBox.API
         public static bool isLogin = false;
         public static string authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiIxIiwibmJmIjoxNzA0MjM2NzM0LCJleHAiOjE3MDQ4NDE1MzQsImlhdCI6MTcwNDIzNjczNH0.bUpfOViTYGG5k_1F0AhVIHEnc6KeRV8K8lLsbSEvWlI";
         public static UserData userData = new UserData();
-
-        public class LoginResponse
-        {
-            public int StatusCode { get; set; }
-            public string Data { get; set; }
-            public string Message { get; set; }
-        }
-        public class UserInfoResponse
-        {
-            public int StatusCode { get; set; }
-            public UserData Data { get; set; }
-            public string Message { get; set; }
-        }
-
-        public class UserData
-        {
-            public int UserID { get; set; }
-            public string Username { get; set; }
-            public string Email { get; set; }
-            public string Area { get; set; }
-            public DateTime DateCreated { get; set; }
-            public DateTime LastLogin { get; set; }
-
-            public int FavoriteSongNum {  get; set; }
-        }
+        public static FavoriteResponse favoriteResponse = new();
 
         public static async Task<String> PostLoginAsync(string username, string password)
         {
@@ -59,7 +36,7 @@ namespace MusicBox.API
             if (response.IsSuccessStatusCode)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
-                var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseString);
+                var loginResponse = JsonConvert.DeserializeObject<DefaultResponse>(responseString);
                 isLogin = true;
                 authToken = loginResponse.Data;
                 GetUserInfoAsync();

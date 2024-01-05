@@ -1,5 +1,6 @@
 ﻿
 using MusicBox.API;
+using MusicBox.Core.Dtos;
 using MusicBox.UI.Button;
 using MusicBox.UI.List;
 using System.Diagnostics;
@@ -15,6 +16,8 @@ namespace MusicBox
         //
         [DllImport("dwmapi.dll", PreserveSig = true)]
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+
 
         public MusicBox()
         {
@@ -54,12 +57,27 @@ namespace MusicBox
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
-            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
-            RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
             MusicBoxLocationSet(sender, e);
             Program.musicPlayer.SetVolume((float)0.5);
             ref_setting();
             MusicBoxAnchorSet();
+            loadRecentList();
+        }
+
+        private void loadRecentList()
+        {
+            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
+            foreach(var item in UserAPI.favoriteResponse.Data.AlbumInfos) {
+                RecentList.AddRecentButtonFromAblumID(item.ID);
+            }
+            //foreach (var item in UserAPI.favoriteResponse.Data.AlbumInfos)
+            //{
+            //    RecentList.AddRecentButtonFromArtistID(item.ID);
+            //}
+            //foreach (var item in UserAPI.favoriteResponse.Data.PlayListInfos)
+            //{
+            //    RecentList.AddRecentButtonFromPlayListID(item.ID);
+            //}
         }
 
         private void MusicBoxAnchorSet()

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static MusicBox.Core.Dtos.Album;
 
 namespace MusicBox.UI.List
 {
@@ -60,16 +61,36 @@ namespace MusicBox.UI.List
 
 
         // 方法：添加 RecentButton
-        public void AddRecentButton(string imgPath, string type, string titleText, string descriptionText)
+        public async void AddRecentButtonFromAblumID(int albumID)
         {
-            var recentButton = new RecentButton(type)
+            var recentButton = new RecentButton("Album")
             {
                 Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
                 Height = 120,
+                ID = albumID,
             };
-            recentButton.Image = Image.FromFile(imgPath);
-            recentButton.TitleText = titleText;
-            recentButton.DescriptionText = descriptionText;
+            Panel.Controls.Add(recentButton);
+        }
+
+        public void AddRecentButtonFromArtistID(int artistID)
+        {
+            var recentButton = new RecentButton("Artist")
+            {
+                Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
+                Height = 120,
+                ID = artistID,
+            };
+            Panel.Controls.Add(recentButton);
+        }
+
+        public void AddRecentButtonFromPlayListID(int playListID)
+        {
+            var recentButton = new RecentButton("PlayList")
+            {
+                Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
+                Height = 120,
+                ID = playListID,
+            };
             Panel.Controls.Add(recentButton);
         }
 

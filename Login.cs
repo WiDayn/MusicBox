@@ -34,6 +34,7 @@ namespace MusicBox
             {
                 Form musicbox = new MusicBox();
                 this.Hide();
+                UserAPI.favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
                 musicbox.Show();
                 Debug.WriteLine("Login Success");
             }
