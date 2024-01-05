@@ -104,13 +104,13 @@ namespace MusicBox
             if (songPlayButton.isPlaying)
             {
                 Program.musicPlayer.Start();
-                if(PlayButton.isPlaying)
+                if (PlayButton.isPlaying)
                     PlayButton.ToggleShape();
             }
             else
             {
                 Program.musicPlayer.Stop();
-                if(!PlayButton.isPlaying)
+                if (!PlayButton.isPlaying)
                     PlayButton.ToggleShape();
             }
             songPlayButton.ToggleShape();
@@ -144,7 +144,7 @@ namespace MusicBox
             homePlayList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             songTopPanel.Location = new Point(0, 0);
             songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
-            songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width/80, MainSplitContainer.Panel2.Height * 1 /4);
+            songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width / 80, MainSplitContainer.Panel2.Height * 1 / 4);
             songTitle.Location = new Point(0, MainSplitContainer.Panel2.Height * 3 / 10);
             songTitle.Size = new Size(MainSplitContainer.Panel2.Width - (int)(8 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height * 1 / 10);
             AlbumList.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);
@@ -154,6 +154,7 @@ namespace MusicBox
         private void MusicBox_SizeChanged(object sender, EventArgs e)
         {
             VolumeTrackBar.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0)), (int)(ClientSize.Height - 35 * GetScreenScalingFactor()));
+            volumeButton.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0) - 10 * GetScreenScalingFactor()), (int)(ClientSize.Height - 46 * GetScreenScalingFactor()));
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         (int)(ClientSize.Height - 63 * GetScreenScalingFactor()));
             NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + (int)(45 * GetScreenScalingFactor()),
@@ -202,5 +203,7 @@ namespace MusicBox
         {
             RightTabControl.SwitchToPanel(1);
         }
+
+
     }
 }

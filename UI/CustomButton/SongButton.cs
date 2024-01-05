@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
 using MusicBox.Core.PlayBack.Player;
@@ -19,6 +20,7 @@ namespace MusicBox.UI.Button
         private Label ArtistName;
         private Label LabelAlbum;
         private Label LabelDuration;
+        private PictureBox pictureBoxLove;
         private bool MouseOn = false;
 
         public SongButton()
@@ -81,6 +83,20 @@ namespace MusicBox.UI.Button
             };
             this.Controls.Add(LabelAlbum);
 
+            // 创建并设置时长图标 PictureBox
+            pictureBoxLove = new PictureBox
+            {
+                Size = new Size(35,35), // 或者任何适合的大小
+                Location = new Point(Width * 3, (int)(Height * (1 / 7.0))), // 调整位置以适合您的布局
+                BackColor = Color.Transparent
+            };
+            pictureBoxLove.Paint += PictureBoxLove_Paint;
+            // 添加鼠标事件处理器
+            pictureBoxLove.MouseEnter += (sender, e) => { pictureBoxLove.Invalidate(); };
+            pictureBoxLove.MouseLeave += (sender, e) => { pictureBoxLove.Invalidate(); };
+
+            this.Controls.Add(pictureBoxLove);
+
             // 时长标签
             LabelDuration = new Label
             {
@@ -97,6 +113,37 @@ namespace MusicBox.UI.Button
             this.MouseEnter += new EventHandler(SongButton_MouseEnter);
             this.MouseLeave += new EventHandler(SongButton_MouseLeave);
             this.MouseDoubleClick += new MouseEventHandler(SongButton_DoubleClick);
+        }
+
+        private void PictureBoxLove_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            // 鼠标悬停时使用白色，否则使用灰色
+            Color heartColor = (pictureBoxLove.ClientRectangle.Contains(pictureBoxLove.PointToClient(Cursor.Position))) ? Color.White : Color.Gray;
+            using (Pen heartPen = new Pen(heartColor, 2))
+            {
+                // 创建一个新的GraphicsPath来绘制爱心
+                using (GraphicsPath path = new GraphicsPath())
+                {
+                    // 计算爱心的大小和位置
+                    int size = Math.Min(pictureBoxLove.Width / 2, pictureBoxLove.Height / 2);
+                    int x = pictureBoxLove.Width / 2;
+                    int y = pictureBoxLove.Height / 2;
+
+                    // 控制点的偏移量，用于调整爱心的形状
+                    int controlOffset = size / 4;
+
+                    // 使用三次贝塞尔曲线绘制爱心形状
+                    path.AddBezier(x, y - size / 2, x - controlOffset, y - size, x - size, y - size / 2, x, y);
+                    path.AddBezier(x, y, x + size, y - size / 2, x + controlOffset, y - size, x, y - size / 2);
+
+
+                    // 绘制爱心形状
+                    g.DrawPath(heartPen, path);
+                }
+            }
         }
 
         private void SongButton_DoubleClick(object sender, EventArgs e)
@@ -176,6 +223,7 @@ namespace MusicBox.UI.Button
         private void SizeChangedHandler(object sender, EventArgs e)
         {
             LabelAlbum.Location = new Point(Width / 2, (int)(Height * (5 / 14.0)));
+            pictureBoxLove.Location = new Point(Width * 13 / 18, (int)(Height * (5 / 14.0)));
             LabelDuration.Location = new Point(Width * 8 / 9, (int)(Height * (5 / 14.0)));
         }
 

@@ -39,7 +39,7 @@ namespace MusicBox
             ApplicationConfiguration.Initialize();
             musicPlayer.PlayInRandom();
             DefaultMusicBox = new();
-            Application.Run(new Login());
+            Application.Run(new MusicBox());
             musicPlayer.Dispose();
         }
     }
