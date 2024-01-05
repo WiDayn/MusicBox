@@ -104,6 +104,10 @@ namespace MusicBox.UI.Button
             Debug.WriteLine($"Add song to playlist: SongID: {SongID} TitleText: {TitleText} - {ArtistID}");
             Program.musicPlayer.AddSongToListFront(new Core.Entity.Song(SongID, TitleText, ArtistID, ArtistNameText, AlbumID, AlbumText, Properties.Resources.External_URL + "/Album/" + ArtistNameText + "-" + AlbumText + "/" + TitleText + ".flac"));
             Program.musicPlayer.PlayInOrder();
+            if (Program.PlayButton.isPlaying)
+                Program.PlayButton.ToggleShape();
+            if (Program.PlaySongButton.isPlaying)
+                Program.PlaySongButton.ToggleShape();
         }
 
         private void SongButton_MouseEnter(object sender, EventArgs e)

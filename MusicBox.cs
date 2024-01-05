@@ -67,6 +67,8 @@ namespace MusicBox
             Program.PlayingSongAlbumPicture = LeftDownAlbumBox;
             Program.PlayingSongTitleLabel = LeftDownSongNameLabel;
             Program.PlayingSongArtistLabel = LeftDownArtistsNameLabel;
+            Program.PlaySongButton = songPlayButton;
+            Program.PlayButton = PlayButton;
         }
 
         private void StopButton_click(object sender, EventArgs e)

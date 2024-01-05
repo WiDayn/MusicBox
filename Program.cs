@@ -26,6 +26,9 @@ namespace MusicBox
 
         public static PictureBox PlayingSongAlbumPicture;
 
+        public static PlayButton PlaySongButton;
+        public static PlayButton PlayButton;
+
         [STAThread]
         static void Main()
         {
