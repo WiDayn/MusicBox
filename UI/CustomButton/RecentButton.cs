@@ -9,6 +9,8 @@ namespace MusicBox.UI.Button
         private CircularPictureBox pictureBox;
         private Label Title;
         private Label Description;
+        // type: Like,Album,Artist
+        public String Type {  get; set; }
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
@@ -68,6 +70,12 @@ namespace MusicBox.UI.Button
             // TODO: 更新RightTabControl.(0)里的内容
             Program.DefaultAlbumList.Panel.Controls.Clear();
             int i = 1;
+
+            if(Type == "Like")
+            {
+                Program.AblumPlayingSongTopPanel.SetSongTopFromIMG(Properties.Resources.MyLove, "歌单", "已点赞的歌", UserAPI.userData.Username + " • " + favoriteResponse.Data.Count.ToString() + "首歌曲");
+            }
+
             foreach (var song in favoriteResponse.Data)
             {
                 // 专辑封面的位置是固定的

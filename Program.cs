@@ -28,7 +28,10 @@ namespace MusicBox
         public static PictureBox PlayingSongAlbumPicture;
 
         public static PlayButton PlaySongButton;
+
         public static PlayButton PlayButton;
+
+        public static SongTopPanel AblumPlayingSongTopPanel;
 
         [STAThread]
         static void Main()
@@ -36,7 +39,7 @@ namespace MusicBox
             ApplicationConfiguration.Initialize();
             musicPlayer.PlayInRandom();
             DefaultMusicBox = new();
-            Application.Run(DefaultMusicBox);
+            Application.Run(new Login());
             musicPlayer.Dispose();
         }
     }

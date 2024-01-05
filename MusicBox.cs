@@ -47,14 +47,8 @@ namespace MusicBox
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
-            songTopPanel.AddSongTop(testFilePath, "艺人", "林家谦", "每月有2名听众");
-            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "已经点赞的歌曲", "歌单 • 1首歌曲");
-            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
-            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
-            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
-            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
-            RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
-            RecentList.AddRecentButton(testFilePath, "测试", "艺人");
+            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单 • 1首歌曲");
+            RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
             MusicBox_SizeChanged(sender, e);
             ref_setting();
         }
@@ -69,6 +63,7 @@ namespace MusicBox
             Program.PlayingSongArtistLabel = LeftDownArtistsNameLabel;
             Program.PlaySongButton = songPlayButton;
             Program.PlayButton = PlayButton;
+            Program.AblumPlayingSongTopPanel = songTopPanel;
         }
 
 
@@ -168,9 +163,6 @@ namespace MusicBox
 
         private void SecondTimer_Tick(object sender, EventArgs e)
         {
-            // 更新我的喜欢中歌曲的数量
-            ((RecentButton)RecentList.Controls[0].Controls[0]).DescriptionText = "歌单 • " + UserAPI.userData.FavoriteSongNum + "首歌曲";
-
             NowTimeLabel.Text = (int)Program.musicPlayer.GetCurrentPositionInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetCurrentPositionInSeconds() % 60);
             EndTimeLabel.Text = (int)Program.musicPlayer.GetTotalDurationInSeconds() / 60 + ":" + String.Format("{0:00}", (int)Program.musicPlayer.GetTotalDurationInSeconds() % 60);
             playTrackBar.Value = (int)(Program.musicPlayer.GetCurrentPositionInSeconds() / Program.musicPlayer.GetTotalDurationInSeconds() * 100);
