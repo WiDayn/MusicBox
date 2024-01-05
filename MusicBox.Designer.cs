@@ -1,6 +1,7 @@
 ﻿using MusicBox.Core.Entity;
 using MusicBox.UI;
 using MusicBox.UI.Button;
+using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -40,7 +41,6 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             songPlayButton = new PlayButton();
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
@@ -72,12 +72,26 @@ namespace MusicBox
             MainSplitContainer.SuspendLayout();
             LeftDownPanel.SuspendLayout();
             LeftTopPanel.SuspendLayout();
+            ArtistPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
             ArtistPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
             SuspendLayout();
+            // 
+            // songPlayButton
+            // 
+            songPlayButton.BackColor = Color.FromArgb(18, 18, 18);
+            songPlayButton.FlatStyle = FlatStyle.Flat;
+            songPlayButton.Location = new Point(485, 718);
+            songPlayButton.Margin = new Padding(2);
+            songPlayButton.Name = "songPlayButton";
+            songPlayButton.Size = new Size(50, 50);
+            songPlayButton.TabIndex = 1;
+            songPlayButton.Text = "Start";
+            songPlayButton.UseVisualStyleBackColor = true;
+            songPlayButton.Click += SongStartButton_Click;
             // 
             // PlayButton
             // 
@@ -91,20 +105,6 @@ namespace MusicBox
             PlayButton.Text = "Start";
             PlayButton.UseVisualStyleBackColor = true;
             PlayButton.Click += StartButton_Click;
-            // 
-            // songPlayButton
-            // 
-            songPlayButton.BackColor = Color.FromArgb(18, 18, 18);
-            songPlayButton.FlatStyle = FlatStyle.Flat;
-            songPlayButton.Location = new Point(485, 718);
-            songPlayButton.Margin = new Padding(2);
-            songPlayButton.Name = "songPlayButton";
-            songPlayButton.Size = new Size(50,50);
-            songPlayButton.TabIndex = 1;
-            songPlayButton.Text = "Start";
-            songPlayButton.UseVisualStyleBackColor = true;
-            songPlayButton.Click += SongStartButton_Click;
-
             // 
             // EndTimeLabel
             // 
@@ -224,6 +224,20 @@ namespace MusicBox
             AlbumPanel.Size = new Size(96, 100);
             AlbumPanel.TabIndex = 2;
             // 
+            // songTopPanel
+            // 
+            songTopPanel.Location = new Point(0, 0);
+            songTopPanel.Name = "songTopPanel";
+            songTopPanel.Size = new Size(96, 100);
+            songTopPanel.TabIndex = 0;
+            // 
+            // songTitle
+            // 
+            songTitle.Location = new Point(0, 0);
+            songTitle.Name = "songTitle";
+            songTitle.Size = new Size(150, 150);
+            songTitle.TabIndex = 2;
+            // 
             // AlbumList
             // 
             AlbumList.Location = new Point(0, 100);
@@ -268,7 +282,6 @@ namespace MusicBox
             // 
             // LeftDownAlbumBox
             // 
-            LeftDownAlbumBox.Image = (Image)resources.GetObject("LeftDownAlbumBox.Image");
             LeftDownAlbumBox.Location = new Point(12, 695);
             LeftDownAlbumBox.Name = "LeftDownAlbumBox";
             LeftDownAlbumBox.Size = new Size(60, 60);

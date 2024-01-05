@@ -7,10 +7,10 @@ using MusicBox.Core.Entity;
 
 namespace MusicBox.Core.PlayBack
 {
-    internal class QueuePlayList
+    public class QueuePlayList
     {
-        private List<Song> songs;
-        private Random random;
+        public List<Song> songs;
+        public Random random;
 
         public QueuePlayList()
         {

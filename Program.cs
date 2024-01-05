@@ -2,6 +2,7 @@
 using MusicBox.Core.PlayBack;
 using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI;
+using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using System.Diagnostics;
 using Un4seen.Bass; //添加引用
@@ -27,7 +28,10 @@ namespace MusicBox
         public static PictureBox PlayingSongAlbumPicture;
 
         public static PlayButton PlaySongButton;
+
         public static PlayButton PlayButton;
+
+        public static SongTopPanel AblumPlayingSongTopPanel;
 
         [STAThread]
         static void Main()
@@ -35,7 +39,7 @@ namespace MusicBox
             ApplicationConfiguration.Initialize();
             musicPlayer.PlayInRandom();
             DefaultMusicBox = new();
-            Application.Run(DefaultMusicBox);
+            Application.Run(new Login());
             musicPlayer.Dispose();
         }
     }

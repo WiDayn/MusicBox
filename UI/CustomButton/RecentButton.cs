@@ -9,12 +9,14 @@ namespace MusicBox.UI.Button
         private CircularPictureBox pictureBox;
         private Label Title;
         private Label Description;
+        // type: Like,Album,Artist
+        public String Type {  get; set; }
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
         public FavoriteResponse favoriteResponse;
 
-        public RecentButton()
+        public RecentButton(string type)
         {
             // 设置控件的初始大小
             Size = new Size(300, 100);
@@ -55,12 +57,13 @@ namespace MusicBox.UI.Button
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
             this.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
-            this.Load += new EventHandler(RecentButton_Load);
+            if(type == "Like") this.Load += new EventHandler(RecentButton_Load);
         }
 
         private async void RecentButton_Load(object sender, EventArgs e)
         {
             favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
+            DescriptionText = $"歌单 • 已喜欢{favoriteResponse.Data.Count}首歌";
         }
 
         private async void RecentButton_MouseClick(object sender, MouseEventArgs e)
@@ -68,13 +71,19 @@ namespace MusicBox.UI.Button
             // TODO: 更新RightTabControl.(0)里的内容
             Program.DefaultAlbumList.Panel.Controls.Clear();
             int i = 1;
-            foreach (var song in favoriteResponse.Data)
+
+            if(Type == "Like")
             {
-                // 专辑封面的位置是固定的
-                Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
-                    , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                Program.AblumPlayingSongTopPanel.SetSongTopFromIMG(Properties.Resources.MyLove, "歌单", "已点赞的歌", UserAPI.userData.Username + " • " + favoriteResponse.Data.Count.ToString() + "首歌曲");
+
+                foreach (var song in favoriteResponse.Data)
+                {
+                    // 专辑封面的位置是固定的
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
+                        , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                }
+                Program.DefaultRightTabControl.SwitchToPanel(0);
             }
-            Program.DefaultRightTabControl.SwitchToPanel(0);
             ButtonClick?.Invoke(this, EventArgs.Empty);
         }
         private void RecentButton_MouseEnter(object sender, EventArgs e)
