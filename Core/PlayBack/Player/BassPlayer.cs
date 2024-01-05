@@ -33,10 +33,11 @@ namespace MusicBox.Core.PlayBack.Player
                 Bass.BASS_StreamFree(_stream);
 
             // 检查 source 是文件路径还是 URL
-            if (Uri.IsWellFormedUriString(source, UriKind.Absolute))
+            if (source.StartsWith("http"))
             {
                 // 从 URL 创建音频流，但不使用 BASS_STREAM_BLOCK
-                _stream = Bass.BASS_StreamCreateURL(UrlConverter.EncodeUrl(source), 0, BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
+                string encodedUrl = UrlConverter.EncodeUrl(source);
+                _stream = Bass.BASS_StreamCreateURL(encodedUrl, 0, BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
             }
             else
             {
