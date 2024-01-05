@@ -2,6 +2,7 @@
 using MusicBox.Core.PlayBack;
 using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI;
+using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using System.Diagnostics;
 using Un4seen.Bass; //添加引用

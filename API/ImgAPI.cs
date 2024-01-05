@@ -15,9 +15,12 @@ namespace MusicBox.API
             var response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
-                using (var stream = await response.Content.ReadAsStreamAsync())
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
-                    return Image.FromStream(stream);
+                    var memoryStream = new MemoryStream();
+                    await responseStream.CopyToAsync(memoryStream);
+                    memoryStream.Position = 0; // 将流的位置重置为开始处
+                    return Image.FromStream(memoryStream);
                 }
             }
             else

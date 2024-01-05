@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MusicBox.API;
 using MusicBox.Core.Entity;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
@@ -13,8 +14,8 @@ namespace MusicBox.Core.PlayBack.Player
 {
     public class MusicPlayer
     {
-        private QueuePlayList MusicPlayList;
-        private QueuePlayList MusicPlayedList;
+        public QueuePlayList MusicPlayList;
+        public QueuePlayList MusicPlayedList;
         private BassPlayer bassPlayer;
 
         public MusicPlayer() 
@@ -36,31 +37,44 @@ namespace MusicBox.Core.PlayBack.Player
 
         public void PlayInOrder()
         {
-            IEnumerator<Song> songList = MusicPlayList.PlayInOrder().GetEnumerator();
-            if (songList.MoveNext())
+            List<Song> songList = MusicPlayList.songs;
+            int nowPlaying = 0;
+            if (nowPlaying < songList.Count)
             {
-                Debug.WriteLine($"Playing: {songList.Current.Title} by ArtistID: {songList.Current.ArtistID} From AlbumID: {songList.Current.AlbumID}");
-                bassPlayer.LoadAudio(songList.Current.FilePath);
-                UpdatePlayingUI(songList.Current);
+                Debug.WriteLine($"Playing: {songList[nowPlaying].Title} by ArtistID: {songList[nowPlaying].ArtistID} From AlbumID: {songList[nowPlaying].AlbumID}");
+                bassPlayer.LoadAudio(songList[nowPlaying].FilePath);
+                UpdatePlayingUI(songList[nowPlaying]);
                 bassPlayer.Play();
                 bassPlayer.TrackEnded += (sender, e) =>
                 {
-                    MusicPlayedList.AddSong(songList.Current);
-                    if (songList.MoveNext())
+                    MusicPlayedList.AddSong(songList[nowPlaying]);
+                    nowPlaying++;
+                    if (nowPlaying < songList.Count)
                     {
-                        bassPlayer.LoadAudio(songList.Current.FilePath);
-                        UpdatePlayingUI(songList.Current);
+                        bassPlayer.LoadAudio(songList[nowPlaying].FilePath);
+                        UpdatePlayingUI(songList[nowPlaying]);
                         bassPlayer.Play();
                     }
                 };
             }
         }
 
-        public async void UpdatePlayingUI(Song song)
+        public void UpdatePlayingUI(Song song)
         {
-            Program.PlayingSongAlbumPicture.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumName + "/cover.jpg");
-            Program.PlayingSongTitleLabel.Text = song.Title;
-            Program.PlayingSongArtistLabel.Text = song.ArtistName;
+            Program.PlayingSongAlbumPicture.Invoke(new MethodInvoker(async () =>
+            {
+                Program.PlayingSongAlbumPicture.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumName + "/cover.jpg");
+            }));
+
+            Program.PlayingSongTitleLabel.Invoke(new MethodInvoker(delegate
+            {
+                Program.PlayingSongTitleLabel.Text = song.Title;
+            }));
+
+            Program.PlayingSongArtistLabel.Invoke(new MethodInvoker(delegate
+            {
+                Program.PlayingSongArtistLabel.Text = song.ArtistName;
+            }));
         }
 
         public float GetVolume()

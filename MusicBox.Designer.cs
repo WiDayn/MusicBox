@@ -1,6 +1,7 @@
 ﻿using MusicBox.Core.Entity;
 using MusicBox.UI;
 using MusicBox.UI.Button;
+using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;

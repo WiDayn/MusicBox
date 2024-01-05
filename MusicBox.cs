@@ -42,7 +42,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
+            String testFilePath = "E:\\cover.jpg";
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
@@ -70,6 +70,8 @@ namespace MusicBox
             Program.PlaySongButton = songPlayButton;
             Program.PlayButton = PlayButton;
         }
+
+
 
         private void StopButton_click(object sender, EventArgs e)
         {
