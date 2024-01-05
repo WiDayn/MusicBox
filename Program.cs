@@ -37,7 +37,6 @@ namespace MusicBox
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            musicPlayer.PlayInRandom();
             DefaultMusicBox = new();
             Application.Run(new Login());
             musicPlayer.Dispose();

@@ -50,6 +50,7 @@ namespace MusicBox
             RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
             RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
             MusicBox_SizeChanged(sender, e);
+            Program.musicPlayer.SetVolume((float)0.5);
             ref_setting();
         }
 
