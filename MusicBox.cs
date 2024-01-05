@@ -127,7 +127,9 @@ namespace MusicBox
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
 
-            songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width/80, MainSplitContainer.Panel2.Height * 9 /40);
+            songTopPanel.Location = new Point(0, 0);
+            songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
+            songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width/80, MainSplitContainer.Panel2.Height * 1 /4);
             songTitle.Location = new Point(0, MainSplitContainer.Panel2.Height * 3 / 10);
             songTitle.Size = new Size(MainSplitContainer.Panel2.Width - (int)(8 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height * 1 / 10);
             AlbumList.Location = new Point(0, MainSplitContainer.Panel2.Height * 4 / 10);

@@ -64,6 +64,7 @@ namespace MusicBox
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
+            songTopPanel = new SongTopPanel();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -202,6 +203,7 @@ namespace MusicBox
             // AlbumPanel
             // 
             AlbumPanel.BackColor = Color.FromArgb(18, 18, 18);
+            AlbumPanel.Controls.Add(songTopPanel);
             AlbumPanel.Controls.Add(songPlayButton);
             AlbumPanel.Controls.Add(songTitle);
             AlbumPanel.Controls.Add(AlbumList);
@@ -319,6 +321,12 @@ namespace MusicBox
             VolumeTrackBar.TabIndex = 10;
             VolumeTrackBar.ScrollChanged += VolumeTrackBar_Scroll;
             // 
+            // songTopPanel
+            // 
+            songTopPanel.Name = "songTopPanel";
+            songTopPanel.Location = new Point(0, 0);
+            songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
+            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -383,5 +391,6 @@ namespace MusicBox
         private Panel AlbumPanel;
         private Panel ArtistPanel;
         private SongTitle songTitle;
+        private SongTopPanel songTopPanel;
     }
 }

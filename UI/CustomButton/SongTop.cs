@@ -10,6 +10,7 @@ namespace MusicBox.UI.Button
     using System;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Windows.Forms;
 
     public class SongTop : UserControl
@@ -17,8 +18,6 @@ namespace MusicBox.UI.Button
         private CircularPictureBox pictureBox;
         private Label Title;
         private Label Description;
-        private bool MouseOn = false;
-        private bool LightOn = false;
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
@@ -59,7 +58,29 @@ namespace MusicBox.UI.Button
             };
             this.Controls.Add(Description);
 
+            // 为用户控件开启双缓冲，减少闪烁
+            this.SetStyle(ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint |
+                          ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
+
             this.SizeChanged += SizeChangedHandler;
+        }
+
+        // 重写绘制背景的方法
+        protected override void OnPaintBackground(PaintEventArgs e)
+        {
+            base.OnPaintBackground(e);
+
+            // 创建渐变画刷
+            using (LinearGradientBrush brush = new LinearGradientBrush(this.ClientRectangle,
+                                                                       Color.White,
+                                                                       Color.FromArgb(18, 18, 18),
+                                                                       LinearGradientMode.Vertical))
+            {
+                // 填充背景
+                e.Graphics.FillRectangle(brush, this.ClientRectangle);
+            }
         }
 
         private void SizeChangedHandler(object sender, EventArgs e)
