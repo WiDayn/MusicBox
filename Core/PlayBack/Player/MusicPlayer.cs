@@ -38,25 +38,29 @@ namespace MusicBox.Core.PlayBack.Player
         public void PlayInOrder()
         {
             List<Song> songList = MusicPlayList.songs;
-            int nowPlaying = 0;
-            if (nowPlaying < songList.Count)
+            if (songList.Count > 0)
             {
-                Debug.WriteLine($"Playing: {songList[nowPlaying].Title} by ArtistID: {songList[nowPlaying].ArtistID} From AlbumID: {songList[nowPlaying].AlbumID}");
-                bassPlayer.LoadAudio(songList[nowPlaying].FilePath);
-                UpdatePlayingUI(songList[nowPlaying]);
+                Debug.WriteLine($"Playing: {songList[0].Title} by ArtistID: {songList[0].ArtistID} From AlbumID: {songList[0].AlbumID}");
+                bassPlayer.LoadAudio(songList[0].FilePath);
+                UpdatePlayingUI(songList[0]);
                 bassPlayer.Play();
                 bassPlayer.TrackEnded += (sender, e) =>
                 {
-                    MusicPlayedList.AddSong(songList[nowPlaying]);
-                    nowPlaying++;
-                    if (nowPlaying < songList.Count)
+                    MusicPlayedList.AddSong(songList[0]);
+                    songList.RemoveAt(0);
+                    if (songList.Count > 0)
                     {
-                        bassPlayer.LoadAudio(songList[nowPlaying].FilePath);
-                        UpdatePlayingUI(songList[nowPlaying]);
+                        bassPlayer.LoadAudio(songList[0].FilePath);
+                        UpdatePlayingUI(songList[0]);
                         bassPlayer.Play();
                     }
                 };
             }
+        }
+
+        public void ClearPlayList()
+        {
+            MusicPlayList.songs.Clear();
         }
 
         public void UpdatePlayingUI(Song song)

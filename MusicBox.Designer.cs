@@ -41,7 +41,6 @@ namespace MusicBox
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MusicBox));
             songPlayButton = new PlayButton();
             PlayButton = new PlayButton();
             EndTimeLabel = new Label();
@@ -53,6 +52,7 @@ namespace MusicBox
             HomeButton = new HomeButton();
             ArtistPanel = new Panel();
             AlbumPanel = new Panel();
+            songTopPanel = new SongTopPanel();
             songTitle = new SongTitle();
             AlbumList = new RecentList();
             RightTabControl = new BorderlessTabControl();
@@ -65,18 +65,32 @@ namespace MusicBox
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
-            songTopPanel = new SongTopPanel();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
             MainSplitContainer.SuspendLayout();
             LeftDownPanel.SuspendLayout();
             LeftTopPanel.SuspendLayout();
+            ArtistPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
             SuspendLayout();
+            // 
+            // songPlayButton
+            // 
+            songPlayButton.BackColor = Color.FromArgb(18, 18, 18);
+            songPlayButton.FlatStyle = FlatStyle.Flat;
+            songPlayButton.Location = new Point(485, 718);
+            songPlayButton.Margin = new Padding(2);
+            songPlayButton.Name = "songPlayButton";
+            songPlayButton.Size = new Size(50, 50);
+            songPlayButton.TabIndex = 1;
+            songPlayButton.Text = "Start";
+            songPlayButton.UseVisualStyleBackColor = true;
+            songPlayButton.Click += SongStartButton_Click;
             // 
             // PlayButton
             // 
@@ -90,20 +104,6 @@ namespace MusicBox
             PlayButton.Text = "Start";
             PlayButton.UseVisualStyleBackColor = true;
             PlayButton.Click += StartButton_Click;
-            // 
-            // songPlayButton
-            // 
-            songPlayButton.BackColor = Color.FromArgb(18, 18, 18);
-            songPlayButton.FlatStyle = FlatStyle.Flat;
-            songPlayButton.Location = new Point(485, 718);
-            songPlayButton.Margin = new Padding(2);
-            songPlayButton.Name = "songPlayButton";
-            songPlayButton.Size = new Size(50,50);
-            songPlayButton.TabIndex = 1;
-            songPlayButton.Text = "Start";
-            songPlayButton.UseVisualStyleBackColor = true;
-            songPlayButton.Click += SongStartButton_Click;
-
             // 
             // EndTimeLabel
             // 
@@ -196,7 +196,8 @@ namespace MusicBox
             // ArtistPanel
             // 
             ArtistPanel.BackColor = Color.FromArgb(18, 18, 18);
-            ArtistPanel.Location = new Point(0, 0);
+            ArtistPanel.Controls.Add(label1);
+            ArtistPanel.Location = new Point(114, 158);
             ArtistPanel.Name = "ArtistPanel";
             ArtistPanel.Size = new Size(200, 100);
             ArtistPanel.TabIndex = 11;
@@ -213,6 +214,20 @@ namespace MusicBox
             AlbumPanel.Name = "AlbumPanel";
             AlbumPanel.Size = new Size(96, 100);
             AlbumPanel.TabIndex = 2;
+            // 
+            // songTopPanel
+            // 
+            songTopPanel.Location = new Point(0, 0);
+            songTopPanel.Name = "songTopPanel";
+            songTopPanel.Size = new Size(96, 100);
+            songTopPanel.TabIndex = 0;
+            // 
+            // songTitle
+            // 
+            songTitle.Location = new Point(0, 0);
+            songTitle.Name = "songTitle";
+            songTitle.Size = new Size(150, 150);
+            songTitle.TabIndex = 2;
             // 
             // AlbumList
             // 
@@ -258,7 +273,6 @@ namespace MusicBox
             // 
             // LeftDownAlbumBox
             // 
-            LeftDownAlbumBox.Image = (Image)resources.GetObject("LeftDownAlbumBox.Image");
             LeftDownAlbumBox.Location = new Point(12, 695);
             LeftDownAlbumBox.Name = "LeftDownAlbumBox";
             LeftDownAlbumBox.Size = new Size(60, 60);
@@ -322,11 +336,16 @@ namespace MusicBox
             VolumeTrackBar.TabIndex = 10;
             VolumeTrackBar.ScrollChanged += VolumeTrackBar_Scroll;
             // 
-            // songTopPanel
+            // label1
             // 
-            songTopPanel.Name = "songTopPanel";
-            songTopPanel.Location = new Point(0, 0);
-            songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(21, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(51, 19);
+            label1.TabIndex = 11;
+            label1.Text = "label1";
             // 
             // MusicBox
             // 
@@ -358,6 +377,8 @@ namespace MusicBox
             MainSplitContainer.ResumeLayout(false);
             LeftDownPanel.ResumeLayout(false);
             LeftTopPanel.ResumeLayout(false);
+            ArtistPanel.ResumeLayout(false);
+            ArtistPanel.PerformLayout();
             AlbumPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
@@ -393,5 +414,6 @@ namespace MusicBox
         private Panel ArtistPanel;
         private SongTitle songTitle;
         private SongTopPanel songTopPanel;
+        private Label label1;
     }
 }
