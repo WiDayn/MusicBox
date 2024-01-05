@@ -223,7 +223,7 @@ namespace MusicBox.UI.Button
         private void SizeChangedHandler(object sender, EventArgs e)
         {
             LabelAlbum.Location = new Point(Width / 2, (int)(Height * (5 / 14.0)));
-            pictureBoxLove.Location = new Point(Width * 13 / 18, (int)(Height * (5 / 14.0)));
+            pictureBoxLove.Location = new Point(Width * 13 / 18, (int)(Height * (2 / 7.0)));
             LabelDuration.Location = new Point(Width * 8 / 9, (int)(Height * (5 / 14.0)));
         }
 
