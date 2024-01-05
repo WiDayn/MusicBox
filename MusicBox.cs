@@ -47,7 +47,7 @@ namespace MusicBox
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.SwitchToPanel(2);
-            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单 • 1首歌曲");
+            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
             RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
             MusicBox_SizeChanged(sender, e);
             ref_setting();

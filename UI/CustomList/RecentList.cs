@@ -77,28 +77,27 @@ namespace MusicBox.UI.List
         // 方法：添加 RecentButton
         public void AddRecentButton(string imgPath, string type, string titleText, string descriptionText)
         {
-            var recentButton = new RecentButton
+            var recentButton = new RecentButton(type)
             {
                 Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
                 Height = 120,
             };
             recentButton.Image = Image.FromFile(imgPath);
             recentButton.TitleText = titleText;
-            recentButton.Type = type;
             recentButton.DescriptionText = descriptionText;
             Panel.Controls.Add(recentButton);
         }
 
         public void AddRecentButtonFromIMG(Image image, string type, string titleText, string descriptionText)
         {
-            var recentButton = new RecentButton
+            var recentButton = new RecentButton(type)
             {
                 Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
                 Height = 120,
+                Type = type
             };
             recentButton.Image = image;
             recentButton.TitleText = titleText;
-            recentButton.Type = type;
             recentButton.DescriptionText = descriptionText;
             Panel.Controls.Add(recentButton);
         }

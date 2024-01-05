@@ -16,7 +16,7 @@ namespace MusicBox.UI.Button
         public event EventHandler ButtonClick;
         public FavoriteResponse favoriteResponse;
 
-        public RecentButton()
+        public RecentButton(string type)
         {
             // 设置控件的初始大小
             Size = new Size(300, 100);
@@ -57,12 +57,13 @@ namespace MusicBox.UI.Button
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
             this.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
-            this.Load += new EventHandler(RecentButton_Load);
+            if(type == "Like") this.Load += new EventHandler(RecentButton_Load);
         }
 
         private async void RecentButton_Load(object sender, EventArgs e)
         {
             favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
+            DescriptionText = $"歌单 • 已喜欢{favoriteResponse.Data.Count}首歌";
         }
 
         private async void RecentButton_MouseClick(object sender, MouseEventArgs e)
