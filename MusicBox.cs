@@ -42,7 +42,14 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "E:\\cover.jpg";
+            String testFilePath = "D:\\QQ_Files\\1503728650\\FileRecv\\cover.jpg";
+
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
@@ -79,10 +86,14 @@ namespace MusicBox
             if (PlayButton.isPlaying)
             {
                 Program.musicPlayer.Start();
+                if (songPlayButton.isPlaying)
+                    songPlayButton.ToggleShape();
             }
             else
             {
                 Program.musicPlayer.Stop();
+                if (!songPlayButton.isPlaying)
+                    songPlayButton.ToggleShape();
             }
 
             PlayButton.ToggleShape();
