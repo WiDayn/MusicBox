@@ -57,7 +57,8 @@ namespace MusicBox.UI.Button
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
             this.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
-            if(type == "Like") this.Load += new EventHandler(RecentButton_Load);
+            Type = type;
+            if(type == "Like") Load += new EventHandler(RecentButton_Load);
         }
 
         private async void RecentButton_Load(object sender, EventArgs e)
