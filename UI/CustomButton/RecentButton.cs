@@ -1,5 +1,6 @@
 ﻿using global::MusicBox.API;
 using global::MusicBox.UI.CustomPictureBox;
+using MusicBox.Core.Dtos;
 
 namespace MusicBox.UI.Button
 {
@@ -11,6 +12,8 @@ namespace MusicBox.UI.Button
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
+        public FavoriteResponse favoriteResponse;
+
         public RecentButton()
         {
             // 设置控件的初始大小
@@ -51,13 +54,18 @@ namespace MusicBox.UI.Button
             this.SizeChanged += SizeChangedHandler;
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
-            this.MouseClick += new MouseEventHandler(ButtonLabel_MouseClick);
+            this.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
+            this.Load += new EventHandler(RecentButton_Load);
         }
-        private async void ButtonLabel_MouseClick(object sender, MouseEventArgs e)
+
+        private async void RecentButton_Load(object sender, EventArgs e)
         {
-            // TODO: 查询对应的内容 + 更新RightTabControl.(0)里的内容
-            var favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
-            // ((BorderlessTabControl)Program.DefaultMusicBox.Controls.Find("RightTabControl", true)[0]).panels[0].Controls.Find("AlbumList", true)
+            favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
+        }
+
+        private async void RecentButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            // TODO: 更新RightTabControl.(0)里的内容
             Program.DefaultAlbumList.Panel.Controls.Clear();
             int i = 1;
             foreach (var song in favoriteResponse.Data)

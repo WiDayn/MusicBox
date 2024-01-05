@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BackEnd_URL" xml:space="preserve">
-    <value>http://localhost:5101</value>
+    <value>http://192.168.50.173:5101</value>
     <comment>后端地址</comment>
   </data>
   <data name="External_URL" xml:space="preserve">
-    <value>http://localhost:5101/External</value>
+    <value>http://192.168.50.173:5101/External</value>
     <comment>静态资源地址</comment>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

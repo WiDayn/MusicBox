@@ -64,7 +64,5 @@ namespace MusicBox.UI
                 panels[panelIndex].Visible = true;
             }
         }
-
-        // 更多方法和属性可以根据需要添加
     }
 }
