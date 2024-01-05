@@ -46,7 +46,7 @@ namespace MusicBox
             MusicBox_SizeChanged(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
-            RightTabControl.SwitchToPanel(2);
+            RightTabControl.SwitchToPanel(1);
             songTopPanel.AddSongTop(testFilePath, "艺人", "林家谦", "每月有2名听众");
             RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "已经点赞的歌曲", "歌单 • 1首歌曲");
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
@@ -55,6 +55,13 @@ namespace MusicBox
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
             RecentList.AddRecentButton(testFilePath, "林家谦", "艺人");
             RecentList.AddRecentButton(testFilePath, "测试", "艺人");
+
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
+
             MusicBox_SizeChanged(sender, e);
             ref_setting();
         }
@@ -82,10 +89,14 @@ namespace MusicBox
             if (PlayButton.isPlaying)
             {
                 Program.musicPlayer.Start();
+                if (songPlayButton.isPlaying)
+                    songPlayButton.ToggleShape();
             }
             else
             {
                 Program.musicPlayer.Stop();
+                if (!songPlayButton.isPlaying)
+                    songPlayButton.ToggleShape();
             }
 
             PlayButton.ToggleShape();
@@ -133,6 +144,7 @@ namespace MusicBox
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
 
+            homePlayList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             songTopPanel.Location = new Point(0, 0);
             songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
             songPlayButton.Location = new Point(MainSplitContainer.Panel2.Width/80, MainSplitContainer.Panel2.Height * 1 /4);
@@ -189,11 +201,12 @@ namespace MusicBox
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
-            RightTabControl.SwitchToPanel(0);
+            RightTabControl.SwitchToPanel(1);
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            
             RightTabControl.SwitchToPanel(1);
         }
     }

@@ -65,6 +65,7 @@ namespace MusicBox
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
             songTopPanel = new SongTopPanel();
+            homePlayList = new HomePlayList();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -72,6 +73,7 @@ namespace MusicBox
             LeftDownPanel.SuspendLayout();
             LeftTopPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
+            ArtistPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
@@ -156,6 +158,13 @@ namespace MusicBox
             RecentList.Size = new Size(314, 66);
             RecentList.TabIndex = 0;
             // 
+            // homePlayList
+            // 
+            homePlayList.Location = new Point(0,0);
+            homePlayList.Name = "homePlayList";
+            homePlayList.Size = new Size(314, 66);
+            homePlayList.TabIndex = 0;
+            // 
             // LeftTopPanel
             // 
             LeftTopPanel.BackColor = Color.FromArgb(18, 18, 18);
@@ -195,10 +204,12 @@ namespace MusicBox
             // ArtistPanel
             // 
             ArtistPanel.BackColor = Color.FromArgb(18, 18, 18);
+            ArtistPanel.Controls.Add(homePlayList);
             ArtistPanel.Location = new Point(0, 0);
+            ArtistPanel.Margin = new Padding(0);
             ArtistPanel.Name = "ArtistPanel";
             ArtistPanel.Size = new Size(200, 100);
-            ArtistPanel.TabIndex = 11;
+            ArtistPanel.TabIndex = 1;
             // 
             // AlbumPanel
             // 
@@ -392,5 +403,6 @@ namespace MusicBox
         private Panel ArtistPanel;
         private SongTitle songTitle;
         private SongTopPanel songTopPanel;
+        private HomePlayList homePlayList;
     }
 }

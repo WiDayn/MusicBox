@@ -40,22 +40,7 @@ namespace MusicBox.UI.List
             }
         }
 
-        public void Sort()
-        {
-            // 使用 LINQ 对按钮进行排序
-            var sortedButtons = Panel.Controls.OfType<RecentButton>()
-                                      .OrderBy(button => button.TitleText) // 这里以 Text 属性为例进行排序
-                                      .ToList();
 
-            // 清除 FlowLayoutPanel 中的所有控件
-            Panel.Controls.Clear();
-
-            // 将排序后的按钮重新添加到 FlowLayoutPanel
-            foreach (var button in sortedButtons)
-            {
-                Panel.Controls.Add(button);
-            }
-        }
 
         private void SizeChangedHandler(object sender, EventArgs e)
         {
