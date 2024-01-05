@@ -23,7 +23,6 @@ namespace MusicBox.UI.Button
 
         private void InitializeControls()
         {
-
             // 序号标签
             labelIndex = new Label
             {
@@ -90,11 +89,11 @@ namespace MusicBox.UI.Button
 
             this.SizeChanged += SizeChangedHandler;
 
-            this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
-            this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
+            this.MouseEnter += new EventHandler(SongButton_MouseEnter);
+            this.MouseLeave += new EventHandler(SongButton_MouseLeave);
         }
 
-        private void RecentButton_MouseEnter(object sender, EventArgs e)
+        private void SongButton_MouseEnter(object sender, EventArgs e)
         {
             // 鼠标停留在TrackBar上时的逻辑
             MouseOn = true;
@@ -103,7 +102,7 @@ namespace MusicBox.UI.Button
         }
 
         // 当鼠标离开TrackBar时触发的方法
-        private void RecentButton_MouseLeave(object sender, EventArgs e)
+        private void SongButton_MouseLeave(object sender, EventArgs e)
         {
             // 鼠标离开TrackBar时的逻辑
             MouseOn = false;
