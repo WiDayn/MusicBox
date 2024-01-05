@@ -78,6 +78,10 @@ namespace MusicBox
             //songTopPanel.Anchor = anchors;
             //songTitle.Anchor = anchors;
             //AlbumList.Anchor = anchors;
+            ArtistPanel.Dock = DockStyle.Fill;
+            AlbumPanel.Dock = DockStyle.Fill;
+            AlbumList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RightTabControl.Dock = DockStyle.Fill;
 
             // 设置主窗体上的控件锚点
             VolumeTrackBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
