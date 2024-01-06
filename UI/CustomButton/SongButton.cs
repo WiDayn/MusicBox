@@ -113,6 +113,11 @@ namespace MusicBox.UI.Button
             this.MouseEnter += new EventHandler(SongButton_MouseEnter);
             this.MouseLeave += new EventHandler(SongButton_MouseLeave);
             this.MouseDoubleClick += new MouseEventHandler(SongButton_DoubleClick);
+            labelIndex.DoubleClick += new EventHandler(SongButton_DoubleClick);
+            Title.DoubleClick += new EventHandler(SongButton_DoubleClick);
+            ArtistName.DoubleClick += new EventHandler(SongButton_DoubleClick);
+            LabelAlbum.DoubleClick += new EventHandler(SongButton_DoubleClick);
+            LabelDuration.DoubleClick += new EventHandler(SongButton_DoubleClick);
         }
 
         private void PictureBoxLove_Paint(object sender, PaintEventArgs e)
