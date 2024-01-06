@@ -50,10 +50,16 @@ namespace MusicBox
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
 
+            SingerList.SetSongTopFromIMG(testFilePath,"艺人", "林家谦", "en");
+            SingerList.AddTrackData("1",testFilePath, "林家谦", "艺人","en","3:40");
+            SingerList.AddTrackData("1", testFilePath, "林家谦", "艺人", "en", "3:40");
+            SingerList.AddTrackData("1", testFilePath, "林家谦", "艺人", "en", "3:40");
+
             MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
-            RightTabControl.SwitchToPanel(2);
+            RightTabControl.AddPanel(SingerPanel);
+            RightTabControl.SwitchToPanel(1);
             RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
             RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
             MusicBoxLocationSet(sender, e);
@@ -169,6 +175,10 @@ namespace MusicBox
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
 
+            SingerPanel.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
+
+            SingerList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
+
             homePlayList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             songTopPanel.Location = new Point(0, 0);
             songTopPanel.Size = new Size(MainSplitContainer.Panel2.Width, MainSplitContainer.Panel2.Height * 1 / 4);
@@ -239,7 +249,7 @@ namespace MusicBox
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            RightTabControl.SwitchToPanel(1);
+            RightTabControl.SwitchToPanel(2);
         }
 
 
