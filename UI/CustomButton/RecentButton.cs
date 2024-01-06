@@ -3,6 +3,7 @@ using global::MusicBox.UI.CustomPictureBox;
 using MusicBox.Core.Dtos;
 using MusicBox.Core.Entity;
 using static MusicBox.Core.Dtos.Album;
+using static MusicBox.Core.Dtos.Artist;
 
 namespace MusicBox.UI.Button
 {
@@ -19,6 +20,7 @@ namespace MusicBox.UI.Button
         public event EventHandler ButtonClick;
 
         public AlbumInfoResponse AlbumInfoResponse;
+        public ArtistInfoResponse ArtistInfoResponse;
 
         public RecentButton(string type)
         {
@@ -76,12 +78,12 @@ namespace MusicBox.UI.Button
                 Title.Text = AlbumInfoResponse.Data.ArtistName;
                 Description.Text = "专辑";
             }
-            if (Type == "PlayList")
+            if (Type == "Artist")
             {
-                AlbumInfoResponse = await AlbumAPI.GetAlbumInfoAsync(ID);
-                pictureBox.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg");
-                Title.Text = AlbumInfoResponse.Data.ArtistName;
-                Description.Text = "专辑";
+                ArtistInfoResponse = await ArtistAPI.GetArtistInfoAsync(ID);
+                pictureBox.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Artist/" + ArtistInfoResponse.Data.Artist.Name + ".jpg");
+                Title.Text = ArtistInfoResponse.Data.Artist.Name;
+                Description.Text = "歌手";
             }
             if (Type == "Like") DescriptionText = $"歌单 • 已喜欢{UserAPI.favoriteResponse.Data.SongInfos.Count}首歌";
             base.OnLoad(e);
@@ -91,6 +93,8 @@ namespace MusicBox.UI.Button
         {
             // TODO: 更新RightTabControl.(0)里的内容
             Program.DefaultAlbumList.Panel.Controls.Clear();
+            Program.DefaultSingerList.SongPanel.Panel.Controls.Clear();
+            Program.DefaultSingerList.AlbumPanel.AlbumPanel.Controls.Clear();
             int i = 1;
             if (Type == "Like")
             {
@@ -115,6 +119,30 @@ namespace MusicBox.UI.Button
                         , song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
                 }
                 Program.DefaultRightTabControl.SwitchToPanel(0);
+            }
+            if (Type == "Artist")
+            {
+                Program.DefaultSingerList.SetSongTop(Properties.Resources.External_URL + "/Artist/" + ArtistInfoResponse.Data.Artist.Name + ".jpg", "歌手", ArtistInfoResponse.Data.Artist.Name, ArtistInfoResponse.Data.Artist.Name + " • " + ArtistInfoResponse.Data.Albums.Count.ToString() + "张专辑");
+
+                foreach (var song in ArtistInfoResponse.Data.TopSongs)
+                {
+                    // 专辑封面的位置是固定的
+                    foreach(var album in ArtistInfoResponse.Data.Albums)
+                    {
+                        if(song.AlbumID == album.AlbumID)
+                        {
+                            Program.DefaultSingerList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg"
+                        , song.Title, ArtistInfoResponse.Data.Artist.Name, album.Title, song.Duration.ToString());
+                        }
+                    }
+                }
+                Program.DefaultSingerList.SongPanel.Height = 70 * ArtistInfoResponse.Data.TopSongs.Count();
+                foreach (var album in ArtistInfoResponse.Data.Albums)
+                {
+                    Program.DefaultSingerList.AddHomePlayListButton(Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg", album.Title, ArtistInfoResponse.Data.Artist.Name);
+                }
+                Program.DefaultSingerList.AlbumPanel.Height = 260 * ArtistInfoResponse.Data.Albums.Count();
+                Program.DefaultRightTabControl.SwitchToPanel(2);
             }
             ButtonClick?.Invoke(this, EventArgs.Empty);
         }

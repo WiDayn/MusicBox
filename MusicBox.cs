@@ -51,14 +51,10 @@ namespace MusicBox
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
 
-            SingerList.SetSongTopFromIMG(testFilePath,"艺人", "林家谦", "en");
-            SingerList.AddTrackData("1",testFilePath, "林家谦", "艺人","en","3:40");
-            SingerList.AddTrackData("1", testFilePath, "林家谦", "艺人", "en", "3:40");
-            SingerList.AddTrackData("1", testFilePath, "林家谦", "艺人", "en", "3:40");
-
             MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
+            RightTabControl.AddPanel(SingerPanel);
             RightTabControl.SwitchToPanel(2);
             MusicBoxLocationSet(sender, e);
             Program.musicPlayer.SetVolume((float)0.5);
@@ -73,10 +69,10 @@ namespace MusicBox
             foreach(var item in UserAPI.favoriteResponse.Data.AlbumInfos) {
                 RecentList.AddRecentButtonFromAblumID(item.ID);
             }
-            //foreach (var item in UserAPI.favoriteResponse.Data.AlbumInfos)
-            //{
-            //    RecentList.AddRecentButtonFromArtistID(item.ID);
-            //}
+            foreach (var item in UserAPI.favoriteResponse.Data.ArtistInfos)
+            {
+                RecentList.AddRecentButtonFromArtistID(item.ID);
+            }
             //foreach (var item in UserAPI.favoriteResponse.Data.PlayListInfos)
             //{
             //    RecentList.AddRecentButtonFromPlayListID(item.ID);
@@ -85,9 +81,6 @@ namespace MusicBox
 
         private void MusicBoxAnchorSet()
         {
-            // 设置Top, Left 和 Right 锚点
-            AnchorStyles anchors = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-
             // 设置 MainSplitContainer 内的控件锚点
             //LeftTopPanel.Anchor = anchors;
             //LeftDownPanel.Anchor = anchors;
@@ -101,6 +94,7 @@ namespace MusicBox
             //AlbumList.Anchor = anchors;
             ArtistPanel.Dock = DockStyle.Fill;
             AlbumPanel.Dock = DockStyle.Fill;
+            SingerPanel.Dock = DockStyle.Fill;
             AlbumList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             RightTabControl.Dock = DockStyle.Fill;
 
@@ -124,6 +118,7 @@ namespace MusicBox
             Program.PlaySongButton = songPlayButton;
             Program.PlayButton = PlayButton;
             Program.AblumPlayingSongTopPanel = songTopPanel;
+            Program.DefaultSingerList = SingerList;
         }
 
 
@@ -156,7 +151,17 @@ namespace MusicBox
         {
             if (songPlayButton.isPlaying)
             {
-                Program.musicPlayer.Start();
+                Program.musicPlayer.ClearPlayList();
+                for (int i = Program.DefaultAlbumList.Panel.Controls.Count - 1; i >= 0; i--)
+                {
+                    if (Program.DefaultAlbumList.Panel.Controls[i].GetType() == typeof(SongButton))
+                    {
+                        SongButton song = (SongButton)Program.DefaultAlbumList.Panel.Controls[i];
+                        Program.musicPlayer.AddSongToListFront(new Core.Entity.Song(song.SongID, song.TitleText, song.ArtistID, song.ArtistNameText, song.AlbumID, song.AlbumText,
+                            Properties.Resources.External_URL + "/Album/" + song.ArtistNameText + "-" + song.AlbumText + "/" + song.TitleText + ".flac"));
+                    }
+                }
+                Program.musicPlayer.PlayInOrder();
                 if (PlayButton.isPlaying)
                     PlayButton.ToggleShape();
             }
@@ -193,10 +198,6 @@ namespace MusicBox
             // 更新SearchButton的大小，使其与MainSplitContainer.Panel1的宽度相同，高度为35
             SearchButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
             HomeButton.Size = new Size(MainSplitContainer.Panel1.Width, (int)(35 * GetScreenScalingFactor()));
-
-            SingerPanel.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
-
-            SingerList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
 
             homePlayList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
             songTopPanel.Location = new Point(0, 0);

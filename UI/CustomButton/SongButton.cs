@@ -11,9 +11,9 @@ namespace MusicBox.UI.Button
 {
     public class SongButton : UserControl
     {
-        private int SongID { get; set; }
-        private int ArtistID { get; set; }
-        private int AlbumID { get; set; }
+        public int SongID { get; set; }
+        public int ArtistID { get; set; }
+        public int AlbumID { get; set; }
         private Label labelIndex;
         private PictureBox pictureBox;
         private Label Title;

@@ -42,14 +42,21 @@ namespace MusicBox.UI.List
 
 
         // 方法：添加 HomePlayListButton
-        public void AddHomePlayListButton(string imgPath, string titleText, string descriptionText)
+        public async void AddHomePlayListButton(string imgPath, string titleText, string descriptionText)
         {
             var homePlayListButton = new HomePlayListButton
             {
                 Width = (int)(200 / GetScreenScalingFactor()), // 适应每行四个按钮的宽度
                 Height = (int)(250 / GetScreenScalingFactor()),
             };
-            homePlayListButton.Image = Image.FromFile(imgPath);
+            if (imgPath.StartsWith("http"))
+            {
+                homePlayListButton.Image = await ImgAPI.LoadImageFromUrlAsync(imgPath);
+            } else
+            {
+                homePlayListButton.Image = Image.FromFile(imgPath);
+            }
+            
             homePlayListButton.TitleText = titleText;
             homePlayListButton.DescriptionText = descriptionText;
             AlbumPanel.Controls.Add(homePlayListButton);

@@ -33,6 +33,10 @@ namespace MusicBox
 
         public static SongTopPanel AblumPlayingSongTopPanel;
 
+        public static SingerList DefaultSingerList;
+
+
+
         [STAThread]
         static void Main()
         {

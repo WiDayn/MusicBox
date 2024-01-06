@@ -119,7 +119,7 @@ namespace MusicBox.UI.List
             musicTrackControl.Index = index;
             musicTrackControl.TitleText = titleText;
             musicTrackControl.ArtistNameText = artistNameText;
-            if (isHTTP)
+            if (imgPath.StartsWith("http"))
             {
                 musicTrackControl.Image = await ImgAPI.LoadImageFromUrlAsync(imgPath);
             }
