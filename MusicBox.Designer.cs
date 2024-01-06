@@ -53,6 +53,7 @@ namespace MusicBox
             ArtistPanel = new Panel();
             homePlayList = new HomePlayList();
             AlbumPanel = new Panel();
+            SingerPanel = new Panel();
             songTopPanel = new SongTopPanel();
             songTitle = new SongTitle();
             AlbumList = new RecentList();
@@ -67,6 +68,7 @@ namespace MusicBox
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
             volumeButton = new VolumeButton();
+            SingerList = new SingerList();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -75,6 +77,7 @@ namespace MusicBox
             LeftTopPanel.SuspendLayout();
             ArtistPanel.SuspendLayout();
             AlbumPanel.SuspendLayout();
+            SingerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).BeginInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).BeginInit();
@@ -135,6 +138,7 @@ namespace MusicBox
             MainSplitContainer.Panel2.BackColor = Color.Black;
             MainSplitContainer.Panel2.Controls.Add(ArtistPanel);
             MainSplitContainer.Panel2.Controls.Add(AlbumPanel);
+            MainSplitContainer.Panel2.Controls.Add(SingerPanel);
             MainSplitContainer.Panel2.Controls.Add(RightTabControl);
             MainSplitContainer.Size = new Size(990, 686);
             MainSplitContainer.SplitterDistance = 330;
@@ -212,6 +216,13 @@ namespace MusicBox
             homePlayList.Size = new Size(314, 66);
             homePlayList.TabIndex = 0;
             // 
+            // SingerList
+            // 
+            SingerList.Location = new Point(0, 0);
+            SingerList.Name = "SingerList";
+            SingerList.Size = new Size(MainSplitContainer.Panel2.Width - (int)(5 * GetScreenScalingFactor()), MainSplitContainer.Panel2.Height);
+            SingerList.TabIndex = 0;
+            // 
             // AlbumPanel
             // 
             AlbumPanel.BackColor = Color.FromArgb(18, 18, 18);
@@ -224,6 +235,16 @@ namespace MusicBox
             AlbumPanel.Name = "AlbumPanel";
             AlbumPanel.Size = new Size(96, 100);
             AlbumPanel.TabIndex = 2;
+            // 
+            // SingerPanel
+            // 
+            SingerPanel.BackColor = Color.FromArgb(18, 18, 18);
+            SingerPanel.Controls.Add(SingerList);
+            SingerPanel.Location = new Point(0, 0);
+            SingerPanel.Margin = new Padding(0);
+            SingerPanel.Name = "SingerPanel";
+            SingerPanel.Size = new Size(96, 100);
+            SingerPanel.TabIndex = 3;
             // 
             // songTopPanel
             // 
@@ -389,6 +410,7 @@ namespace MusicBox
             LeftTopPanel.ResumeLayout(false);
             ArtistPanel.ResumeLayout(false);
             AlbumPanel.ResumeLayout(false);
+            SingerPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).EndInit();
@@ -425,5 +447,7 @@ namespace MusicBox
         private SongTopPanel songTopPanel;
         private HomePlayList homePlayList;
         private VolumeButton volumeButton;
+        private Panel SingerPanel;
+        private SingerList SingerList;
     }
 }
