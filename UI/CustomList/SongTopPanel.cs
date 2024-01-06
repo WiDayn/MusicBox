@@ -14,22 +14,20 @@ namespace MusicBox.UI.List
     public class SongTopPanel : UserControl
     {
         public Panel Panel;
-
+        public SongTop songTop;
         public SongTopPanel()
         {
             Panel = new Panel();
+            songTop = new SongTop();
+            songTop.Width = Width;
+            songTop.Height = Height;
+            songTop.Dock = DockStyle.Fill;
             Panel.Dock = DockStyle.Fill;
             this.Controls.Add(Panel);
         }
 
         public async void SetSongTop(String imgPath ,string typeText, string nameText, string descriptionText)
         {
-            var songTop = new SongTop
-            {
-                Width = Width, // 减去滚动条的宽度
-                Height = Height,
-                Dock = DockStyle.Fill,
-            };
             if (imgPath.StartsWith("http"))
             {
                 songTop.Image = await ImgAPI.LoadImageFromUrlAsync(imgPath);
@@ -45,12 +43,6 @@ namespace MusicBox.UI.List
         }
         public async void SetSongTopFromIMG(Image image, string typeText, string nameText, string descriptionText)
         {
-            var songTop = new SongTop
-            {
-                Width = Width, // 减去滚动条的宽度
-                Height = Height,
-                Dock = DockStyle.Fill,
-            };
             songTop.Image = image;
 
             songTop.TypeText = typeText;

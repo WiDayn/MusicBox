@@ -1,6 +1,8 @@
 ﻿using global::MusicBox.API;
 using global::MusicBox.UI.CustomPictureBox;
 using MusicBox.Core.Dtos;
+using MusicBox.Core.Entity;
+using static MusicBox.Core.Dtos.Album;
 
 namespace MusicBox.UI.Button
 {
@@ -11,10 +13,12 @@ namespace MusicBox.UI.Button
         private Label Description;
         // type: Like,Album,Artist
         public String Type {  get; set; }
+        public int ID { get; set; }
 
         // 声明一个点击事件
         public event EventHandler ButtonClick;
-        public FavoriteResponse favoriteResponse;
+
+        public AlbumInfoResponse AlbumInfoResponse;
 
         public RecentButton(string type)
         {
@@ -56,14 +60,31 @@ namespace MusicBox.UI.Button
             this.SizeChanged += SizeChangedHandler;
             this.MouseEnter += new EventHandler(RecentButton_MouseEnter);
             this.MouseLeave += new EventHandler(RecentButton_MouseLeave);
+            pictureBox.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
+            Title.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
+            Description.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
             this.MouseClick += new MouseEventHandler(RecentButton_MouseClick);
-            if(type == "Like") this.Load += new EventHandler(RecentButton_Load);
+            Type = type;
         }
 
-        private async void RecentButton_Load(object sender, EventArgs e)
+        protected override async void OnLoad(EventArgs e)
         {
-            favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
-            DescriptionText = $"歌单 • 已喜欢{favoriteResponse.Data.Count}首歌";
+            if (Type == "Album")
+            {
+                AlbumInfoResponse = await AlbumAPI.GetAlbumInfoAsync(ID);
+                pictureBox.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg");
+                Title.Text = AlbumInfoResponse.Data.ArtistName;
+                Description.Text = "专辑";
+            }
+            if (Type == "PlayList")
+            {
+                AlbumInfoResponse = await AlbumAPI.GetAlbumInfoAsync(ID);
+                pictureBox.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg");
+                Title.Text = AlbumInfoResponse.Data.ArtistName;
+                Description.Text = "专辑";
+            }
+            if (Type == "Like") DescriptionText = $"歌单 • 已喜欢{UserAPI.favoriteResponse.Data.SongInfos.Count}首歌";
+            base.OnLoad(e);
         }
 
         private async void RecentButton_MouseClick(object sender, MouseEventArgs e)
@@ -71,16 +92,27 @@ namespace MusicBox.UI.Button
             // TODO: 更新RightTabControl.(0)里的内容
             Program.DefaultAlbumList.Panel.Controls.Clear();
             int i = 1;
-
-            if(Type == "Like")
+            if (Type == "Like")
             {
-                Program.AblumPlayingSongTopPanel.SetSongTopFromIMG(Properties.Resources.MyLove, "歌单", "已点赞的歌", UserAPI.userData.Username + " • " + favoriteResponse.Data.Count.ToString() + "首歌曲");
+                Program.AblumPlayingSongTopPanel.SetSongTopFromIMG(Properties.Resources.MyLove, "歌单", "已点赞的歌", UserAPI.userData.Username + " • " + UserAPI.favoriteResponse.Data.SongInfos.Count.ToString() + "首歌曲");
 
-                foreach (var song in favoriteResponse.Data)
+                foreach (var song in UserAPI.favoriteResponse.Data.SongInfos)
                 {
                     // 专辑封面的位置是固定的
                     Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
                         , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                }
+                Program.DefaultRightTabControl.SwitchToPanel(0);
+            }
+            if (Type == "Album")
+            {
+                Program.AblumPlayingSongTopPanel.SetSongTop(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg", "专辑", AlbumInfoResponse.Data.Album.Title, AlbumInfoResponse.Data.ArtistName + " • " + AlbumInfoResponse.Data.Songs.Count.ToString() + "首歌曲");
+
+                foreach (var song in AlbumInfoResponse.Data.Songs)
+                {
+                    // 专辑封面的位置是固定的
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg"
+                        , song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
                 }
                 Program.DefaultRightTabControl.SwitchToPanel(0);
             }

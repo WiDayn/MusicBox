@@ -1,5 +1,6 @@
 ﻿
 using MusicBox.API;
+using MusicBox.Core.Dtos;
 using MusicBox.UI.Button;
 using MusicBox.UI.List;
 using System.Diagnostics;
@@ -42,7 +43,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "D:\\cover.jpg";
+            String testFilePath = "E:\\cover.jpg";
 
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
             homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
@@ -58,14 +59,28 @@ namespace MusicBox
             MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
-            RightTabControl.AddPanel(SingerPanel);
-            RightTabControl.SwitchToPanel(1);
-            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
-            RecentList.AddRecentButton(testFilePath, "Artist", "林家谦", "艺人");
+            RightTabControl.SwitchToPanel(2);
             MusicBoxLocationSet(sender, e);
             Program.musicPlayer.SetVolume((float)0.5);
             ref_setting();
             MusicBoxAnchorSet();
+            loadRecentList();
+        }
+
+        private void loadRecentList()
+        {
+            RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
+            foreach(var item in UserAPI.favoriteResponse.Data.AlbumInfos) {
+                RecentList.AddRecentButtonFromAblumID(item.ID);
+            }
+            //foreach (var item in UserAPI.favoriteResponse.Data.AlbumInfos)
+            //{
+            //    RecentList.AddRecentButtonFromArtistID(item.ID);
+            //}
+            //foreach (var item in UserAPI.favoriteResponse.Data.PlayListInfos)
+            //{
+            //    RecentList.AddRecentButtonFromPlayListID(item.ID);
+            //}
         }
 
         private void MusicBoxAnchorSet()
@@ -84,6 +99,10 @@ namespace MusicBox
             //songTopPanel.Anchor = anchors;
             //songTitle.Anchor = anchors;
             //AlbumList.Anchor = anchors;
+            ArtistPanel.Dock = DockStyle.Fill;
+            AlbumPanel.Dock = DockStyle.Fill;
+            AlbumList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            RightTabControl.Dock = DockStyle.Fill;
 
             // 设置主窗体上的控件锚点
             VolumeTrackBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
