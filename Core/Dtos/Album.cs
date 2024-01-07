@@ -42,5 +42,12 @@ namespace MusicBox.Core.Dtos
             public int BitRate { get; set; }
             public int ViewCount { get; set; }
         }
+
+        public class RecentAlbumsResponse
+        {
+            public int StatusCode { get; set; }
+            public List<int> Data { get; set; }
+            public string Message { get; set; }
+        }
     }
 }

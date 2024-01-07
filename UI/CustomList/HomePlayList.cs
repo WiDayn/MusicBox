@@ -40,6 +40,11 @@ namespace MusicBox.UI.List
             }
         }
 
+        public void ClearAllButton()
+        {
+            AlbumPanel.Controls.Clear();
+        }
+
 
         // 方法：添加 HomePlayListButton
         public async void AddHomePlayListButton(int id, string type)

@@ -1,6 +1,7 @@
 ﻿using MusicBox.Core.Entity;
 using MusicBox.UI;
 using MusicBox.UI.Button;
+using MusicBox.UI.CustomList;
 using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using System.Runtime.InteropServices;
@@ -52,6 +53,7 @@ namespace MusicBox
             HomeButton = new HomeButton();
             RightTabControl = new BorderlessTabControl();
             ArtistPanel = new Panel();
+            HomePanel = new HomePanel();
             homePlayList = new HomePlayList();
             AlbumPanel = new Panel();
             songTopPanel = new SongTopPanel();
@@ -64,11 +66,13 @@ namespace MusicBox
             SecondTimer = new System.Windows.Forms.Timer(components);
             LeftDownAlbumBox = new PictureBox();
             LeftDownSongNameLabel = new Label();
+            
             LeftDownArtistsNameLabel = new Label();
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
             volumeButton = new VolumeButton();
+            
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -232,7 +236,14 @@ namespace MusicBox
             AlbumPanel.Name = "AlbumPanel";
             AlbumPanel.Size = new Size(96, 100);
             AlbumPanel.TabIndex = 2;
-            // 
+            //
+            // HomePanel
+            //
+            //
+            HomePanel.BackColor = Color.FromArgb(18, 18, 18);
+            HomePanel.Location = new Point(0, 0);
+            HomePanel.Margin = new Padding(0);
+            HomePanel.Dock = DockStyle.Fill;
             // songTopPanel
             // 
             songTopPanel.Location = new Point(0, 0);
@@ -449,6 +460,7 @@ namespace MusicBox
         private HomePlayList homePlayList;
         private VolumeButton volumeButton;
         private Panel SingerPanel;
+        private HomePanel HomePanel;
         private SingerList SingerList;
     }
 }

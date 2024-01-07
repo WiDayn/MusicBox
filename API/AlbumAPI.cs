@@ -32,5 +32,25 @@ namespace MusicBox.API
                 throw new HttpRequestException($"Error fetching album data: {response.StatusCode}");
             }
         }
+        public static async Task<RecentAlbumsResponse?> GetRecentAlbumsInfoAsync()
+        {
+            string url = Properties.Resources.BackEnd_URL + "/album/recent";
+            var client = Program.httpClient;
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(UserAPI.authToken);
+
+            var response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                RecentAlbumsResponse recentAlbumsResponse = JsonConvert.DeserializeObject<RecentAlbumsResponse>(jsonString);
+                Debug.WriteLine("Get recent albums data successfully");
+                return recentAlbumsResponse;
+            }
+            else
+            {
+                // 处理错误响应
+                throw new HttpRequestException($"Error fetching recent albums data: {response.StatusCode}");
+            }
+        }
     }
 }

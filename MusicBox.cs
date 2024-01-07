@@ -49,7 +49,8 @@ namespace MusicBox
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.AddPanel(SingerPanel);
-            RightTabControl.SwitchToPanel(2);
+            RightTabControl.AddPanel(HomePanel);
+            RightTabControl.SwitchToPanel(3);
             MusicBoxLocationSet(sender, e);
             Program.musicPlayer.SetVolume((float)0.5);
             ref_setting();
@@ -259,7 +260,7 @@ namespace MusicBox
 
         private void HomeButton_Click(object sender, EventArgs e)
         {
-            RightTabControl.SwitchToPanel(1);
+            RightTabControl.SwitchToPanel(3);
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
