@@ -35,6 +35,7 @@ namespace MusicBox
 
         public static SingerList DefaultSingerList;
 
+        public static RecentList DefaultRecentList;
 
 
         [STAThread]

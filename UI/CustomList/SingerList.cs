@@ -64,14 +64,12 @@ namespace MusicBox.UI.List
                 Width = (int)(Width - (23 * GetScreenScalingFactor())),
             };
             this.Controls.Add(AlbumPanel);
-            Debug.WriteLine(TopPanel.Width + " " + Width);
             Layout += (sender, e) => {
                 TopPanel.Width = (int)(Width - (23 * GetScreenScalingFactor()));
                 songtext.Width = (int)(Width - (23 * GetScreenScalingFactor()));
                 SongPanel.Width = (int)(Width - (23 * GetScreenScalingFactor()));
                 albumtext.Width = (int)(Width - (23 * GetScreenScalingFactor()));
                 AlbumPanel.Width = (int)(Width - (23 * GetScreenScalingFactor()));
-                Debug.WriteLine(TopPanel.Width + " " + Width);
             };
 
         }
@@ -90,9 +88,9 @@ namespace MusicBox.UI.List
             TopPanel.SetSongTop(imgPath, typeText, nameText, descriptionText);
         }
 
-        public void AddTrackData(string index, string imgPath, string titleText, string artistNameText, string album, string duration)
+        public void AddTrackData(string index, string imgPath, int songID, string titleText, string artistNameText, string album, string duration)
         {
-            SongPanel.AddTrackData(index, false, imgPath, titleText, artistNameText, album, duration);
+            SongPanel.AddTrackData(index, false, imgPath, songID, titleText, artistNameText, album, duration);
         }
 
         // 方法：添加 HomePlayListButton

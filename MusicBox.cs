@@ -119,6 +119,7 @@ namespace MusicBox
             Program.PlayButton = PlayButton;
             Program.AblumPlayingSongTopPanel = songTopPanel;
             Program.DefaultSingerList = SingerList;
+            Program.DefaultRecentList = RecentList;
         }
 
 

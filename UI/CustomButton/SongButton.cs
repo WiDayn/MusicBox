@@ -4,8 +4,12 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
+using MusicBox.API;
+using MusicBox.Core.Dtos;
 using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI.CustomPictureBox;
+using MusicBox.UI.List;
+using static MusicBox.Core.Dtos.Album;
 
 namespace MusicBox.UI.Button
 {
@@ -94,6 +98,8 @@ namespace MusicBox.UI.Button
             // 添加鼠标事件处理器
             pictureBoxLove.MouseEnter += (sender, e) => { pictureBoxLove.Invalidate(); };
             pictureBoxLove.MouseLeave += (sender, e) => { pictureBoxLove.Invalidate(); };
+            pictureBoxLove.Click += PictureBoxLove_Click;
+
 
             this.Controls.Add(pictureBoxLove);
 
@@ -120,6 +126,24 @@ namespace MusicBox.UI.Button
             LabelDuration.DoubleClick += new EventHandler(SongButton_DoubleClick);
         }
 
+        private async void PictureBoxLove_Click(object sender, EventArgs e)
+        {
+            foreach(var songInfo in UserAPI.favoriteResponse.Data.SongInfos)
+            {
+                if(songInfo.SongID == SongID)
+                {
+                    _ = UserAPI.RemoveFavoriteSongAsync(songInfo.SongID);
+                    UserAPI.favoriteResponse.Data.SongInfos.Remove(songInfo);
+                    ((RecentButton)Program.DefaultRecentList.Panel.Controls[0]).ReloadDescriptionText();
+                    return;
+                }
+            }
+            _ = UserAPI.AddFavoriteSongAsync(SongID);
+            UserAPI.favoriteResponse = await ListAPI.GetFavoriteSongsAsync();
+            ((RecentButton)Program.DefaultRecentList.Panel.Controls[0]).ReloadDescriptionText();
+            Debug.WriteLine(UserAPI.favoriteResponse.Data.SongInfos.Count);
+        }
+
         private void PictureBoxLove_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -127,6 +151,13 @@ namespace MusicBox.UI.Button
 
             // 鼠标悬停时使用白色，否则使用灰色
             Color heartColor = (pictureBoxLove.ClientRectangle.Contains(pictureBoxLove.PointToClient(Cursor.Position))) ? Color.White : Color.Gray;
+            foreach (var songInfo in UserAPI.favoriteResponse.Data.SongInfos)
+            {
+                if (songInfo.SongID == SongID)
+                {
+                    heartColor = Color.Green;
+                }
+            }
             using (Pen heartPen = new Pen(heartColor, 2))
             {
                 // 创建一个新的GraphicsPath来绘制爱心

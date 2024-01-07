@@ -109,10 +109,11 @@ namespace MusicBox.UI.List
         }
 
         // 公共方法用于设置音乐轨道项的数据
-        public async void AddTrackData(string index, bool isHTTP, string imgPath, string titleText, string artistNameText, string album,string duration)
+        public async void AddTrackData(string index, bool isHTTP, string imgPath, int songID, string titleText, string artistNameText, string album,string duration)
         {
             var musicTrackControl = new SongButton
             {
+                SongID = songID,
                 Width = (int)(Width - (23 * GetScreenScalingFactor())), // 减去滚动条的宽度
                 Height = 60,
             };

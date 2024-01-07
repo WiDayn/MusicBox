@@ -69,6 +69,11 @@ namespace MusicBox.UI.Button
             Type = type;
         }
 
+        public void ReloadDescriptionText()
+        {
+            if (Type == "Like") DescriptionText = $"歌单 • 已喜欢{UserAPI.favoriteResponse.Data.SongInfos.Count}首歌";
+        }
+
         protected override async void OnLoad(EventArgs e)
         {
             if (Type == "Album")
@@ -103,8 +108,8 @@ namespace MusicBox.UI.Button
                 foreach (var song in UserAPI.favoriteResponse.Data.SongInfos)
                 {
                     // 专辑封面的位置是固定的
-                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg"
-                        , song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true,  Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg",
+                        song.SongID, song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
                 }
                 Program.DefaultRightTabControl.SwitchToPanel(0);
             }
@@ -115,8 +120,8 @@ namespace MusicBox.UI.Button
                 foreach (var song in AlbumInfoResponse.Data.Songs)
                 {
                     // 专辑封面的位置是固定的
-                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg"
-                        , song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg",
+                        song.SongID, song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
                 }
                 Program.DefaultRightTabControl.SwitchToPanel(0);
             }
@@ -131,8 +136,8 @@ namespace MusicBox.UI.Button
                     {
                         if(song.AlbumID == album.AlbumID)
                         {
-                            Program.DefaultSingerList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg"
-                        , song.Title, ArtistInfoResponse.Data.Artist.Name, album.Title, song.Duration.ToString());
+                            Program.DefaultSingerList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg",
+                                song.SongID, song.Title, ArtistInfoResponse.Data.Artist.Name, album.Title, song.Duration.ToString());
                         }
                     }
                 }

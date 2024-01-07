@@ -30,7 +30,7 @@ namespace MusicBox.API
             var json = JsonConvert.SerializeObject(loginData);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            client.Timeout = TimeSpan.FromSeconds(5); // Set timeout to 30 seconds
+            client.Timeout = TimeSpan.FromSeconds(30); // Set timeout to 30 seconds
             var response = await client.PostAsync(url, content);
 
             if (response.IsSuccessStatusCode)
@@ -65,6 +65,51 @@ namespace MusicBox.API
             {
                 // 处理错误响应
                 throw new HttpRequestException($"Error fetching user data: {response.StatusCode}");
+            }
+        }
+        public static async Task RemoveFavoriteSongAsync(int songId)
+        {
+            string url = Properties.Resources.BackEnd_URL + $"/favorite/removeSong/{songId}";
+            var client = Program.httpClient;
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(authToken);
+
+            var response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var responseObj = JsonConvert.DeserializeObject<ApiResponse>(jsonString);
+                if (responseObj.StatusCode == 200)
+                {
+                    Debug.WriteLine(responseObj.Data); // "Remove song successfully"
+                }
+            }
+            else
+            {
+                // 处理错误响应
+                throw new HttpRequestException($"Error removing song: {response.StatusCode}");
+            }
+        }
+
+        public static async Task AddFavoriteSongAsync(int songId)
+        {
+            string url = Properties.Resources.BackEnd_URL + $"/favorite/addSong/{songId}";
+            var client = Program.httpClient;
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(authToken);
+
+            var response = await client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var responseObj = JsonConvert.DeserializeObject<ApiResponse>(jsonString);
+                if (responseObj.StatusCode == 200)
+                {
+                    Debug.WriteLine(responseObj.Data); // "Add song successfully"
+                }
+            }
+            else
+            {
+                // 处理错误响应
+                throw new HttpRequestException($"Error adding song: {response.StatusCode}");
             }
         }
     }
