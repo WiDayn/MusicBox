@@ -88,15 +88,15 @@ namespace MusicBox.UI.List
             TopPanel.SetSongTop(imgPath, typeText, nameText, descriptionText);
         }
 
-        public void AddTrackData(string index, string imgPath, int songID, string titleText, string artistNameText, string album, string duration)
+        public void AddTrackData(string index, string imgPath, int songID, int artistID, int albumID, string titleText, string artistNameText, string album, string duration)
         {
-            SongPanel.AddTrackData(index, false, imgPath, songID, titleText, artistNameText, album, duration);
+            SongPanel.AddTrackData(index, imgPath, songID, artistID, albumID, titleText, artistNameText, album, duration);
         }
 
         // 方法：添加 HomePlayListButton
-        public void AddHomePlayListButton(string imgPath, string titleText, string descriptionText)
+        public void AddHomePlayListButton(int id, string type)
         {
-            AlbumPanel.AddHomePlayListButton(imgPath, titleText, descriptionText);
+            AlbumPanel.AddHomePlayListButton(id, type);
         }
 
         //公共方法用于设置音乐轨道项的数据

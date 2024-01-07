@@ -108,8 +108,8 @@ namespace MusicBox.UI.Button
                 foreach (var song in UserAPI.favoriteResponse.Data.SongInfos)
                 {
                     // 专辑封面的位置是固定的
-                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true,  Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg",
-                        song.SongID, song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + song.ArtistName + "-" + song.AlbumTitle + "/cover.jpg",
+                       song.SongID, song.ArtistID, song.AlbumID, song.Title, song.ArtistName, song.AlbumTitle, song.Duration.ToString());
                 }
                 Program.DefaultRightTabControl.SwitchToPanel(0);
             }
@@ -120,8 +120,8 @@ namespace MusicBox.UI.Button
                 foreach (var song in AlbumInfoResponse.Data.Songs)
                 {
                     // 专辑封面的位置是固定的
-                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), true, Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg",
-                        song.SongID, song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
+                    Program.DefaultAlbumList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg",
+                        song.SongID, AlbumInfoResponse.Data.Album.ArtistID, song.AlbumID , song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
                 }
                 Program.DefaultRightTabControl.SwitchToPanel(0);
             }
@@ -137,14 +137,14 @@ namespace MusicBox.UI.Button
                         if(song.AlbumID == album.AlbumID)
                         {
                             Program.DefaultSingerList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg",
-                                song.SongID, song.Title, ArtistInfoResponse.Data.Artist.Name, album.Title, song.Duration.ToString());
+                                song.SongID, ArtistInfoResponse.Data.Artist.ArtistID , song.AlbumID, song.Title, ArtistInfoResponse.Data.Artist.Name, album.Title, song.Duration.ToString());
                         }
                     }
                 }
                 Program.DefaultSingerList.SongPanel.Height = 70 * ArtistInfoResponse.Data.TopSongs.Count();
                 foreach (var album in ArtistInfoResponse.Data.Albums)
                 {
-                    Program.DefaultSingerList.AddHomePlayListButton(Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg", album.Title, ArtistInfoResponse.Data.Artist.Name);
+                    Program.DefaultSingerList.AddHomePlayListButton(album.AlbumID, "Album");
                 }
                 Program.DefaultSingerList.AlbumPanel.Height = 260 * ArtistInfoResponse.Data.Albums.Count();
                 Program.DefaultRightTabControl.SwitchToPanel(2);

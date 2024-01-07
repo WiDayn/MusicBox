@@ -3,9 +3,12 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
+using MusicBox.API;
 using MusicBox.Core.Dtos;
 using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI.CustomPictureBox;
+using static MusicBox.Core.Dtos.Album;
+using static MusicBox.Core.Dtos.Artist;
 
 namespace MusicBox.UI.Button
 {
@@ -18,7 +21,12 @@ namespace MusicBox.UI.Button
         // 声明一个点击事件
         public event EventHandler ButtonClick;
 
-        public HomePlayListButton()
+        public AlbumInfoResponse AlbumInfoResponse;
+
+        public int ID { get; set; }
+        public string Type { get; set; }
+
+        public HomePlayListButton(int id, string type)
         {
             // 设置控件的初始大小
             Size = new Size(300, 100);
@@ -58,14 +66,39 @@ namespace MusicBox.UI.Button
 
 
             this.SizeChanged += SizeChangedHandler;
-
             this.MouseEnter += new EventHandler(HomePlayListButton_MouseEnter);
             this.MouseLeave += new EventHandler(HomePlayListButton_MouseLeave);
-            this.MouseDoubleClick += new MouseEventHandler(HomePlayListButton_DoubleClick);
+            this.pictureBox.Click += new EventHandler(HomePlayListButton_Click);
+            this.title.Click += new EventHandler(HomePlayListButton_Click);
+            this.description.Click += new EventHandler(HomePlayListButton_Click);
+            this.Click += new EventHandler(HomePlayListButton_Click);
+            ID = id;
+            Type = type;
+        }
+        protected override async void OnLoad(EventArgs e)
+        {
+            if(Type == "Album")
+            {
+                AlbumInfoResponse = await AlbumAPI.GetAlbumInfoAsync(ID);
+                pictureBox.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg");
+                title.Text = AlbumInfoResponse.Data.ArtistName;
+                description.Text = "专辑";
+            }
+            
+            base.OnLoad(e);
         }
 
-        private void HomePlayListButton_DoubleClick(object sender, EventArgs e)
+        private void HomePlayListButton_Click(object sender, EventArgs e)
         {
+            Program.AblumPlayingSongTopPanel.SetSongTop(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg", "专辑", AlbumInfoResponse.Data.Album.Title, AlbumInfoResponse.Data.ArtistName + " • " + AlbumInfoResponse.Data.Songs.Count.ToString() + "首歌曲");
+            int i = 0;
+            foreach (var song in AlbumInfoResponse.Data.Songs)
+            {
+                // 专辑封面的位置是固定的
+                Program.DefaultAlbumList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg",
+                    song.SongID, AlbumInfoResponse.Data.Album.ArtistID , song.AlbumID, song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
+            }
+            Program.DefaultRightTabControl.SwitchToPanel(0);
         }
 
         private void SizeChangedHandler(object sender, EventArgs e)
@@ -89,25 +122,6 @@ namespace MusicBox.UI.Button
             // 鼠标离开TrackBar时的逻辑
             BackColor = Color.FromArgb(BackColor.R - 8, BackColor.R - 8, BackColor.R - 8);
             ToggleShape();
-        }
-
-        // 公共属性设置图片
-        public Image Image
-        {
-            get => pictureBox.Image;
-            set => pictureBox.Image = value;
-        }
-
-        public string TitleText
-        {
-            get => title.Text;
-            set => title.Text = value;
-        }
-
-        public string DescriptionText
-        {
-            get => description.Text;
-            set => description.Text = value;
         }
 
         public void ToggleShape()

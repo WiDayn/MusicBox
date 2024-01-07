@@ -10,6 +10,7 @@ using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using static MusicBox.Core.Dtos.Album;
+using static MusicBox.Core.Dtos.Artist;
 
 namespace MusicBox.UI.Button
 {
@@ -27,8 +28,14 @@ namespace MusicBox.UI.Button
         private PictureBox pictureBoxLove;
         private bool MouseOn = false;
 
-        public SongButton()
+        public AlbumInfoResponse AlbumInfoResponse;
+        public ArtistInfoResponse ArtistInfoResponse;
+
+        public SongButton(int songID, int artistID, int albumID)
         {
+            this.SongID = songID;
+            this.ArtistID = artistID;
+            this.AlbumID = albumID;
             InitializeControls();
         }
 
@@ -118,12 +125,64 @@ namespace MusicBox.UI.Button
 
             this.MouseEnter += new EventHandler(SongButton_MouseEnter);
             this.MouseLeave += new EventHandler(SongButton_MouseLeave);
+            LabelAlbum.MouseEnter += new EventHandler(LabelAlbum_MouseEnter);
+            LabelAlbum.MouseLeave += new EventHandler(LabelAlbum_MouseLeave);
+            ArtistName.MouseEnter += new EventHandler(ArtistName_MouseEnter);
+            ArtistName.MouseLeave += new EventHandler(ArtistName_MouseLeave);
             this.MouseDoubleClick += new MouseEventHandler(SongButton_DoubleClick);
             labelIndex.DoubleClick += new EventHandler(SongButton_DoubleClick);
             Title.DoubleClick += new EventHandler(SongButton_DoubleClick);
-            ArtistName.DoubleClick += new EventHandler(SongButton_DoubleClick);
-            LabelAlbum.DoubleClick += new EventHandler(SongButton_DoubleClick);
+            ArtistName.Click += new EventHandler(ArtistName_Click);
+            LabelAlbum.Click += new EventHandler(Album_Click);
             LabelDuration.DoubleClick += new EventHandler(SongButton_DoubleClick);
+        }
+
+        protected override async void OnLoad(EventArgs e)
+        {
+            AlbumInfoResponse = await AlbumAPI.GetAlbumInfoAsync(AlbumID);
+            ArtistInfoResponse = await ArtistAPI.GetArtistInfoAsync(ArtistID);
+            base.OnLoad(e);
+        }
+
+        private async void Album_Click(object sender, EventArgs e)
+        {
+            Program.DefaultAlbumList.Panel.Controls.Clear();
+            Program.AblumPlayingSongTopPanel.SetSongTop(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg", "专辑", AlbumInfoResponse.Data.Album.Title, AlbumInfoResponse.Data.ArtistName + " • " + AlbumInfoResponse.Data.Songs.Count.ToString() + "首歌曲");
+            int i = 1;
+            foreach (var song in AlbumInfoResponse.Data.Songs)
+            {
+                // 专辑封面的位置是固定的
+                Program.DefaultAlbumList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg",
+                    song.SongID, AlbumInfoResponse.Data.Album.ArtistID, song.AlbumID, song.Title, AlbumInfoResponse.Data.ArtistName, AlbumInfoResponse.Data.Album.Title, song.Duration.ToString());
+            }
+            Program.DefaultRightTabControl.SwitchToPanel(0);
+        }
+
+        private async void ArtistName_Click(object sender, EventArgs e)
+        {
+            Program.DefaultSingerList.SongPanel.Panel.Controls.Clear();
+            Program.DefaultSingerList.AlbumPanel.AlbumPanel.Controls.Clear();
+            Program.DefaultSingerList.SetSongTop(Properties.Resources.External_URL + "/Artist/" + ArtistInfoResponse.Data.Artist.Name + ".jpg", "歌手", ArtistInfoResponse.Data.Artist.Name, ArtistInfoResponse.Data.Artist.Name + " • " + ArtistInfoResponse.Data.Albums.Count.ToString() + "张专辑");
+            int i = 1;
+            foreach (var song in ArtistInfoResponse.Data.TopSongs)
+            {
+                // 专辑封面的位置是固定的
+                foreach (var album in ArtistInfoResponse.Data.Albums)
+                {
+                    if (song.AlbumID == album.AlbumID)
+                    {
+                        Program.DefaultSingerList.AddTrackData((i++).ToString(), Properties.Resources.External_URL + "/Album/" + ArtistInfoResponse.Data.Artist.Name + "-" + album.Title + "/cover.jpg",
+                            song.SongID, ArtistInfoResponse.Data.Artist.ArtistID, song.AlbumID, song.Title, ArtistInfoResponse.Data.Artist.Name, album.Title, song.Duration.ToString());
+                    }
+                }
+            }
+            Program.DefaultSingerList.SongPanel.Height = 70 * ArtistInfoResponse.Data.TopSongs.Count();
+            foreach (var album in ArtistInfoResponse.Data.Albums)
+            {
+                Program.DefaultSingerList.AddHomePlayListButton(album.AlbumID, "Album");
+            }
+            Program.DefaultSingerList.AlbumPanel.Height = 260 * ArtistInfoResponse.Data.Albums.Count();
+            Program.DefaultRightTabControl.SwitchToPanel(2);
         }
 
         private async void PictureBoxLove_Click(object sender, EventArgs e)
@@ -191,6 +250,31 @@ namespace MusicBox.UI.Button
                 Program.PlayButton.ToggleShape();
             if (Program.PlaySongButton.isPlaying)
                 Program.PlaySongButton.ToggleShape();
+        }
+
+        private void LabelAlbum_MouseEnter(object sender, EventArgs e)
+        {
+            Debug.WriteLine(1);
+            LabelAlbum.ForeColor = Color.FromArgb(LabelAlbum.ForeColor.R + 40, LabelAlbum.ForeColor.G + 40, LabelAlbum.ForeColor.B + 40);
+            LabelAlbum.Invalidate();
+        }
+
+        private void LabelAlbum_MouseLeave(object sender, EventArgs e)
+        {
+            LabelAlbum.ForeColor = Color.FromArgb(LabelAlbum.ForeColor.R - 40, LabelAlbum.ForeColor.G - 40, LabelAlbum.ForeColor.B - 40);
+            LabelAlbum.Invalidate();
+        }
+
+        private void ArtistName_MouseEnter(object sender, EventArgs e)
+        {
+            ArtistName.ForeColor = Color.FromArgb(ArtistName.ForeColor.R + 40, ArtistName.ForeColor.R + 40, ArtistName.ForeColor.R + 40);
+            ArtistName.Invalidate();
+        }
+
+        private void ArtistName_MouseLeave(object sender, EventArgs e)
+        {
+            ArtistName.ForeColor = Color.FromArgb(ArtistName.ForeColor.R - 40, ArtistName.ForeColor.G - 40, ArtistName.ForeColor.B - 40);
+            ArtistName.Invalidate();
         }
 
         private void SongButton_MouseEnter(object sender, EventArgs e)

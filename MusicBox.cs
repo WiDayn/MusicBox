@@ -45,12 +45,6 @@ namespace MusicBox
         {
             String testFilePath = "E:\\cover.jpg";
 
-            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
-            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
-            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
-            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
-            homePlayList.AddHomePlayListButton(testFilePath, "测试", "艺人");
-
             MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
             RightTabControl.AddPanel(ArtistPanel);
