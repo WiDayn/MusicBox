@@ -72,7 +72,7 @@ namespace MusicBox
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
             volumeButton = new VolumeButton();
-            Lyrics = new Label();
+            lyricsButton = new LyricsButton();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -394,17 +394,17 @@ namespace MusicBox
             volumeButton.TabIndex = 11;
             volumeButton.UseVisualStyleBackColor = true;
             // 
-            // Geci
+            // lyricsButton
             // 
-            Lyrics.AutoSize = true;
-            Lyrics.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
-            Lyrics.ForeColor = Color.White;
-            Lyrics.Location = new Point(796, 728);
-            Lyrics.Name = "Geci";
-            Lyrics.Size = new Size(32, 17);
-            Lyrics.TabIndex = 12;
-            Lyrics.Text = "歌词";
-            Lyrics.Click += Geci_Click;
+            lyricsButton.BackColor = Color.Black;
+            lyricsButton.FlatStyle = FlatStyle.Flat;
+            lyricsButton.Location = new Point(834, 725);
+            lyricsButton.Name = "lyricsButton";
+            lyricsButton.Size = new Size(32, 37);
+            lyricsButton.TabIndex = 12;
+            lyricsButton.UseVisualStyleBackColor = true;
+            lyricsButton.Click += Geci_Click;
+
             // 
             // MusicBox
             // 
@@ -412,8 +412,8 @@ namespace MusicBox
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(998, 771);
-            Controls.Add(Lyrics);
             Controls.Add(volumeButton);
+            Controls.Add(lyricsButton);
             Controls.Add(VolumeTrackBar);
             Controls.Add(LeftDownArtistsNameLabel);
             Controls.Add(LeftDownSongNameLabel);
@@ -481,6 +481,6 @@ namespace MusicBox
         private Panel SingerPanel;
         private HomePanel HomePanel;
         private SingerList SingerList;
-        private Label Lyrics;
+        private LyricsButton lyricsButton;
     }
 }

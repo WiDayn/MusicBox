@@ -101,7 +101,7 @@ namespace MusicBox
             //LeftDownAlbumBox.Anchor = anchors;
             //LeftDownSongNameLabel.Anchor = anchors;
             //LeftDownArtistsNameLabel.Anchor = anchors;
-            Lyrics.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+         
             RecentList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         }
 
@@ -228,6 +228,7 @@ namespace MusicBox
         {
             VolumeTrackBar.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0)), (int)(ClientSize.Height - 35 * GetScreenScalingFactor()));
             volumeButton.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0) - 10 * GetScreenScalingFactor()), (int)(ClientSize.Height - 46 * GetScreenScalingFactor()));
+            lyricsButton.Location = new Point((int)(ClientSize.Width * (8.5 / 10.0) - 60 * GetScreenScalingFactor()), (int)(ClientSize.Height - 48 * GetScreenScalingFactor()));
             PlayButton.Location = new Point(ClientSize.Width / 2 - PlayButton.Width / 2,
                                         (int)(ClientSize.Height - 63 * GetScreenScalingFactor()));
             NextButton.Location = new Point(ClientSize.Width / 2 - NextButton.Width / 2 + (int)(45 * GetScreenScalingFactor()),
