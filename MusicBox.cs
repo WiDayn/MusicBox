@@ -43,7 +43,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "E:\\cover.jpg";
+            String testFilePath = "D:\\cover.jpg";
 
             MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
@@ -51,6 +51,7 @@ namespace MusicBox
             RightTabControl.AddPanel(SingerPanel);
             RightTabControl.AddPanel(HomePanel);
             RightTabControl.AddPanel(LyricsPanel);
+            RightTabControl.AddPanel(SearchPanel);
             RightTabControl.SwitchToPanel(3);
             MusicBoxLocationSet(sender, e);
             Program.musicPlayer.SetVolume((float)0.5);
@@ -270,7 +271,7 @@ namespace MusicBox
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            RightTabControl.SwitchToPanel(2);
+            RightTabControl.SwitchToPanel(5);
         }
 
         private void Geci_Click(object sender, EventArgs e)

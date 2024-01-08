@@ -55,6 +55,7 @@ namespace MusicBox
             ArtistPanel = new Panel();
             homePlayList = new HomePlayList();
             HomePanel = new HomePanel();
+            SearchPanel = new SearchPanel();
             AlbumPanel = new Panel();
             songTopPanel = new SongTopPanel();
             LyricsPanel = new LyricsPanel();
@@ -233,6 +234,16 @@ namespace MusicBox
             HomePanel.Name = "HomePanel";
             HomePanel.Size = new Size(200, 100);
             HomePanel.TabIndex = 0;
+            // 
+            // SearchPanel
+            // 
+            SearchPanel.BackColor = Color.FromArgb(18, 18, 18);
+            SearchPanel.Dock = DockStyle.Fill;
+            SearchPanel.Location = new Point(0, 0);
+            SearchPanel.Margin = new Padding(0);
+            SearchPanel.Name = "SearchPanel";
+            SearchPanel.Size = new Size(200, 100);
+            SearchPanel.TabIndex = 0;
             // 
             // AlbumPanel
             // 
@@ -473,6 +484,7 @@ namespace MusicBox
         private BorderlessTabControl RightTabControl;
         private Panel AlbumPanel;
         private Panel ArtistPanel;
+        private SearchPanel SearchPanel;
         private SongTitle songTitle;
         private SongTopPanel songTopPanel;
         private LyricsPanel LyricsPanel;
