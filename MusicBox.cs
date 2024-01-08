@@ -50,6 +50,7 @@ namespace MusicBox
             RightTabControl.AddPanel(ArtistPanel);
             RightTabControl.AddPanel(SingerPanel);
             RightTabControl.AddPanel(HomePanel);
+            RightTabControl.AddPanel(LyricsPanel);
             RightTabControl.SwitchToPanel(3);
             MusicBoxLocationSet(sender, e);
             Program.musicPlayer.SetVolume((float)0.5);
@@ -61,7 +62,8 @@ namespace MusicBox
         private void loadRecentList()
         {
             RecentList.AddRecentButtonFromIMG(Properties.Resources.MyLove, "Like", "已经点赞的歌曲", "歌单");
-            foreach(var item in UserAPI.favoriteResponse.Data.AlbumInfos) {
+            foreach (var item in UserAPI.favoriteResponse.Data.AlbumInfos)
+            {
                 RecentList.AddRecentButtonFromAblumID(item.ID);
             }
             foreach (var item in UserAPI.favoriteResponse.Data.ArtistInfos)
@@ -99,6 +101,7 @@ namespace MusicBox
             //LeftDownAlbumBox.Anchor = anchors;
             //LeftDownSongNameLabel.Anchor = anchors;
             //LeftDownArtistsNameLabel.Anchor = anchors;
+            Lyrics.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             RecentList.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         }
 
@@ -115,6 +118,7 @@ namespace MusicBox
             Program.AblumPlayingSongTopPanel = songTopPanel;
             Program.DefaultSingerList = SingerList;
             Program.DefaultRecentList = RecentList;
+            Program.DefaultLyricsPanel = LyricsPanel;
         }
 
 
@@ -268,6 +272,9 @@ namespace MusicBox
             RightTabControl.SwitchToPanel(2);
         }
 
-
+        private void Geci_Click(object sender, EventArgs e)
+        {
+            RightTabControl.SwitchToPanel(4);
+        }
     }
 }

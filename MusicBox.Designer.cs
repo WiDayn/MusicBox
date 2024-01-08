@@ -53,10 +53,11 @@ namespace MusicBox
             HomeButton = new HomeButton();
             RightTabControl = new BorderlessTabControl();
             ArtistPanel = new Panel();
-            HomePanel = new HomePanel();
             homePlayList = new HomePlayList();
+            HomePanel = new HomePanel();
             AlbumPanel = new Panel();
             songTopPanel = new SongTopPanel();
+            LyricsPanel = new LyricsPanel();
             songTitle = new SongTitle();
             AlbumList = new RecentList();
             SingerPanel = new Panel();
@@ -66,13 +67,12 @@ namespace MusicBox
             SecondTimer = new System.Windows.Forms.Timer(components);
             LeftDownAlbumBox = new PictureBox();
             LeftDownSongNameLabel = new Label();
-            
             LeftDownArtistsNameLabel = new Label();
             NextButton = new NextButton();
             LastButton = new LastButton();
             VolumeTrackBar = new PlayTrackBar();
             volumeButton = new VolumeButton();
-            
+            Lyrics = new Label();
             ((System.ComponentModel.ISupportInitialize)MainSplitContainer).BeginInit();
             MainSplitContainer.Panel1.SuspendLayout();
             MainSplitContainer.Panel2.SuspendLayout();
@@ -224,6 +224,16 @@ namespace MusicBox
             homePlayList.Size = new Size(314, 66);
             homePlayList.TabIndex = 0;
             // 
+            // HomePanel
+            // 
+            HomePanel.BackColor = Color.FromArgb(18, 18, 18);
+            HomePanel.Dock = DockStyle.Fill;
+            HomePanel.Location = new Point(0, 0);
+            HomePanel.Margin = new Padding(0);
+            HomePanel.Name = "HomePanel";
+            HomePanel.Size = new Size(200, 100);
+            HomePanel.TabIndex = 0;
+            // 
             // AlbumPanel
             // 
             AlbumPanel.BackColor = Color.FromArgb(18, 18, 18);
@@ -236,14 +246,7 @@ namespace MusicBox
             AlbumPanel.Name = "AlbumPanel";
             AlbumPanel.Size = new Size(96, 100);
             AlbumPanel.TabIndex = 2;
-            //
-            // HomePanel
-            //
-            //
-            HomePanel.BackColor = Color.FromArgb(18, 18, 18);
-            HomePanel.Location = new Point(0, 0);
-            HomePanel.Margin = new Padding(0);
-            HomePanel.Dock = DockStyle.Fill;
+            // 
             // songTopPanel
             // 
             songTopPanel.Location = new Point(0, 0);
@@ -278,12 +281,15 @@ namespace MusicBox
             // 
             // SingerList
             // 
+            SingerList.AutoScroll = true;
+            SingerList.BackColor = Color.FromArgb(18, 18, 18);
             SingerList.Dock = DockStyle.Fill;
             SingerList.FlowDirection = FlowDirection.TopDown;
             SingerList.Location = new Point(0, 0);
             SingerList.Name = "SingerList";
             SingerList.Size = new Size(96, 100);
             SingerList.TabIndex = 0;
+            SingerList.WrapContents = false;
             // 
             // playTrackBar
             // 
@@ -388,12 +394,25 @@ namespace MusicBox
             volumeButton.TabIndex = 11;
             volumeButton.UseVisualStyleBackColor = true;
             // 
+            // Geci
+            // 
+            Lyrics.AutoSize = true;
+            Lyrics.Font = new Font("Microsoft YaHei UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 134);
+            Lyrics.ForeColor = Color.White;
+            Lyrics.Location = new Point(796, 728);
+            Lyrics.Name = "Geci";
+            Lyrics.Size = new Size(32, 17);
+            Lyrics.TabIndex = 12;
+            Lyrics.Text = "歌词";
+            Lyrics.Click += Geci_Click;
+            // 
             // MusicBox
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(998, 771);
+            Controls.Add(Lyrics);
             Controls.Add(volumeButton);
             Controls.Add(VolumeTrackBar);
             Controls.Add(LeftDownArtistsNameLabel);
@@ -422,7 +441,6 @@ namespace MusicBox
             ArtistPanel.ResumeLayout(false);
             AlbumPanel.ResumeLayout(false);
             SingerPanel.ResumeLayout(false);
-            SingerPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)playTrackBar).EndInit();
             ((System.ComponentModel.ISupportInitialize)LeftDownAlbumBox).EndInit();
             ((System.ComponentModel.ISupportInitialize)VolumeTrackBar).EndInit();
@@ -457,10 +475,12 @@ namespace MusicBox
         private Panel ArtistPanel;
         private SongTitle songTitle;
         private SongTopPanel songTopPanel;
+        private LyricsPanel LyricsPanel;
         private HomePlayList homePlayList;
         private VolumeButton volumeButton;
         private Panel SingerPanel;
         private HomePanel HomePanel;
         private SingerList SingerList;
+        private Label Lyrics;
     }
 }

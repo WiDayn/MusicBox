@@ -81,7 +81,7 @@ namespace MusicBox.UI.Button
             {
                 AlbumInfoResponse = await AlbumAPI.GetAlbumInfoAsync(ID);
                 pictureBox.Image = await ImgAPI.LoadImageFromUrlAsync(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg");
-                title.Text = AlbumInfoResponse.Data.ArtistName;
+                title.Text = AlbumInfoResponse.Data.Album.Title;
                 description.Text = "专辑";
             }
             
@@ -92,6 +92,7 @@ namespace MusicBox.UI.Button
         {
             Program.AblumPlayingSongTopPanel.SetSongTop(Properties.Resources.External_URL + "/Album/" + AlbumInfoResponse.Data.ArtistName + "-" + AlbumInfoResponse.Data.Album.Title + "/cover.jpg", "专辑", AlbumInfoResponse.Data.Album.Title, AlbumInfoResponse.Data.ArtistName + " • " + AlbumInfoResponse.Data.Songs.Count.ToString() + "首歌曲");
             int i = 0;
+            Program.DefaultAlbumList.Panel.Controls.Clear();
             foreach (var song in AlbumInfoResponse.Data.Songs)
             {
                 // 专辑封面的位置是固定的

@@ -2,6 +2,7 @@
 using MusicBox.Core.PlayBack;
 using MusicBox.Core.PlayBack.Player;
 using MusicBox.UI;
+using MusicBox.UI.CustomList;
 using MusicBox.UI.CustomPictureBox;
 using MusicBox.UI.List;
 using System.Diagnostics;
@@ -36,6 +37,8 @@ namespace MusicBox
         public static SingerList DefaultSingerList;
 
         public static RecentList DefaultRecentList;
+
+        public static LyricsPanel DefaultLyricsPanel;
 
 
         [STAThread]

@@ -17,6 +17,7 @@ namespace MusicBox.Core.PlayBack.Player
         public QueuePlayList MusicPlayList;
         public QueuePlayList MusicPlayedList;
         private BassPlayer bassPlayer;
+        public int lastPlaying = 0;
 
         public MusicPlayer() 
         { 
@@ -45,6 +46,7 @@ namespace MusicBox.Core.PlayBack.Player
                 MusicPlayedList.AddSong(songList[0]);
                 UpdatePlayingUI(songList[0]);
                 bassPlayer.Play();
+                lastPlaying = songList[0].SongID;
                 songList.RemoveAt(0);
                 bassPlayer.TrackEnded += (sender, e) =>
                 {
@@ -54,6 +56,7 @@ namespace MusicBox.Core.PlayBack.Player
                         bassPlayer.LoadAudio(songList[0].FilePath);
                         UpdatePlayingUI(songList[0]);
                         bassPlayer.Play();
+                        lastPlaying = songList[0].SongID;
                         songList.RemoveAt(0);
                     }
                 };
