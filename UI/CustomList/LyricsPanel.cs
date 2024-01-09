@@ -15,6 +15,7 @@ namespace MusicBox.UI.CustomList
     using System.Drawing;
     using System.Windows.Forms;
     using static global::MusicBox.Core.Dtos.Song;
+    using static System.Windows.Forms.LinkLabel;
 
     public class LyricsPanel : FlowLayoutPanel
     {
@@ -53,6 +54,18 @@ namespace MusicBox.UI.CustomList
         private void CreateLyricsLabels()
         {
             this.Controls.Clear();
+            if(_lyrics.Count == 0)
+            {
+                var label = new Label
+                {
+                    Text = "本歌曲暂无歌词或为纯音乐",
+                    ForeColor = Color.FromArgb(170, 170, 170),
+                    Font = new Font("Microsoft YaHei UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 134),
+                    AutoSize = true,
+                    MaximumSize = new Size(this.Width, 0)
+                };
+                this.Controls.Add(label);
+            }
             foreach (var line in _lyrics)
             {
                 var label = new Label

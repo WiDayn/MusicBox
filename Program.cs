@@ -46,7 +46,7 @@ namespace MusicBox
         {
             ApplicationConfiguration.Initialize();
             DefaultMusicBox = new();
-            Application.Run(new MusicBox());
+            Application.Run(new Login());
             musicPlayer.Dispose();
         }
     }

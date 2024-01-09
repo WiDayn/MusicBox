@@ -1,2 +1,442 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MusicBox.Properties.Resources" Collapsed="true">
+    <Position X="4.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAABEAAAAQAAAAAAAAAAAIAQAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.AlbumAPI" Collapsed="true">
+    <Position X="2.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\AlbumAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.ArtistAPI" Collapsed="true">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>API\ArtistAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.ImgAPI" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>API\ImgAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.ListAPI" Collapsed="true">
+    <Position X="4.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>API\ListAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.DefaultResponse" Collapsed="true">
+    <Position X="2.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAIAAAIAAAAAA=</HashCode>
+      <FileName>API\response.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.SongAPI" Collapsed="true">
+    <Position X="4.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>API\SongAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.API.UserAPI" Collapsed="true">
+    <Position X="2.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAQAACEAgAAAA=</HashCode>
+      <FileName>API\UserAPI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Common.SharedData" Collapsed="true">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Common\SharedData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Common.UrlConverter" Collapsed="true">
+    <Position X="2.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Common\UrlConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.Album" Collapsed="true">
+    <Position X="2.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Dtos\Album.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.ApiResponse" Collapsed="true">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAIAAAIAAAAAA=</HashCode>
+      <FileName>Core\Dtos\API.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.Artist" Collapsed="true">
+    <Position X="4.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Dtos\Artist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.FavoriteInfo" Collapsed="true">
+    <Position X="4.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Core\Dtos\Favorite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.FavoriteItem" Collapsed="true">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Dtos\Favorite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.SongInfo" Collapsed="true">
+    <Position X="6" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAADBEAAAAKAEAAACgAAAACAAAAAABAAAgA=</HashCode>
+      <FileName>Core\Dtos\Favorite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.FavoriteResponse" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAIAAAIAAAAAA=</HashCode>
+      <FileName>Core\Dtos\Favorite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.Song" Collapsed="true">
+    <Position X="2.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Dtos\Song.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.UserInfoResponse" Collapsed="true">
+    <Position X="7.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAIAAAIAAAAAA=</HashCode>
+      <FileName>Core\Dtos\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Dtos.UserData" Collapsed="true">
+    <Position X="4.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACAAAAAQAAAAgAAAAAAAAAAAAEAQAAAAA=</HashCode>
+      <FileName>Core\Dtos\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.Account" Collapsed="true">
+    <Position X="6" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASACAAgAAQAAAAgABAAAAAEAAAAgAAARAAA=</HashCode>
+      <FileName>Core\Entity\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.Album" Collapsed="true">
+    <Position X="6" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAEAAAAiAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Entity\Album.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.Artist" Collapsed="true">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAEAAQAAAAQCACAAAACGBAAAAA=</HashCode>
+      <FileName>Core\Entity\Artist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.Concert" Collapsed="true">
+    <Position X="2.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Entity\Concert.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.LrcLine" Collapsed="true">
+    <Position X="6" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAQA=</HashCode>
+      <FileName>Core\Entity\Lyrics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.LrcParser" Collapsed="true">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Core\Entity\Lyrics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.PlayList" Collapsed="true">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAAEAAIAAA=</HashCode>
+      <FileName>Core\Entity\PlayList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.Entity.Song" Collapsed="true">
+    <Position X="4.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAJAEAAAACAAAAAAAAAAACAAABAABAAAAA=</HashCode>
+      <FileName>Core\Entity\Song.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.PlayBack.Player.BassPlayer" Collapsed="true">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAQCCAAAECAAAAAACAAAAICACAoAAAAAAACBE=</HashCode>
+      <FileName>Core\PlayBack\Player\BassPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.PlayBack.Player.MusicPlayer" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAQAgBBQCCAQAAAEQAAAAAAAAAACECEYAAAAAAAAAA=</HashCode>
+      <FileName>Core\PlayBack\Player\MusicPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Core.PlayBack.QueuePlayList" Collapsed="true">
+    <Position X="6" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAgAAAEAAAAAAAAQAQAABAAAAA=</HashCode>
+      <FileName>Core\PlayBack\QueuePlayList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomeButton" Collapsed="true">
+    <Position X="0.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACACAAAAAAACAAAACAAAAAAAAAEAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>UI\CustomButton\HomeButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LastButton" Collapsed="true">
+    <Position X="6.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACAAAAAAAAAAAAAAAAAAIIAEAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\LastButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LyricsButton" Collapsed="true">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACCAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>UI\CustomButton\LyricsButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NextButton" Collapsed="true">
+    <Position X="8.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACAAAAAAAAAAAAAAAAAAIIAEABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\NextButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SearchButton" Collapsed="true">
+    <Position X="12" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACAAAAAAAAAAAAAAiAABEAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\SearchButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayButton" Collapsed="true">
+    <Position X="10.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAACAAEAAAAAAAAIAAAAAEAAEAAAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\StartButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolumeButton" Collapsed="true">
+    <Position X="4.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACCAAAAAAAAAAAAAAgAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\VolumeButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayTrackBar" Collapsed="true">
+    <Position X="14.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAQBAAgAABAECAAQAAAAgAAAAGEAAAAAAQQAAAIAA=</HashCode>
+      <FileName>UI\CustomTrackBar\PlayTrackBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.Button.HomePlayListButton" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAQAAAjAIAIQAAAAACACAAEAAAAQAEAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\HomePlayListButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.Button.RecentButton" Collapsed="true">
+    <Position X="16" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAGAAAAACAAgiEIAAYAAEAACACAAEBAgAwAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\RecentButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.Button.SongButton" Collapsed="true">
+    <Position X="16" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAIQAAkCCATAMIAAQCAAACCACAQEVCgAwEAABIAAAA=</HashCode>
+      <FileName>UI\CustomButton\SongButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.Button.SongTitle" Collapsed="true">
+    <Position X="16" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAEAAAQAAAAAAABAQEAAAAgAAAAwQAAA=</HashCode>
+      <FileName>UI\CustomButton\SongTitle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.Button.SongTop" Collapsed="true">
+    <Position X="16" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQEAAAAAAAAACAAAIQAAAAABACAFABAAAAAAAAAAQAA=</HashCode>
+      <FileName>UI\CustomButton\SongTop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.CustomButton.RoundedPanelButton" Collapsed="true">
+    <Position X="12" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABCgCAAAAAAAAgAAAAEAIAABgAAAAAAAA=</HashCode>
+      <FileName>UI\CustomButton\RoundedPanelButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.CustomList.HomePanel" Collapsed="true">
+    <Position X="12" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACACAAgAACAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>UI\CustomList\HomePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.CustomList.LyricsPanel" Collapsed="true">
+    <Position X="12" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAggABAAAAAgAAAAgAAAABIAAAAAAAAgAA=</HashCode>
+      <FileName>UI\CustomList\LyricsPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.CustomList.SearchPanel" Collapsed="true">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomList\SearchPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.List.HomePlayList" Collapsed="true">
+    <Position X="16" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAGAAAAAAACAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>UI\CustomList\HomePlayList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.List.RecentList" Collapsed="true">
+    <Position X="16" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAEAAAAAAAAAAAAASAAAAAAAAAgAAAJAAAAAAgAAAA=</HashCode>
+      <FileName>UI\CustomList\RecentList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.List.SingerList" Collapsed="true">
+    <Position X="12" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAgAAAAQAAAAAACAAAAAAACAAAAACAAAAAAAABAA=</HashCode>
+      <FileName>UI\CustomList\SingerList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.List.SongTopPanel" Collapsed="true">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAgAAAAAAAADAAAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomList\SongTopPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.CustomPictureBox.CircularPictureBox" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI\CustomPictureBox\CircularPictureBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.CustomTextBox.RoundedTextBox" Collapsed="true">
+    <Position X="16" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAgAAAAAABAACCAAIAAEAAAAAgEAAAAAgBCAAAAAA=</HashCode>
+      <FileName>UI\CustomTextBox\RoundedTextBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.UI.BorderlessTabControl" Collapsed="true">
+    <Position X="16" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAGAAAAAAAAAAAAQAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>UI\BorderlessTabControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Login" Collapsed="true">
+    <Position X="12" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAYAACAAABAAIACAAAAiAAAAAAAACACAAAAAAIA=</HashCode>
+      <FileName>Login.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.MusicBox" Collapsed="true">
+    <Position X="12" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBMAAKEWGgACAAAACDBQMAzEwgyhAghEIYBDExDBog=</HashCode>
+      <FileName>MusicBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicBox.Program" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAQAAAAAgCEAAAAAAAAAAAgEAQQgBIAAADAAAgAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Button" Collapsed="true">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Windows.Forms.UserControl" Collapsed="true">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.Panel" Collapsed="true">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.TrackBar" Collapsed="true">
+    <Position X="14.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="9.75" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.FlowLayoutPanel" Collapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Windows.Forms.PictureBox" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

@@ -43,7 +43,7 @@ namespace MusicBox
 
         private void MusicBox_Load(object sender, EventArgs e)
         {
-            String testFilePath = "D:\\cover.jpg";
+            String testFilePath = "E:\\cover.jpg";
 
             MusicBoxLocationSet(sender, e);
             RightTabControl.AddPanel(AlbumPanel);
