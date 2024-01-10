@@ -160,6 +160,7 @@ namespace MusicBox
                         SongButton song = (SongButton)Program.DefaultAlbumList.Panel.Controls[i];
                         Program.musicPlayer.AddSongToListFront(new Core.Entity.Song(song.SongID, song.TitleText, song.ArtistID, song.ArtistNameText, song.AlbumID, song.AlbumText,
                             Properties.Resources.External_URL + "/Album/" + song.ArtistNameText + "-" + song.AlbumText + "/" + song.TitleText + ".flac"));
+                        Debug.WriteLine(1);
                     }
                 }
                 Program.musicPlayer.PlayInOrder();
@@ -257,11 +258,13 @@ namespace MusicBox
         private void NextButton_Click(object sender, EventArgs e)
         {
             //播放下一首
+            Program.musicPlayer.PlayNext();
         }
 
         private void LastButton_Click(object sender, EventArgs e)
         {
             //播放上一首
+            Program.musicPlayer.PlayLast();
         }
 
         private void HomeButton_Click(object sender, EventArgs e)

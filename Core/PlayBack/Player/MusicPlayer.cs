@@ -68,6 +68,33 @@ namespace MusicBox.Core.PlayBack.Player
             MusicPlayList.songs.Clear();
         }
 
+        public void PlayNext()
+        {
+            List<Song> songList = MusicPlayList.songs;
+            if (songList.Count > 0)
+            {
+                Debug.WriteLine($"Playing: {songList[0].Title} by ArtistID: {songList[0].ArtistID} From AlbumID: {songList[0].AlbumID}");
+                bassPlayer.LoadAudio(songList[0].FilePath);
+                MusicPlayedList.AddSong(songList[0]);
+                UpdatePlayingUI(songList[0]);
+                bassPlayer.Play();
+                lastPlaying = songList[0].SongID;
+                songList.RemoveAt(0);
+            }
+        }
+
+        public void PlayLast()
+        {
+            if (MusicPlayedList.songs.Count > 1)
+            {
+                AddSongToListFront(MusicPlayedList.songs[MusicPlayedList.songs.Count - 1]);
+                AddSongToListFront(MusicPlayedList.songs[MusicPlayedList.songs.Count - 2]);
+                MusicPlayedList.songs.RemoveAt(MusicPlayedList.songs.Count - 1);
+                MusicPlayedList.songs.RemoveAt(MusicPlayedList.songs.Count - 1);
+                PlayNext();
+            }
+        }
+
         public void UpdatePlayingUI(Song song)
         {
             Program.PlayingSongAlbumPicture.Invoke(new MethodInvoker(async () =>
