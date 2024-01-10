@@ -114,7 +114,7 @@ namespace MusicBox
             Program.PlayingSongAlbumPicture = LeftDownAlbumBox;
             Program.PlayingSongTitleLabel = LeftDownSongNameLabel;
             Program.PlayingSongArtistLabel = LeftDownArtistsNameLabel;
-            Program.PlaySongButton = songPlayButton;
+            Program.DownPlayButton = songPlayButton;
             Program.PlayButton = PlayButton;
             Program.AblumPlayingSongTopPanel = songTopPanel;
             Program.DefaultSingerList = SingerList;

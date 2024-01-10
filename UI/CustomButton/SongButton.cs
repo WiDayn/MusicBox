@@ -248,8 +248,8 @@ namespace MusicBox.UI.Button
             Program.musicPlayer.PlayInOrder();
             if (Program.PlayButton.isPlaying)
                 Program.PlayButton.ToggleShape();
-            if (Program.PlaySongButton.isPlaying)
-                Program.PlaySongButton.ToggleShape();
+            if (Program.DownPlayButton.isPlaying)
+                Program.DownPlayButton.ToggleShape();
         }
 
         private void LabelAlbum_MouseEnter(object sender, EventArgs e)
